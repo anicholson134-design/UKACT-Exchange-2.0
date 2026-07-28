@@ -15,10 +15,11 @@ export default async function AdminDashboardPage() {
   if (!user) redirect('/login')
 
   const admin = createAdminClient()
-  const [candidates, employers, pendingEmployers, activeJobs, pendingJobs, applications] = await Promise.all([
+  const [candidates, employers, pendingEmployers, pendingCandidates, activeJobs, pendingJobs, applications] = await Promise.all([
     admin.from('profiles').select('id', { count: 'exact', head: true }).eq('role', 'candidate'),
     admin.from('employer_profiles').select('id', { count: 'exact', head: true }).eq('status', 'approved'),
     admin.from('employer_profiles').select('id', { count: 'exact', head: true }).eq('status', 'pending'),
+    admin.from('candidate_profiles').select('id', { count: 'exact', head: true }).eq('status', 'pending'),
     admin.from('jobs').select('id', { count: 'exact', head: true }).eq('status', 'active'),
     admin.from('jobs').select('id', { count: 'exact', head: true }).eq('status', 'pending_review'),
     admin.from('applications').select('id', { count: 'exact', head: true }),
@@ -49,7 +50,7 @@ export default async function AdminDashboardPage() {
         ))}
       </div>
 
-      <div className="grid md:grid-cols-2 gap-6">
+      <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
         <Card className="border-orange-200">
           <CardHeader>
             <CardTitle className="flex items-center gap-2 text-orange-700">
@@ -61,6 +62,21 @@ export default async function AdminDashboardPage() {
           <CardContent>
             <Button asChild>
               <Link href="/admin/employers?status=pending">Review employers</Link>
+            </Button>
+          </CardContent>
+        </Card>
+
+        <Card className="border-orange-200">
+          <CardHeader>
+            <CardTitle className="flex items-center gap-2 text-orange-700">
+              <Clock className="h-5 w-5" />
+              Pending Candidates
+              <span className="ml-auto text-2xl font-bold">{pendingCandidates.count ?? 0}</span>
+            </CardTitle>
+          </CardHeader>
+          <CardContent>
+            <Button asChild>
+              <Link href="/admin/candidates?status=pending">Review candidates</Link>
             </Button>
           </CardContent>
         </Card>

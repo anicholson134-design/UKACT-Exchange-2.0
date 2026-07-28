@@ -1,4 +1,5 @@
 export type UserRole = 'candidate' | 'employer' | 'admin'
+export type CandidateStatus = 'pending' | 'approved'
 export type EmployerStatus = 'pending' | 'approved' | 'rejected' | 'suspended'
 export type JobStatus = 'draft' | 'pending_review' | 'active' | 'closed' | 'rejected'
 export type ApplicationStatus = 'submitted' | 'reviewing' | 'shortlisted' | 'rejected' | 'hired'
@@ -25,7 +26,9 @@ export interface CandidateProfile {
   linkedin_url: string | null
   skills: string[]
   years_exp: number | null
-  open_to_work: boolean
+  status: CandidateStatus
+  reviewed_by: string | null
+  reviewed_at: string | null
 }
 
 export interface EmployerProfile {

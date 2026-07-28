@@ -38,7 +38,7 @@ export default async function JobDetailPage({ params }: Props) {
     if (p?.role === 'candidate') {
       const { data: cp } = await supabase
         .from('candidate_profiles')
-        .select('cv_url, cv_filename')
+        .select('cv_url, cv_filename, status')
         .eq('id', user.id)
         .single()
       candidateProfile = cp
@@ -228,6 +228,7 @@ export default async function JobDetailPage({ params }: Props) {
                 jobTitle={job.title}
                 isLoggedIn={!!user}
                 isCandidate={profile?.role === 'candidate'}
+                isApproved={(candidateProfile as any)?.status === 'approved'}
                 alreadyApplied={alreadyApplied}
                 cvFilename={(candidateProfile as any)?.cv_filename ?? null}
                 cvUrl={(candidateProfile as any)?.cv_url ?? null}

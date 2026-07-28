@@ -32,7 +32,11 @@ export async function POST(request: Request) {
   if (!parsed.success) return NextResponse.json({ error: parsed.error.flatten() }, { status: 422 })
 
   const { data: candidateProfile } = await supabase
-    .from('candidate_profiles').select('cv_url').eq('id', user.id).single()
+    .from('candidate_profiles').select('cv_url, status').eq('id', user.id).single()
+
+  if (candidateProfile?.status !== 'approved') {
+    return NextResponse.json({ error: 'Your account is still awaiting approval' }, { status: 403 })
+  }
 
   const { data, error } = await supabase
     .from('applications')

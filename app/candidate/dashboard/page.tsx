@@ -16,7 +16,7 @@ export default async function CandidateDashboardPage() {
 
   const [{ data: candidateProfile }, { data: applications, count: appCount }, { count: jobCount }] =
     await Promise.all([
-      supabase.from('candidate_profiles').select('cv_url, cv_filename, open_to_work').eq('id', user.id).single(),
+      supabase.from('candidate_profiles').select('cv_url, cv_filename').eq('id', user.id).single(),
       supabase
         .from('applications')
         .select('*, jobs(title, location, contract_type, employer_profiles(company_name, logo_url))', { count: 'exact' })

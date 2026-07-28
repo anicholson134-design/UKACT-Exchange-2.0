@@ -97,6 +97,19 @@ export async function middleware(request: NextRequest) {
     }
   }
 
+  // Candidate approval gate
+  if (pathname.startsWith('/candidate') && !pathname.startsWith('/candidate/pending') && role === 'candidate') {
+    const { data: cand } = await supabase
+      .from('candidate_profiles')
+      .select('status')
+      .eq('id', user.id)
+      .single()
+
+    if (cand && cand.status !== 'approved') {
+      return NextResponse.redirect(new URL('/candidate/pending', request.url))
+    }
+  }
+
   return supabaseResponse
 }
 

@@ -1,7 +1,7 @@
 import { cn } from '@/lib/utils'
-import type { ApplicationStatus, EmployerStatus, JobStatus } from '@/types'
+import type { ApplicationStatus, CandidateStatus, EmployerStatus, JobStatus } from '@/types'
 
-type Status = ApplicationStatus | EmployerStatus | JobStatus
+type Status = ApplicationStatus | CandidateStatus | EmployerStatus | JobStatus
 
 const labels: Record<string, string> = {
   submitted: 'Submitted',

@@ -19,6 +19,7 @@ interface ApplySectionProps {
   jobTitle: string
   isLoggedIn: boolean
   isCandidate: boolean
+  isApproved: boolean
   alreadyApplied: boolean
   cvFilename: string | null
   cvUrl: string | null
@@ -29,6 +30,7 @@ export function ApplySection({
   jobTitle,
   isLoggedIn,
   isCandidate,
+  isApproved,
   alreadyApplied,
   cvFilename,
   cvUrl,
@@ -131,6 +133,18 @@ export function ApplySection({
     return (
       <div className="rounded-2xl border border-stone/20 bg-mist p-6 text-center">
         <p className="text-sm text-ink/60">Only keeper accounts can apply for placements.</p>
+      </div>
+    )
+  }
+
+  // Candidate account still awaiting admin approval
+  if (!isApproved) {
+    return (
+      <div className="rounded-2xl border border-stone/20 bg-mist p-6 text-center space-y-2">
+        <p className="font-display font-semibold text-forest">Account awaiting approval</p>
+        <p className="text-sm text-ink/60 leading-relaxed">
+          Your account is still under review. You&apos;ll be able to apply once it&apos;s approved.
+        </p>
       </div>
     )
   }
