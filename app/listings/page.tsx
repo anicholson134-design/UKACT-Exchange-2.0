@@ -5,7 +5,7 @@ import { Navbar } from '@/components/shared/Navbar'
 import { Footer } from '@/components/shared/Footer'
 import { JobCard } from '@/components/candidate/JobCard'
 import { Pagination } from '@/components/shared/Pagination'
-import { Search, SlidersHorizontal } from 'lucide-react'
+import { Search } from 'lucide-react'
 import Link from 'next/link'
 import type { Job } from '@/types'
 
@@ -13,12 +13,10 @@ export const metadata = { title: 'Current Placements' }
 
 const PAGE_SIZE = 12
 
-const sectors = ['Primates', 'Big Cats', 'Marine', 'Herpetology', 'Birds', 'Ungulates', 'Bears', 'Elephants', 'Penguins', 'Invertebrates']
-
 export default async function ListingsPage({
   searchParams,
 }: {
-  searchParams: Promise<{ q?: string; page?: string; sector?: string }>
+  searchParams: Promise<{ q?: string; page?: string }>
 }) {
   const supabase = await createClient()
   const settings = await getSiteSettings()
@@ -32,7 +30,6 @@ export default async function ListingsPage({
   const params = await searchParams
   const page = Number(params.page ?? 1)
   const q = params.q ?? ''
-  const sector = params.sector ?? ''
 
   let query = supabase
     .from('jobs')
@@ -42,7 +39,6 @@ export default async function ListingsPage({
     .range((page - 1) * PAGE_SIZE, page * PAGE_SIZE - 1)
 
   if (q) query = query.ilike('title', `%${q}%`)
-  if (sector) query = query.contains('skills_required', [sector])
 
   const { data: jobs, count } = await query
   const totalPages = Math.ceil((count ?? 0) / PAGE_SIZE)
@@ -63,7 +59,7 @@ export default async function ListingsPage({
             <p className="eyebrow text-gold mb-4">Opportunities</p>
             <h1 className="display-lg text-cream mb-4">Find Your Next Placement</h1>
             <p className="text-cream/70 text-lg mb-10 max-w-xl mx-auto">
-              Browse keeper exchange opportunities at world-class collections across the UK and beyond.
+              Browse placement opportunities at animal management colleges and farm schools across the UK.
             </p>
 
             {/* Search bar */}
@@ -86,27 +82,6 @@ export default async function ListingsPage({
             </form>
           </div>
         </section>
-
-        {/* Sector filter pills */}
-        <div className="bg-sand border-b border-stone/20 overflow-x-auto scrollbar-none">
-          <div className="py-4 flex gap-2 whitespace-nowrap px-4 md:px-20 lg:px-[clamp(1.25rem,5vw,5rem)]">
-            <Link
-              href="/listings"
-              className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${!sector ? 'bg-canopy text-cream' : 'bg-white text-ink/60 hover:text-ink border border-stone/30'}`}
-            >
-              All sectors
-            </Link>
-            {sectors.map(s => (
-              <Link
-                key={s}
-                href={`/listings?sector=${encodeURIComponent(s)}${q ? `&q=${q}` : ''}`}
-                className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${sector === s ? 'bg-canopy text-cream' : 'bg-white text-ink/60 hover:text-ink border border-stone/30'}`}
-              >
-                {s}
-              </Link>
-            ))}
-          </div>
-        </div>
 
         {/* Results */}
         <section className="section-padding bg-cream">
@@ -137,9 +112,9 @@ export default async function ListingsPage({
               <div className="text-center py-20">
                 <p className="text-4xl mb-4">🔍</p>
                 <h3 className="font-display text-2xl text-forest mb-2">No placements found</h3>
-                <p className="text-ink/50 mb-6">Try a different search or sector filter</p>
+                <p className="text-ink/50 mb-6">Try a different search</p>
                 <Link href="/listings" className="text-sm text-canopy hover:text-gold font-medium">
-                  Clear filters
+                  Clear search
                 </Link>
               </div>
             )}

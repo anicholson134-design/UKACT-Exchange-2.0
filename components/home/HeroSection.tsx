@@ -28,7 +28,7 @@ export function HeroSection({
   }, [])
 
   return (
-    <section className="relative h-screen min-h-[600px] flex items-end overflow-hidden bg-forest">
+    <section className="relative h-screen min-h-[600px] flex items-end overflow-hidden bg-forest pt-28 md:pt-32">
       {/* Video background */}
       <video
         ref={videoRef}
