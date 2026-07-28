@@ -4,21 +4,24 @@
 
 @custom-variant dark (&:is(.dark *));
 
-/* ─── KEEP Design Tokens ─────────────────────────────────────── */
+/* ─── UKACT Design Tokens ────────────────────────────────────────
+   Blue (primary) and green (secondary) sampled directly from the
+   official UKACT logo, on a pale near-white base — built to read as
+   an extension of the ukact.org brand rather than a standalone site. */
 :root {
   /* Brand colours */
-  --forest:      #1C2B1E;
-  --canopy:      #2D4A32;
-  --moss:        #4A6741;
-  --sage:        #8FAF7E;
-  --stone:       #C4B49A;
-  --sand:        #E8DCC8;
-  --cream:       #F5F0E8;
-  --gold:        #B8935A;
-  --gold-light:  #D4A96A;
-  --ink:         #1A1A18;
-  --mist:        #F0EDE6;
-  --white-warm:  #FDFAF5;
+  --forest:      #0B3B54;
+  --canopy:      #0C7FA6;
+  --moss:        #5C8F35;
+  --sage:        #8FBF5C;
+  --stone:       #B7C4CC;
+  --sand:        #E7F1F5;
+  --cream:       #F7FBFD;
+  --gold:        #4B7F2E;
+  --gold-light:  #6FA33C;
+  --ink:         #16222B;
+  --mist:        #EAF4F8;
+  --white-warm:  #FFFFFF;
 
   /* Shadcn token mapping */
   --background: var(--cream);
@@ -32,12 +35,12 @@
   --secondary: var(--sand);
   --secondary-foreground: var(--ink);
   --muted: var(--mist);
-  --muted-foreground: #6B6456;
+  --muted-foreground: #5C6B72;
   --accent: var(--gold);
   --accent-foreground: var(--cream);
   --destructive: #C0392B;
-  --border: rgba(196, 180, 154, 0.4);
-  --input: rgba(196, 180, 154, 0.3);
+  --border: rgba(183, 196, 204, 0.4);
+  --input: rgba(183, 196, 204, 0.3);
   --ring: var(--gold);
   --radius: 0.75rem;
 
@@ -82,18 +85,18 @@
   --radius-2xl: 1.25rem;
   --radius-full: 999px;
 
-  /* KEEP brand as Tailwind colours */
-  --color-forest: #1C2B1E;
-  --color-canopy: #2D4A32;
-  --color-moss: #4A6741;
-  --color-sage: #8FAF7E;
-  --color-stone: #C4B49A;
-  --color-sand: #E8DCC8;
-  --color-cream: #F5F0E8;
-  --color-gold: #B8935A;
-  --color-gold-light: #D4A96A;
-  --color-ink: #1A1A18;
-  --color-mist: #F0EDE6;
+  /* UKACT brand as Tailwind colours */
+  --color-forest: #0B3B54;
+  --color-canopy: #0C7FA6;
+  --color-moss: #5C8F35;
+  --color-sage: #8FBF5C;
+  --color-stone: #B7C4CC;
+  --color-sand: #E7F1F5;
+  --color-cream: #F7FBFD;
+  --color-gold: #4B7F2E;
+  --color-gold-light: #6FA33C;
+  --color-ink: #16222B;
+  --color-mist: #EAF4F8;
 }
 
 /* ─── Base styles ────────────────────────────────────────────── */
@@ -199,17 +202,17 @@
 
   /* Glass effect */
   .glass {
-    background: rgba(28, 43, 30, 0.72);
+    background: rgba(11, 59, 84, 0.72);
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
     border: 1px solid rgba(255, 255, 255, 0.08);
   }
 
   .glass-light {
-    background: rgba(245, 240, 232, 0.85);
+    background: rgba(247, 251, 253, 0.85);
     backdrop-filter: blur(16px);
     -webkit-backdrop-filter: blur(16px);
-    border: 1px solid rgba(196, 180, 154, 0.3);
+    border: 1px solid rgba(183, 196, 204, 0.3);
   }
 
   /* Text gradient */
@@ -226,9 +229,9 @@
     inset: 0;
     background: linear-gradient(
       to top,
-      rgba(28, 43, 30, 0.85) 0%,
-      rgba(28, 43, 30, 0.3) 50%,
-      rgba(28, 43, 30, 0.1) 100%
+      rgba(11, 59, 84, 0.85) 0%,
+      rgba(11, 59, 84, 0.3) 50%,
+      rgba(11, 59, 84, 0.1) 100%
     );
   }
 
@@ -237,8 +240,8 @@
     inset: 0;
     background: linear-gradient(
       135deg,
-      rgba(28, 43, 30, 0.7) 0%,
-      rgba(28, 43, 30, 0.2) 100%
+      rgba(11, 59, 84, 0.7) 0%,
+      rgba(11, 59, 84, 0.2) 100%
     );
   }
 
