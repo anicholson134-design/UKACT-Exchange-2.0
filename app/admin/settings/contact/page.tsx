@@ -1,4 +1,4 @@
-import { getSiteSettings } from '@/lib/getSiteSettings'
+import { getSiteSettings, parseSetting, DEFAULT_CONTACT_BLOCKS } from '@/lib/getSiteSettings'
 import { ContactForm } from './ContactForm'
 
 export default async function ContactSettingsPage() {
@@ -6,6 +6,7 @@ export default async function ContactSettingsPage() {
   return (
     <ContactForm
       initial={{
+        blocks: parseSetting(s['contact.blocks'], DEFAULT_CONTACT_BLOCKS),
         hero_heading: s['contact.hero_heading'],
         hero_body: s['contact.hero_body'],
         email: s['contact.email'],

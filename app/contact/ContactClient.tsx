@@ -4,6 +4,7 @@ import { useState } from 'react'
 import { Mail, MapPin, Clock, Send } from 'lucide-react'
 
 interface Props {
+  blocks: string[]
   heroHeading: string
   heroBody: string
   email: string
@@ -11,7 +12,7 @@ interface Props {
   responseTime: string
 }
 
-export function ContactClient({ heroHeading, heroBody, email, location, responseTime }: Props) {
+export function ContactClient({ blocks, heroHeading, heroBody, email, location, responseTime }: Props) {
   const [sent, setSent] = useState(false)
   const [loading, setLoading] = useState(false)
 
@@ -29,9 +30,9 @@ export function ContactClient({ heroHeading, heroBody, email, location, response
     { icon: Clock, label: 'Response time', value: responseTime, href: null },
   ]
 
-  return (
-    <main className="flex-1">
-      <section className="relative pt-36 pb-20 bg-forest overflow-hidden">
+  const sections: Record<string, React.ReactNode> = {
+    hero: (
+      <section key="hero" className="relative pt-36 pb-20 bg-forest overflow-hidden">
         <div className="absolute inset-0 opacity-15 bg-cover bg-center" style={{ backgroundImage: `url('https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=1920&q=40')` }} />
         <div className="absolute inset-0 bg-forest/70" />
         <div className="relative z-10 container-keep">
@@ -40,8 +41,9 @@ export function ContactClient({ heroHeading, heroBody, email, location, response
           <p className="text-cream/70 text-lg max-w-lg leading-relaxed">{heroBody}</p>
         </div>
       </section>
-
-      <section className="section-padding bg-cream">
+    ),
+    details_form: (
+      <section key="details_form" className="section-padding bg-cream">
         <div className="container-keep">
           <div className="grid lg:grid-cols-12 gap-12 lg:gap-20">
             <div className="lg:col-span-4 space-y-8">
@@ -119,6 +121,12 @@ export function ContactClient({ heroHeading, heroBody, email, location, response
           </div>
         </div>
       </section>
+    ),
+  }
+
+  return (
+    <main className="flex-1">
+      {blocks.map(type => sections[type] ?? null)}
     </main>
   )
 }

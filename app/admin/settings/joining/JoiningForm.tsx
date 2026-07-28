@@ -5,12 +5,22 @@ import { ImageField } from '@/components/admin/settings/ImageField'
 import { StringArrayField } from '@/components/admin/settings/StringArrayField'
 import { ObjectArrayField } from '@/components/admin/settings/ObjectArrayField'
 import { SaveBar } from '@/components/admin/settings/SaveBar'
+import { SectionBlocksField, type BlockTypeDef } from '@/components/admin/settings/SectionBlocksField'
+import { Image as ImageIcon, Users, ListOrdered, HelpCircle } from 'lucide-react'
 
 interface JoiningData {
+  blocks: string[]
   hero_title: string; hero_subtitle: string; hero_image: string
   keeper_benefits: string[]; collection_benefits: string[]
   steps: Record<string, string>[]; faqs: Record<string, string>[]
 }
+
+const CATALOG: BlockTypeDef[] = [
+  { type: 'hero', label: 'Hero', desc: 'Title, subtitle, image', icon: ImageIcon },
+  { type: 'benefits', label: 'Who It\'s For', desc: 'Staff & institution benefit cards', icon: Users },
+  { type: 'steps', label: 'How to Join', desc: 'Numbered process steps', icon: ListOrdered },
+  { type: 'faqs', label: 'FAQs', desc: 'Expandable question list', icon: HelpCircle },
+]
 
 export function JoiningForm({ initial }: { initial: JoiningData }) {
   const [d, setD] = useState<JoiningData>(initial)
@@ -23,6 +33,7 @@ export function JoiningForm({ initial }: { initial: JoiningData }) {
       method: 'PATCH',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
+        'joining.blocks': JSON.stringify(d.blocks),
         'joining.hero_title': d.hero_title, 'joining.hero_subtitle': d.hero_subtitle, 'joining.hero_image': d.hero_image,
         'joining.keeper_benefits': JSON.stringify(d.keeper_benefits),
         'joining.collection_benefits': JSON.stringify(d.collection_benefits),
@@ -32,9 +43,9 @@ export function JoiningForm({ initial }: { initial: JoiningData }) {
     })
   }
 
-  return (
-    <div className="max-w-2xl space-y-8">
-      <section>
+  const sections: Record<string, React.ReactNode> = {
+    hero: (
+      <section key="hero">
         <h2 className="text-base font-semibold text-forest mb-4">Hero</h2>
         <div className={card}>
           <div><label className="block text-sm font-medium text-ink mb-1.5">Title</label><input className={inp} value={d.hero_title} onChange={e => set('hero_title', e.target.value)} /></div>
@@ -42,22 +53,24 @@ export function JoiningForm({ initial }: { initial: JoiningData }) {
           <ImageField label="Hero Image" value={d.hero_image} onChange={v => set('hero_image', v)} />
         </div>
       </section>
-
-      <section>
-        <h2 className="text-base font-semibold text-forest mb-4">Member Benefits</h2>
-        <div className={card}>
-          <StringArrayField label="Benefits (for keepers)" values={d.keeper_benefits} onChange={v => set('keeper_benefits', v)} placeholder="Access to placements at 80+ collections" />
+    ),
+    benefits: (
+      <section key="benefits">
+        <h2 className="text-base font-semibold text-forest mb-4">Who It&apos;s For</h2>
+        <div className={`${card} space-y-6`}>
+          <div>
+            <p className="text-xs font-medium text-ink/60 mb-2">For Staff</p>
+            <StringArrayField label="Member benefits" values={d.keeper_benefits} onChange={v => set('keeper_benefits', v)} placeholder="Access to placements at 80+ collections" />
+          </div>
+          <div>
+            <p className="text-xs font-medium text-ink/60 mb-2">For Institutions</p>
+            <StringArrayField label="Institution benefits" values={d.collection_benefits} onChange={v => set('collection_benefits', v)} placeholder="Host motivated staff" />
+          </div>
         </div>
       </section>
-
-      <section>
-        <h2 className="text-base font-semibold text-forest mb-4">Collection Benefits</h2>
-        <div className={card}>
-          <StringArrayField label="Benefits (for collections)" values={d.collection_benefits} onChange={v => set('collection_benefits', v)} placeholder="Host motivated keepers" />
-        </div>
-      </section>
-
-      <section>
+    ),
+    steps: (
+      <section key="steps">
         <h2 className="text-base font-semibold text-forest mb-4">How to Join Steps</h2>
         <div className={card}>
           <ObjectArrayField
@@ -72,8 +85,9 @@ export function JoiningForm({ initial }: { initial: JoiningData }) {
           />
         </div>
       </section>
-
-      <section>
+    ),
+    faqs: (
+      <section key="faqs">
         <h2 className="text-base font-semibold text-forest mb-4">FAQs</h2>
         <div className={card}>
           <ObjectArrayField
@@ -88,6 +102,14 @@ export function JoiningForm({ initial }: { initial: JoiningData }) {
           />
         </div>
       </section>
+    ),
+  }
+
+  return (
+    <div className="max-w-2xl space-y-8">
+      <SectionBlocksField catalog={CATALOG} value={d.blocks} onChange={v => set('blocks', v)} />
+
+      {d.blocks.map(type => sections[type] ?? null)}
 
       <SaveBar onSave={save} />
     </div>

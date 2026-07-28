@@ -65,6 +65,10 @@ export const DEFAULT_FAQS = [
   { q: 'How did UKACT start?', a: 'UKACT began life as a Facebook group in 2019, created to help staff caring for animals in education settings connect and share knowledge. In 2023, a team of five Unit Managers formalised it into a professional membership association.' },
 ]
 
+export const DEFAULT_HOME_BLOCKS = ['hero', 'mission', 'stats', 'how_it_works', 'featured_listings', 'testimonials', 'partners']
+export const DEFAULT_JOINING_BLOCKS = ['hero', 'benefits', 'steps', 'faqs']
+export const DEFAULT_CONTACT_BLOCKS = ['hero', 'details_form']
+
 // ─── Flat DB defaults (all string values) ────────────────────────────────────
 
 export const SETTING_DEFAULTS: Record<string, string> = {
@@ -93,6 +97,7 @@ export const SETTING_DEFAULTS: Record<string, string> = {
   'home.partners_eyebrow': 'Our Network',
   'home.partners_heading': 'Trusted by Leading Organisations',
   'home.partners': JSON.stringify(DEFAULT_HOME_PARTNERS),
+  'home.blocks': JSON.stringify(DEFAULT_HOME_BLOCKS),
 
   'joining.hero_title': 'Become Part of the Network',
   'joining.hero_subtitle': "Whether you're a member of staff ready to grow or an institution ready to share — UKACT is for you.",
@@ -101,12 +106,14 @@ export const SETTING_DEFAULTS: Record<string, string> = {
   'joining.collection_benefits': JSON.stringify(DEFAULT_COLLECTION_BENEFITS),
   'joining.steps': JSON.stringify(DEFAULT_JOINING_STEPS),
   'joining.faqs': JSON.stringify(DEFAULT_FAQS),
+  'joining.blocks': JSON.stringify(DEFAULT_JOINING_BLOCKS),
 
   'contact.hero_heading': "We'd love to hear from you",
   'contact.hero_body': 'Whether you have a question about joining UKACT, hosting a CPD event or supporting our work — our team is here to help.',
   'contact.email': 'info@ukact.keeperexchange.org',
   'contact.location': 'United Kingdom',
   'contact.response_time': 'Usually within 2–3 working days',
+  'contact.blocks': JSON.stringify(DEFAULT_CONTACT_BLOCKS),
 
   'auth.login_image': 'https://images.unsplash.com/photo-1474511320723-9a56873867b5?w=1200&q=85',
   'auth.login_quote': 'Every exchange is a lesson that stays with you for the rest of your career.',

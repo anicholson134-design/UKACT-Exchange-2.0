@@ -1,4 +1,4 @@
-import { getSiteSettings, parseSetting, DEFAULT_KEEPER_BENEFITS, DEFAULT_COLLECTION_BENEFITS, DEFAULT_JOINING_STEPS, DEFAULT_FAQS } from '@/lib/getSiteSettings'
+import { getSiteSettings, parseSetting, DEFAULT_KEEPER_BENEFITS, DEFAULT_COLLECTION_BENEFITS, DEFAULT_JOINING_STEPS, DEFAULT_FAQS, DEFAULT_JOINING_BLOCKS } from '@/lib/getSiteSettings'
 import { JoiningForm } from './JoiningForm'
 
 export default async function JoiningSettingsPage() {
@@ -6,6 +6,7 @@ export default async function JoiningSettingsPage() {
   return (
     <JoiningForm
       initial={{
+        blocks: parseSetting(s['joining.blocks'], DEFAULT_JOINING_BLOCKS),
         hero_title: s['joining.hero_title'],
         hero_subtitle: s['joining.hero_subtitle'],
         hero_image: s['joining.hero_image'],

@@ -5,8 +5,11 @@ import { ImageField } from '@/components/admin/settings/ImageField'
 import { StringArrayField } from '@/components/admin/settings/StringArrayField'
 import { ObjectArrayField } from '@/components/admin/settings/ObjectArrayField'
 import { SaveBar } from '@/components/admin/settings/SaveBar'
+import { SectionBlocksField, type BlockTypeDef } from '@/components/admin/settings/SectionBlocksField'
+import { Image as ImageIcon, Sparkles, BarChart3, ListOrdered, Briefcase, MessageSquare, Users } from 'lucide-react'
 
 interface HomeData {
+  blocks: string[]
   hero_eyebrow: string; hero_headline: string; hero_subtitle: string; hero_bg_image: string
   mission_quote: string; mission_body_1: string; mission_body_2: string; mission_image: string
   mission_stat_number: string; mission_stat_label: string
@@ -15,6 +18,16 @@ interface HomeData {
   testimonials_eyebrow: string; testimonials_heading: string; testimonials: Record<string, string>[]
   partners_eyebrow: string; partners_heading: string; partners: Record<string, string>[]
 }
+
+const CATALOG: BlockTypeDef[] = [
+  { type: 'hero', label: 'Hero', desc: 'Full-screen video/image intro', icon: ImageIcon },
+  { type: 'mission', label: 'Mission', desc: 'Pull quote + body copy', icon: Sparkles },
+  { type: 'stats', label: 'Stats Bar', desc: 'Row of key numbers', icon: BarChart3 },
+  { type: 'how_it_works', label: 'How UKACT Works', desc: 'Numbered process steps', icon: ListOrdered },
+  { type: 'featured_listings', label: 'Featured Listings', desc: 'Latest active placements (live data)', icon: Briefcase },
+  { type: 'testimonials', label: 'Testimonials', desc: 'Member quote carousel', icon: MessageSquare },
+  { type: 'partners', label: 'Partners Marquee', desc: 'Scrolling partner name strip', icon: Users },
+]
 
 export function HomeForm({ initial }: { initial: HomeData }) {
   const [d, setD] = useState<HomeData>(initial)
@@ -29,6 +42,7 @@ export function HomeForm({ initial }: { initial: HomeData }) {
       method: 'PATCH',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
+        'home.blocks': JSON.stringify(d.blocks),
         'home.hero_eyebrow': d.hero_eyebrow, 'home.hero_headline': d.hero_headline,
         'home.hero_subtitle': d.hero_subtitle, 'home.hero_bg_image': d.hero_bg_image,
         'home.mission_quote': d.mission_quote, 'home.mission_body_1': d.mission_body_1,
@@ -48,10 +62,9 @@ export function HomeForm({ initial }: { initial: HomeData }) {
   const inp = 'w-full px-3 py-2 text-sm border border-stone/30 rounded-lg focus:outline-none focus:ring-2 focus:ring-canopy/30'
   const card = 'bg-white rounded-xl border border-stone/20 p-6 space-y-5'
 
-  return (
-    <div className="max-w-2xl space-y-8">
-
-      <section>
+  const sections: Record<string, React.ReactNode> = {
+    hero: (
+      <section key="hero">
         <h2 className="text-base font-semibold text-forest mb-4">Hero Section</h2>
         <div className={card}>
           <div><label className="block text-sm font-medium text-ink mb-1.5">Eyebrow text</label><input className={inp} {...field('hero_eyebrow')} /></div>
@@ -60,8 +73,9 @@ export function HomeForm({ initial }: { initial: HomeData }) {
           <ImageField label="Background Image" value={d.hero_bg_image} onChange={v => set('hero_bg_image', v)} />
         </div>
       </section>
-
-      <section>
+    ),
+    mission: (
+      <section key="mission">
         <h2 className="text-base font-semibold text-forest mb-4">Mission Section</h2>
         <div className={card}>
           <div><label className="block text-sm font-medium text-ink mb-1.5">Pull Quote</label><textarea rows={3} className={inp} value={d.mission_quote} onChange={e => set('mission_quote', e.target.value)} /></div>
@@ -74,8 +88,9 @@ export function HomeForm({ initial }: { initial: HomeData }) {
           </div>
         </div>
       </section>
-
-      <section>
+    ),
+    stats: (
+      <section key="stats">
         <h2 className="text-base font-semibold text-forest mb-4">Stats Bar</h2>
         <div className={card}>
           <ObjectArrayField
@@ -92,8 +107,9 @@ export function HomeForm({ initial }: { initial: HomeData }) {
           />
         </div>
       </section>
-
-      <section>
+    ),
+    how_it_works: (
+      <section key="how_it_works">
         <h2 className="text-base font-semibold text-forest mb-4">How UKACT Works</h2>
         <div className={card}>
           <div><label className="block text-sm font-medium text-ink mb-1.5">Eyebrow</label><input className={inp} {...field('howitworks_eyebrow')} /></div>
@@ -110,8 +126,20 @@ export function HomeForm({ initial }: { initial: HomeData }) {
           />
         </div>
       </section>
-
-      <section>
+    ),
+    featured_listings: (
+      <section key="featured_listings">
+        <h2 className="text-base font-semibold text-forest mb-4">Featured Listings</h2>
+        <div className={card}>
+          <p className="text-sm text-ink/60">
+            Automatically shows the 3 most recent active placements. Nothing to configure here beyond
+            whether the section appears — manage the placements themselves under <strong>Jobs</strong>.
+          </p>
+        </div>
+      </section>
+    ),
+    testimonials: (
+      <section key="testimonials">
         <h2 className="text-base font-semibold text-forest mb-4">Testimonials</h2>
         <div className={card}>
           <div><label className="block text-sm font-medium text-ink mb-1.5">Eyebrow</label><input className={inp} {...field('testimonials_eyebrow')} /></div>
@@ -131,8 +159,9 @@ export function HomeForm({ initial }: { initial: HomeData }) {
           />
         </div>
       </section>
-
-      <section>
+    ),
+    partners: (
+      <section key="partners">
         <h2 className="text-base font-semibold text-forest mb-4">Partners Marquee</h2>
         <div className={card}>
           <div><label className="block text-sm font-medium text-ink mb-1.5">Eyebrow</label><input className={inp} {...field('partners_eyebrow')} /></div>
@@ -145,6 +174,14 @@ export function HomeForm({ initial }: { initial: HomeData }) {
           />
         </div>
       </section>
+    ),
+  }
+
+  return (
+    <div className="max-w-2xl space-y-8">
+      <SectionBlocksField catalog={CATALOG} value={d.blocks} onChange={v => set('blocks', v)} />
+
+      {d.blocks.map(type => sections[type] ?? null)}
 
       <SaveBar onSave={save} />
     </div>

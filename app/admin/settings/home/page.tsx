@@ -1,4 +1,4 @@
-import { getSiteSettings, parseSetting, DEFAULT_STATS, DEFAULT_HOWITWORKS_STEPS, DEFAULT_TESTIMONIALS, DEFAULT_HOME_PARTNERS } from '@/lib/getSiteSettings'
+import { getSiteSettings, parseSetting, DEFAULT_STATS, DEFAULT_HOWITWORKS_STEPS, DEFAULT_TESTIMONIALS, DEFAULT_HOME_PARTNERS, DEFAULT_HOME_BLOCKS } from '@/lib/getSiteSettings'
 import { HomeForm } from './HomeForm'
 
 export default async function HomeSettingsPage() {
@@ -6,6 +6,7 @@ export default async function HomeSettingsPage() {
   return (
     <HomeForm
       initial={{
+        blocks: parseSetting(s['home.blocks'], DEFAULT_HOME_BLOCKS),
         hero_eyebrow: s['home.hero_eyebrow'],
         hero_headline: s['home.hero_headline'],
         hero_subtitle: s['home.hero_subtitle'],
