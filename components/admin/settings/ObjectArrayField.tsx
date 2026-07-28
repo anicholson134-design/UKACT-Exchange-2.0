@@ -11,16 +11,16 @@ export interface FieldDef {
   placeholder?: string
 }
 
-interface Props {
+interface Props<T extends Record<string, string>> {
   label: string
-  items: Record<string, string>[]
+  items: T[]
   fields: FieldDef[]
-  onChange: (items: Record<string, string>[]) => void
-  newItem?: Record<string, string>
-  itemLabel?: (item: Record<string, string>, i: number) => string
+  onChange: (items: T[]) => void
+  newItem?: T
+  itemLabel?: (item: T, i: number) => string
 }
 
-export function ObjectArrayField({ label, items, fields, onChange, newItem, itemLabel }: Props) {
+export function ObjectArrayField<T extends Record<string, string>>({ label, items, fields, onChange, newItem, itemLabel }: Props<T>) {
   const [open, setOpen] = useState<number | null>(null)
 
   function update(i: number, key: string, val: string) {
@@ -34,7 +34,7 @@ export function ObjectArrayField({ label, items, fields, onChange, newItem, item
   }
 
   function add() {
-    const blank = newItem ?? Object.fromEntries(fields.map(f => [f.key, '']))
+    const blank = newItem ?? (Object.fromEntries(fields.map(f => [f.key, ''])) as T)
     onChange([...items, blank])
     setOpen(items.length)
   }

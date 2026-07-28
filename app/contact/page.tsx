@@ -3,7 +3,9 @@ import { Footer } from '@/components/shared/Footer'
 import { createClient } from '@/lib/supabase/server'
 import { getCmsNavItems } from '@/lib/getCmsNavItems'
 import { getSiteSettings, parseSetting, DEFAULT_CONTACT_BLOCKS } from '@/lib/getSiteSettings'
-import { ContactClient } from './ContactClient'
+import { getBlockData, migrateLegacyBlockType } from '@/lib/blockLibrary'
+import { renderBlock } from '@/components/blocks/renderBlock'
+import type { Job } from '@/types'
 
 export const metadata = { title: 'Contact UKACT' }
 
@@ -17,17 +19,26 @@ export default async function ContactPage() {
     profile = data
   }
 
+  const blocks = parseSetting(s['contact.blocks'], DEFAULT_CONTACT_BLOCKS).map(t => migrateLegacyBlockType(t, 'contact'))
+  const blockData = getBlockData(s)
+
+  let featuredJobs: Job[] = []
+  if (blocks.includes('featured_listings')) {
+    const { data } = await supabase
+      .from('jobs')
+      .select('*, employer_profiles(company_name, logo_url, location)')
+      .eq('status', 'active')
+      .order('created_at', { ascending: false })
+      .limit(3)
+    featuredJobs = data ?? []
+  }
+
   return (
     <div className="flex flex-col min-h-screen">
       <Navbar profile={profile as any} cmsItems={cmsItems} logoUrl={s["branding.logo_url"]} navConfig={parseSetting(s["nav.items"], undefined)} navCustom={parseSetting(s["nav.custom"], [])} />
-      <ContactClient
-        blocks={parseSetting(s['contact.blocks'], DEFAULT_CONTACT_BLOCKS)}
-        heroHeading={s['contact.hero_heading']}
-        heroBody={s['contact.hero_body']}
-        email={s['contact.email']}
-        location={s['contact.location']}
-        responseTime={s['contact.response_time']}
-      />
+      <main className="flex-1">
+        {blocks.map(type => renderBlock(type, blockData, featuredJobs))}
+      </main>
       <Footer />
     </div>
   )
