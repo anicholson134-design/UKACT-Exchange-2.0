@@ -1,3 +1,33 @@
+-- Safe to re-run: tears down anything from a previous partial/broken attempt
+-- before rebuilding, so a dropped type or a half-applied run never leaves
+-- stray objects behind (e.g. a trigger function referencing a type that no
+-- longer exists, which throws "type ... does not exist" at signup time).
+
+-- ── Teardown ──────────────────────────────────────────────────────────────
+drop trigger if exists set_applications_updated_at on applications;
+drop trigger if exists set_jobs_updated_at on jobs;
+drop trigger if exists set_profiles_updated_at on profiles;
+drop trigger if exists on_auth_user_created on auth.users;
+
+drop function if exists handle_new_user();
+drop function if exists set_updated_at();
+
+drop table if exists audit_log cascade;
+drop table if exists saved_jobs cascade;
+drop table if exists applications cascade;
+drop table if exists jobs cascade;
+drop table if exists employer_profiles cascade;
+drop table if exists candidate_profiles cascade;
+drop table if exists profiles cascade;
+
+drop type if exists application_status;
+drop type if exists job_status;
+drop type if exists employer_status;
+drop type if exists user_role;
+drop type if exists contract_type;
+
+-- ── Build ─────────────────────────────────────────────────────────────────
+
 -- Enable extensions
 create extension if not exists "pg_trgm";
 
