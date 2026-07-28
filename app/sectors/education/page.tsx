@@ -5,7 +5,7 @@ import { getSiteSettings, parseSetting } from '@/lib/getSiteSettings'
 import { getCmsNavItems } from '@/lib/getCmsNavItems'
 import { SectorPage } from '@/components/sectors/SectorPage'
 
-export const metadata: Metadata = { title: 'KEEP Education' }
+export const metadata: Metadata = { title: 'Education' }
 
 export default async function EducationPage() {
   const supabase = await createClient()

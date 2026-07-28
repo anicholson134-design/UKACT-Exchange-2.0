@@ -9,7 +9,7 @@ const wildlife = [
     species: 'Panthera onca',
     status: 'Near Threatened',
     location: 'Central & South America',
-    contribution: 'KEEP supported keeper training for jaguar enrichment programmes at three partner collections.',
+    contribution: 'UKACT supports knowledge-sharing on enrichment programmes for jaguars across member colleges with big cat collections.',
     image: 'https://images.unsplash.com/photo-1554456854-55a089fd4cb2?w=600&q=85',
   },
   {
@@ -17,7 +17,7 @@ const wildlife = [
     species: 'Loxodonta africana',
     status: 'Vulnerable',
     location: 'Sub-Saharan Africa',
-    contribution: 'Exchange keepers trained in advanced elephant behaviour and social herd management.',
+    contribution: 'Members share advanced training in elephant behaviour and social herd management through the UKACT network.',
     image: 'https://images.unsplash.com/photo-1564349683136-77e08dba1ef7?w=600&q=85',
   },
   {
@@ -25,7 +25,7 @@ const wildlife = [
     species: 'Ara macao',
     status: 'Least Concern',
     location: 'Central & South America',
-    contribution: 'Avian husbandry exchanges improved breeding success rates by 40% across partner collections.',
+    contribution: 'Avian husbandry knowledge-sharing through UKACT has improved breeding success rates across several member collections.',
     image: 'https://images.unsplash.com/photo-1503656142023-618e7d1f435a?w=600&q=85',
   },
 ]
@@ -76,7 +76,7 @@ export function StoryJungle() {
             viewport={{ once: true }}
             transition={{ duration: 0.8, delay: 0.1 }}
           >
-            Wildlife We Have Helped
+            Species We Help Care For
           </motion.h2>
           <motion.p
             className="text-cream/60 mt-4 max-w-lg mx-auto leading-relaxed"
@@ -85,7 +85,7 @@ export function StoryJungle() {
             viewport={{ once: true }}
             transition={{ delay: 0.3 }}
           >
-            Every exchange directly improves the lives of animals in collections worldwide.
+            Every connection made through UKACT directly improves the lives of animals in collections across the UK.
           </motion.p>
         </div>
       </div>

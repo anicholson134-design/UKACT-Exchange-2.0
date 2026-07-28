@@ -8,7 +8,7 @@ import { OurStoryExperience } from '@/components/story/OurStoryExperience'
 
 export const metadata: Metadata = {
   title: 'Our Story',
-  description: 'A journey through wildlife conservation, education and global partnerships.',
+  description: 'A journey through animal care, education and a growing national network.',
 }
 
 export default async function OurStoryPage() {

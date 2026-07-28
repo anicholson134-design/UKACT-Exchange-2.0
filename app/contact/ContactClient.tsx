@@ -67,9 +67,9 @@ export function ContactClient({ heroHeading, heroBody, email, location, response
               </div>
 
               <div className="rounded-2xl bg-mist p-6 border border-stone/20">
-                <h3 className="font-display font-semibold text-forest mb-2">Looking to join KEEP?</h3>
-                <p className="text-sm text-ink/60 mb-4 leading-relaxed">For registration enquiries, visit our Joining KEEP page for full details and the application process.</p>
-                <a href="/joining-keep" className="text-sm font-medium text-canopy hover:text-gold transition-colors link-underline">Learn about joining →</a>
+                <h3 className="font-display font-semibold text-forest mb-2">Looking to join UKACT?</h3>
+                <p className="text-sm text-ink/60 mb-4 leading-relaxed">For registration enquiries, visit our Join UKACT page for full details and the application process.</p>
+                <a href="/joining-ukact" className="text-sm font-medium text-canopy hover:text-gold transition-colors link-underline">Learn about joining →</a>
               </div>
             </div>
 
@@ -98,7 +98,7 @@ export function ContactClient({ heroHeading, heroBody, email, location, response
                     <label className="text-sm font-medium text-forest">Subject</label>
                     <select className="w-full px-4 py-3 rounded-xl border border-stone/30 bg-cream/50 text-sm focus:outline-none focus:ring-2 focus:ring-gold/30 transition-all text-ink/70">
                       <option>General enquiry</option>
-                      <option>Keeper registration</option>
+                      <option>Membership registration</option>
                       <option>Collection registration</option>
                       <option>Sponsorship</option>
                       <option>Media / press</option>

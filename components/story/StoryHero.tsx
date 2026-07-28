@@ -106,7 +106,7 @@ export function StoryHero() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2, duration: 0.8 }}
           >
-            Keeper Exchange and Education Programme
+            UK Animal Care Technicians
           </motion.p>
 
           <h1
@@ -127,7 +127,7 @@ export function StoryHero() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 1.2, duration: 0.8 }}
           >
-            A journey through wildlife conservation, education and global partnerships
+            A journey through animal care, education and a growing national network
           </motion.p>
 
           {/* Scroll hint */}

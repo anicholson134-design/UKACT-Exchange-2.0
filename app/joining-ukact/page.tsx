@@ -7,9 +7,9 @@ import { getSiteSettings, parseSetting, DEFAULT_KEEPER_BENEFITS, DEFAULT_COLLECT
 import Link from 'next/link'
 import { Check, UserCircle, Building2 } from 'lucide-react'
 
-export const metadata = { title: 'Joining KEEP' }
+export const metadata = { title: 'Join UKACT' }
 
-export default async function JoiningKeepPage() {
+export default async function JoiningUkactPage() {
   const supabase = await createClient()
   const [cmsItems, s] = await Promise.all([getCmsNavItems(), getSiteSettings()])
   const { data: { user } } = await supabase.auth.getUser()
@@ -39,7 +39,7 @@ export default async function JoiningKeepPage() {
           <div className="container-keep">
             <div className="text-center mb-16">
               <p className="eyebrow mb-4">Who It's For</p>
-              <h2 className="display-md text-forest">Built for the keeper community</h2>
+              <h2 className="display-md text-forest">Built for the animal care community</h2>
             </div>
 
             <div className="grid md:grid-cols-2 gap-8">
@@ -49,7 +49,7 @@ export default async function JoiningKeepPage() {
                     <UserCircle className="h-6 w-6 text-moss" strokeWidth={1.5} />
                   </div>
                   <div>
-                    <h3 className="font-display font-semibold text-xl text-forest">For Keepers</h3>
+                    <h3 className="font-display font-semibold text-xl text-forest">For Staff</h3>
                     <p className="text-sm text-ink/50">Develop your expertise</p>
                   </div>
                 </div>
@@ -61,7 +61,7 @@ export default async function JoiningKeepPage() {
                   ))}
                 </ul>
                 <Link href="/register/candidate" className="block w-full py-3 text-center bg-canopy text-cream font-medium rounded-xl hover:bg-forest transition-colors">
-                  Register as a Keeper
+                  Register as a Member
                 </Link>
               </div>
 
@@ -71,7 +71,7 @@ export default async function JoiningKeepPage() {
                     <Building2 className="h-6 w-6 text-moss" strokeWidth={1.5} />
                   </div>
                   <div>
-                    <h3 className="font-display font-semibold text-xl text-forest">For Collections</h3>
+                    <h3 className="font-display font-semibold text-xl text-forest">For Institutions</h3>
                     <p className="text-sm text-ink/50">Share and receive expertise</p>
                   </div>
                 </div>
@@ -83,7 +83,7 @@ export default async function JoiningKeepPage() {
                   ))}
                 </ul>
                 <Link href="/register/employer" className="block w-full py-3 text-center bg-gold text-cream font-medium rounded-xl hover:bg-gold-light transition-colors">
-                  Register Your Collection
+                  Register Your Institution
                 </Link>
               </div>
             </div>

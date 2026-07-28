@@ -6,23 +6,23 @@ import { motion, useScroll, useTransform } from 'framer-motion'
 const stories = [
   {
     image: 'https://images.unsplash.com/photo-1551316679-9c6ae9dec224?w=1400&q=90',
-    quote: 'Three weeks. That is all it took to completely change how I approach animal care.',
+    quote: 'A few weeks of shared practice. That is all it took to completely change how I approach animal care.',
     name: 'Sarah Mitchell',
-    role: 'Senior Keeper · Chester Zoo',
+    role: 'Animal Unit Manager · Further Education College',
     side: 'left',
   },
   {
     image: 'https://images.unsplash.com/photo-1546026423-cc4642628d2b?w=1400&q=90',
-    quote: 'KEEP gave me access to knowledge I could never have learned from a textbook.',
+    quote: 'UKACT gave me access to knowledge I could never have learned from a textbook.',
     name: 'James Hartley',
-    role: 'Marine Mammal Specialist · SeaLife',
+    role: 'Head of Animal Care · Agricultural College',
     side: 'right',
   },
   {
     image: 'https://images.unsplash.com/photo-1517315003714-a071486bd9ea?w=1400&q=90',
-    quote: 'The connections I built through KEEP have shaped my entire conservation career.',
+    quote: 'The connections I built through UKACT have shaped my entire career in animal care.',
     name: 'Emma Clarke',
-    role: 'Head of Carnivores · Longleat',
+    role: 'Animal Care Technician',
     side: 'left',
   },
 ]

@@ -273,7 +273,7 @@ export function ApplicantTable({ applications: initial }: { applications: Enrich
                 {/* Quick email button */}
                 {selected.email && (
                   <a
-                    href={`mailto:${selected.email}?subject=Your KEEP application`}
+                    href={`mailto:${selected.email}?subject=Your UKACT application`}
                     className="flex items-center justify-center gap-2 w-full py-2.5 rounded-xl border border-canopy/30 text-sm font-medium text-canopy hover:bg-canopy hover:text-cream transition-all"
                   >
                     <Mail className="h-4 w-4" />

@@ -48,7 +48,7 @@ export function LoginForm() {
     <div className="w-full">
       <div className="mb-8">
         <h1 className="font-display text-3xl font-semibold text-forest mb-2">Welcome back</h1>
-        <p className="text-ink/50 text-sm">Sign in to your KEEP account</p>
+        <p className="text-ink/50 text-sm">Sign in to your UKACT account</p>
       </div>
 
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">

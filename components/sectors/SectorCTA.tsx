@@ -64,9 +64,9 @@ export function SectorCTA({ headline, body, href, label }: CTAProps) {
           {/* Trust signals */}
           <div className="flex items-center justify-center gap-8 mt-14 flex-wrap">
             {[
-              ['Free to join', 'No membership fee for keepers'],
-              ['Fully vetted', 'All collections approved by KEEP'],
-              ['Est. 2014', 'A decade of keeper development'],
+              ['Free to join', 'No membership fee for individual members'],
+              ['Fully vetted', 'All institutions approved by UKACT'],
+              ['Est. 2019', 'Growing UK-wide since day one'],
             ].map(([title, desc]) => (
               <div key={title} className="text-center">
                 <p className="text-cream font-semibold text-sm">{title}</p>

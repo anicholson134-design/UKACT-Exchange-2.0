@@ -112,7 +112,7 @@ export function ApplySection({
       <div className="rounded-2xl border border-stone/20 bg-white p-6 space-y-4">
         <h3 className="font-display font-semibold text-xl text-forest">Apply for this placement</h3>
         <p className="text-sm text-ink/60 leading-relaxed">
-          Create a free KEEP account or log in to apply.
+          Create a free UKACT account or log in to apply.
         </p>
         <Button asChild className="w-full bg-gold hover:bg-gold-light text-cream">
           <Link href={`/register/candidate?next=${pathname}`}>

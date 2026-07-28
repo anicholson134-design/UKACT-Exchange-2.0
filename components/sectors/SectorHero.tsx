@@ -65,7 +65,7 @@ export function SectorHero({ name, tagline, subtitle, heroPoster, videoSrc, cta 
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.3, duration: 0.7 }}
         >
-          KEEP Sectors
+          UKACT Sectors
         </motion.p>
 
         <h1

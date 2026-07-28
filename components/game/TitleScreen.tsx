@@ -21,10 +21,10 @@ export function TitleScreen({ onPlay, onHowToPlay, onLeaderboard, onToggleMute, 
       <div className="absolute inset-0 bg-gradient-to-b from-forest/70 via-forest/30 to-forest/80" />
 
       <div className="relative z-10 flex flex-col items-center gap-5 px-6 text-center">
-        <Image src="/keep-logo.webp" alt="KEEP" width={72} height={72} className="drop-shadow-lg" />
+        <Image src="/UKACT-1536x730.jpg" alt="UKACT" width={72} height={35} className="drop-shadow-lg" />
 
         <h1 className="font-pixel text-cream text-lg sm:text-2xl leading-relaxed drop-shadow-[3px_3px_0_rgba(0,0,0,0.6)]">
-          KEEP
+          UKACT
           <br />
           the Wheelbarrow
         </h1>
@@ -49,7 +49,7 @@ export function TitleScreen({ onPlay, onHowToPlay, onLeaderboard, onToggleMute, 
         </div>
 
         <p className="font-pixel text-[7px] sm:text-[8px] text-cream/70 mt-2 max-w-xs">
-          A KEEP zookeeper marketing mini-game
+          A UKACT animal care marketing mini-game
         </p>
       </div>
     </div>

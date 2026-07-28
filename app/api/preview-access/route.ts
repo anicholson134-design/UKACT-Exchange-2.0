@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server'
 
-const PREVIEW_PASSWORD = 'Keep1!'
-const COOKIE_NAME = 'keep_preview'
+const PREVIEW_PASSWORD = 'Ukact1!'
+const COOKIE_NAME = 'ukact_preview'
 // 30-day cookie
 const MAX_AGE = 60 * 60 * 24 * 30
 

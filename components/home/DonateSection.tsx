@@ -15,8 +15,8 @@ export function DonateSection({ heading, body, bgImage }: DonateSectionProps) {
   const ref = useRef<HTMLDivElement>(null)
   const inView = useInView(ref, { once: true, margin: '-10%' })
 
-  const donateHeading = heading || 'Help us support the next generation of keepers'
-  const donateBody = body || 'Every £5 donated helps KEEP facilitate more exchanges, develop more keepers, and ultimately improve the lives of animals in collections worldwide.'
+  const donateHeading = heading || 'Help us support the next generation of animal care technicians'
+  const donateBody = body || 'Every £5 donated helps UKACT run CPD events, develop resources, and ultimately improve animal welfare and student experience across the UK.'
   const donateBgImage = bgImage || '/CTA-bg.webp'
 
   return (
@@ -41,7 +41,7 @@ export function DonateSection({ heading, body, bgImage }: DonateSectionProps) {
           <div className="relative z-10 px-8 md:px-16 py-16 md:py-20 max-w-2xl">
             <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-gold/20 border border-gold/30 mb-6">
               <Heart className="h-3.5 w-3.5 text-gold" />
-              <span className="text-xs font-semibold text-gold uppercase tracking-wider">Support KEEP</span>
+              <span className="text-xs font-semibold text-gold uppercase tracking-wider">Support UKACT</span>
             </div>
 
             <h2 className="display-md text-cream mb-4">

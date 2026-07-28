@@ -78,7 +78,7 @@ function UpdatePasswordForm() {
       <Card className="w-full max-w-md">
         <CardHeader>
           <CardTitle>Set new password</CardTitle>
-          <CardDescription>Choose a new password for your KEEP account.</CardDescription>
+          <CardDescription>Choose a new password for your UKACT account.</CardDescription>
         </CardHeader>
         <CardContent>
           {error ? (

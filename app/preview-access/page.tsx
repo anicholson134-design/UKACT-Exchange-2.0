@@ -45,7 +45,7 @@ export default function PreviewAccessPage() {
       <div className="relative z-10 w-full max-w-sm">
         {/* Logo */}
         <div className="flex justify-center mb-8">
-          <Image src="/keep-logo.webp" alt="KEEP" width={80} height={80} className="object-contain" />
+          <Image src="/UKACT-1536x730.jpg" alt="UKACT" width={140} height={67} className="object-contain" />
         </div>
 
         <div className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-8">
@@ -95,7 +95,7 @@ export default function PreviewAccessPage() {
         </div>
 
         <p className="text-center text-cream/25 text-xs mt-6">
-          KEEP – Zookeeper Exchange Programme
+          UKACT Exchange – UK Animal Care Technicians
         </p>
       </div>
     </div>

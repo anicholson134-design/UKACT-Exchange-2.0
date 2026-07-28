@@ -12,9 +12,9 @@ const pixelFont = Press_Start_2P({
 })
 
 export const metadata: Metadata = {
-  title: 'KEEP the Wheelbarrow — a retro zookeeper mini-game',
+  title: 'UKACT the Wheelbarrow — a retro animal care mini-game',
   description:
-    "Stack buckets, hay bales and KEEP crates onto the wheelbarrow without tipping it over. A free retro arcade mini-game from KEEP, the UK's Zookeeper Exchange Programme.",
+    "Stack buckets, hay bales and UKACT crates onto the wheelbarrow without tipping it over. A free retro arcade mini-game from UKACT, UK Animal Care Technicians.",
   robots: { index: true, follow: true },
 }
 
@@ -25,8 +25,8 @@ export default function GamePage() {
         href="/"
         className="font-pixel text-[8px] sm:text-[9px] text-cream/70 hover:text-gold-light flex items-center gap-2"
       >
-        <Image src="/keep-logo.webp" alt="" width={20} height={20} aria-hidden="true" />
-        BACK TO KEEP
+        <Image src="/UKACT-1536x730.jpg" alt="" width={20} height={20} aria-hidden="true" />
+        BACK TO UKACT
       </Link>
 
       <div className="w-full max-w-[440px] aspect-[220/380] max-h-[85vh] border-4 border-cream/80 shadow-[0_0_0_4px_rgba(15,15,14,0.9),8px_8px_0_0_rgba(0,0,0,0.5)] overflow-hidden">

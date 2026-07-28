@@ -57,7 +57,7 @@ export default async function PartnersPage() {
           <div className="container-keep text-center max-w-xl">
             <h2 className="display-md text-forest mb-4">{s['partners.cta_heading']}</h2>
             <p className="text-ink/60 text-lg mb-8 leading-relaxed">{s['partners.cta_body']}</p>
-            <Link href="/joining-keep" className="inline-flex items-center gap-2 px-6 py-3 bg-canopy text-cream font-medium rounded-lg hover:bg-forest transition-all duration-300">
+            <Link href="/joining-ukact" className="inline-flex items-center gap-2 px-6 py-3 bg-canopy text-cream font-medium rounded-lg hover:bg-forest transition-all duration-300">
               Register your collection
             </Link>
           </div>

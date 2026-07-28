@@ -6,32 +6,32 @@ import { motion, useInView, useScroll, useTransform } from 'framer-motion'
 const photos = [
   {
     src: 'https://images.unsplash.com/photo-1548767797-d8c844163c4a?w=500&q=80',
-    caption: 'Chester Zoo — 2015',
+    caption: 'Facebook Beginnings — 2019',
     rotate: -4, x: -5, y: 0, z: 1, size: 'w-52',
   },
   {
     src: 'https://images.unsplash.com/photo-1564349683136-77e08dba1ef7?w=500&q=80',
-    caption: 'Edinburgh — 2016',
+    caption: 'Halesowen College — 2021',
     rotate: 3, x: 30, y: 40, z: 3, size: 'w-44',
   },
   {
     src: 'https://images.unsplash.com/photo-1474511320723-9a56873867b5?w=500&q=80',
-    caption: 'Longleat — 2017',
+    caption: 'Passing 1,000 Members — 2022',
     rotate: -2, x: -20, y: 80, z: 2, size: 'w-60',
   },
   {
     src: 'https://images.unsplash.com/photo-1517315003714-a071486bd9ea?w=500&q=80',
-    caption: 'Chester Zoo — 2018',
+    caption: 'Formalising UKACT — 2023',
     rotate: 5, x: 15, y: 20, z: 4, size: 'w-48',
   },
   {
     src: 'https://images.unsplash.com/photo-1551316679-9c6ae9dec224?w=500&q=80',
-    caption: 'Bristol Zoo — 2019',
+    caption: 'BIAZA Partnership — 2024',
     rotate: -3, x: -30, y: 60, z: 2, size: 'w-56',
   },
   {
     src: 'https://images.unsplash.com/photo-1503656142023-618e7d1f435a?w=500&q=80',
-    caption: 'Paignton — 2020',
+    caption: 'National Network — 2025',
     rotate: 2, x: 20, y: 90, z: 5, size: 'w-40',
   },
 ]
@@ -100,10 +100,10 @@ export function StoryExchanges() {
           >
             <p className="eyebrow mb-4">Chapter Two</p>
             <h2 className="font-display text-forest" style={{ fontSize: 'clamp(2.5rem, 5vw, 4rem)' }}>
-              Growing Through Exchanges
+              Growing Through Collaboration
             </h2>
             <p className="text-ink/60 max-w-xl mx-auto mt-4 leading-relaxed" style={{ fontFamily: 'Georgia, serif' }}>
-              Each exchange left its mark. Keepers returned home transformed — carrying new techniques, new friendships and a deeper understanding of what conservation really means.
+              Each milestone left its mark. Staff and institutions came together — sharing new techniques, new friendships and a deeper commitment to animal welfare.
             </p>
           </motion.div>
 
@@ -123,9 +123,9 @@ export function StoryExchanges() {
             transition={{ duration: 0.8, delay: 0.2 }}
           >
             {[
-              { n: '1,200+', label: 'Keepers placed' },
-              { n: '80+', label: 'Partner collections' },
-              { n: '10 yrs', label: 'Of growing together' },
+              { n: '1,000+', label: 'Members connected' },
+              { n: '120+', label: 'Colleges & farm schools' },
+              { n: '6 yrs', label: 'Of growing together' },
             ].map(s => (
               <div key={s.label} className="text-center">
                 <p className="font-display text-4xl md:text-5xl font-bold text-gold/80 mb-2">{s.n}</p>

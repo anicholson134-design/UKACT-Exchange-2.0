@@ -23,12 +23,12 @@ export function MissionSection({
   const ref = useRef<HTMLDivElement>(null)
   const inView = useInView(ref, { once: true, margin: '-15%' })
 
-  const missionQuote = quote || 'KEEP exists to raise the standard of animal care worldwide — one keeper at a time.'
-  const missionBody1 = body1 || 'Since 2022, the Keeper Exchange and Education Programme has been facilitating professional development exchanges between UK zoological collections — giving keepers hands-on experience with species and husbandry techniques they\'d never encounter at their home institution.'
-  const missionBody2 = body2 || 'The result is a stronger, more connected conservation community — and animals that benefit from keepers who are constantly learning.'
+  const missionQuote = quote || 'UKACT exists to connect staff across animal care education — sharing knowledge to raise welfare standards, one institution at a time.'
+  const missionBody1 = body1 || "What began as a Facebook group in 2019 has grown into the UK's leading network for animal care technicians — connecting staff across animal management colleges and farm schools who care for animal collections in education settings."
+  const missionBody2 = body2 || 'The result is a stronger, better-connected sector — and students and animals who benefit from staff who are constantly learning.'
   const missionImage = image || '/alicephoto-768x1032.jpg'
-  const missionStatNumber = statNumber || '4+'
-  const missionStatLabel = statLabel || 'Years connecting keepers'
+  const missionStatNumber = statNumber || '6+'
+  const missionStatLabel = statLabel || 'Years connecting animal care staff'
 
   return (
     <section className="section-padding bg-cream" ref={ref}>
@@ -84,7 +84,7 @@ export function MissionSection({
               <div className="aspect-[4/5] rounded-2xl overflow-hidden">
                 <img
                   src={missionImage}
-                  alt="Wildlife keeper working with animals"
+                  alt="Animal care technician working with animals"
                   className="w-full h-full object-cover hover:scale-105 transition-transform duration-700"
                 />
               </div>

@@ -50,7 +50,7 @@ export function TeamForm({ initial }: { initial: TeamData }) {
               { key: 'name', label: 'Name', placeholder: 'Alice' },
               { key: 'role', label: 'Role / Title', placeholder: 'Director' },
               { key: 'bio', label: 'Bio', type: 'textarea' },
-              { key: 'image_url', label: 'Photo URL', placeholder: '/KEEP-Alice-2-768x1032.avif' },
+              { key: 'image_url', label: 'Photo URL', placeholder: '/UKACT-1536x730.jpg' },
             ]}
             itemLabel={item => item.name || 'Member'}
           />

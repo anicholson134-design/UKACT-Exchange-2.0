@@ -5,7 +5,7 @@ import { getSiteSettings, parseSetting } from '@/lib/getSiteSettings'
 import { getCmsNavItems } from '@/lib/getCmsNavItems'
 import { SectorPage } from '@/components/sectors/SectorPage'
 
-export const metadata: Metadata = { title: 'KEEP Conservation' }
+export const metadata: Metadata = { title: 'Conservation & Welfare' }
 
 export default async function ConservationPage() {
   const supabase = await createClient()

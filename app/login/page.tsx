@@ -17,7 +17,7 @@ export default function LoginPage() {
 
         {/* Logo */}
         <div className="relative z-10 p-10">
-          <Link href="/" className="font-display font-bold text-2xl text-cream">KEEP</Link>
+          <Link href="/" className="font-display font-bold text-2xl text-cream">UKACT</Link>
         </div>
 
         {/* Quote */}
@@ -25,7 +25,7 @@ export default function LoginPage() {
           <blockquote className="text-cream/90 text-xl font-display italic leading-relaxed mb-4">
             "Every exchange is a lesson that stays with you for the rest of your career."
           </blockquote>
-          <p className="text-sage/70 text-sm">— Sarah Mitchell, Senior Keeper, Chester Zoo</p>
+          <p className="text-sage/70 text-sm">— Sarah Mitchell, Animal Unit Manager, Further Education College</p>
         </div>
       </div>
 
@@ -33,7 +33,7 @@ export default function LoginPage() {
       <div className="flex-1 flex flex-col justify-center px-6 py-12 lg:px-16 bg-cream">
         {/* Mobile logo */}
         <div className="lg:hidden mb-10">
-          <Link href="/" className="font-display font-bold text-2xl text-forest">KEEP</Link>
+          <Link href="/" className="font-display font-bold text-2xl text-forest">UKACT</Link>
         </div>
 
         <div className="max-w-md w-full mx-auto lg:mx-0">

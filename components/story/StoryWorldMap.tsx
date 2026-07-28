@@ -9,17 +9,10 @@ gsap.registerPlugin(ScrollTrigger)
 
 // Simplified world country positions on an 800x450 viewBox
 const exchanges = [
-  { id: 'uk', cx: 370, cy: 110, label: 'United Kingdom', year: '2014', focus: 'Primates & Big Cats', desc: 'KEEP founded — first 12 exchanges across UK zoos' },
-  { id: 'ie', cx: 348, cy: 112, label: 'Ireland', year: '2015', focus: 'Marine Mammals', desc: 'First international exchange partner' },
-  { id: 'de', cx: 400, cy: 115, label: 'Germany', year: '2016', focus: 'Large Carnivores', desc: 'Partnership with leading European collections' },
-  { id: 'za', cx: 430, cy: 290, label: 'South Africa', year: '2017', focus: 'African Wildlife', desc: 'First African field exchange programme' },
-  { id: 'au', cx: 680, cy: 300, label: 'Australia', year: '2018', focus: 'Marsupials & Reptiles', desc: 'Southern hemisphere expansion' },
-  { id: 'us', cx: 150, cy: 155, label: 'United States', year: '2019', focus: 'Cetaceans', desc: 'North American partnership established' },
-  { id: 'ke', cx: 460, cy: 255, label: 'Kenya', year: '2020', focus: 'Conservation Research', desc: 'Field research exchange in Maasai Mara' },
-  { id: 'sg', cx: 635, cy: 240, label: 'Singapore', year: '2021', focus: 'Herpetology', desc: 'South-East Asian network launch' },
-  { id: 'br', cx: 220, cy: 270, label: 'Brazil', year: '2022', focus: 'Rainforest Species', desc: 'Amazon conservation partnership' },
-  { id: 'nz', cx: 720, cy: 340, label: 'New Zealand', year: '2023', focus: 'Endangered Birds', desc: 'Kakapo and kiwi conservation work' },
-  { id: 'jp', cx: 680, cy: 160, label: 'Japan', year: '2024', focus: 'Red Pandas & Primates', desc: 'Asia-Pacific expansion continues' },
+  { id: 'uk', cx: 370, cy: 110, label: 'United Kingdom', year: '2019', focus: 'Where it began', desc: 'UKACT founded as a Facebook group — now spanning 120+ colleges and 130+ farm schools' },
+  { id: 'ie', cx: 348, cy: 112, label: 'Ireland', year: '2020', focus: 'BIAZA Partnership', desc: 'BIAZA — the British & Irish Association of Zoos and Aquariums — becomes a key UKACT partner' },
+  { id: 'us', cx: 150, cy: 155, label: 'United States', year: '2021', focus: 'ABMA Partnership', desc: 'Connections with The Animal Behavior Management Alliance bring international best practice home' },
+  { id: 'global', cx: 500, cy: 200, label: 'Global Network', year: '2022', focus: 'IRKA Partnership', desc: "The International Rhino Keeper Association joins UKACT's growing list of partner organisations" },
 ]
 
 function WorldMapSVG() {
@@ -78,10 +71,10 @@ export function StoryWorldMap() {
         >
           <p className="eyebrow text-gold mb-4">Chapter Three</p>
           <h2 className="font-display text-cream" style={{ fontSize: 'clamp(2.5rem, 5vw, 4rem)' }}>
-            Growing Around the World
+            Connected to the Wider World
           </h2>
           <p className="text-cream/60 mt-4 max-w-lg mx-auto leading-relaxed">
-            From a single idea in Cambridge, KEEP's network has grown to span continents — connecting collections and keepers across the globe.
+            From a Facebook group in 2019, UKACT has grown into the UK's national network for animal care education — connected to the wider world through partnerships with international bodies like BIAZA, ABMA and IRKA.
           </p>
         </motion.div>
 
@@ -178,7 +171,7 @@ export function StoryWorldMap() {
               />
             ))}
           </div>
-          <p className="text-center text-cream/40 text-xs mt-3">{revealed} of {exchanges.length} exchanges revealed</p>
+          <p className="text-center text-cream/40 text-xs mt-3">{revealed} of {exchanges.length} milestones revealed</p>
         </div>
       </div>
     </section>

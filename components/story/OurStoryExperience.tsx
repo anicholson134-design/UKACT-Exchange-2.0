@@ -12,18 +12,11 @@ gsap.registerPlugin(ScrollTrigger)
 
 const SCROLL_PAGES = 9
 
-// Map connections from UK origin
+// Map connections from UK origin — real UKACT partner organisations
 const connections = [
-  { x1: 388, y1: 108, x2: 345, y2: 114, year: '2015', country: 'Ireland' },
-  { x1: 388, y1: 108, x2: 420, y2: 116, year: '2016', country: 'Germany' },
-  { x1: 388, y1: 108, x2: 448, y2: 288, year: '2017', country: 'South Africa' },
-  { x1: 388, y1: 108, x2: 688, y2: 308, year: '2018', country: 'Australia' },
-  { x1: 388, y1: 108, x2: 148, y2: 156, year: '2019', country: 'USA' },
-  { x1: 388, y1: 108, x2: 462, y2: 256, year: '2020', country: 'Kenya' },
-  { x1: 388, y1: 108, x2: 634, y2: 240, year: '2021', country: 'Singapore' },
-  { x1: 388, y1: 108, x2: 218, y2: 270, year: '2022', country: 'Brazil' },
-  { x1: 388, y1: 108, x2: 718, y2: 340, year: '2023', country: 'New Zealand' },
-  { x1: 388, y1: 108, x2: 680, y2: 160, year: '2024', country: 'Japan' },
+  { x1: 388, y1: 108, x2: 345, y2: 114, year: '2020', country: 'Ireland (BIAZA)' },
+  { x1: 388, y1: 108, x2: 148, y2: 156, year: '2021', country: 'USA (ABMA)' },
+  { x1: 388, y1: 108, x2: 462, y2: 256, year: '2022', country: 'Global (IRKA)' },
 ]
 
 // Ambient particles — fixed to avoid hydration mismatch
@@ -285,7 +278,7 @@ export function OurStoryExperience() {
         <div ref={heroRef} className={`${layerBase} flex flex-col items-center justify-end pb-24 md:pb-32 text-center px-6`}>
           <motion.p className="eyebrow text-gold mb-5"
             initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3, duration: 0.8 }}>
-            Keeper Exchange and Education Programme
+            UK Animal Care Technicians
           </motion.p>
           <motion.h1
             className="text-cream font-display font-bold"
@@ -295,7 +288,7 @@ export function OurStoryExperience() {
           </motion.h1>
           <motion.p className="text-cream/60 text-lg mt-6 max-w-md"
             initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1.2, duration: 0.8 }}>
-            A journey through wildlife conservation, education and global partnerships
+            A journey through animal care, education and a growing national network
           </motion.p>
           <motion.div className="absolute bottom-10 flex flex-col items-center gap-2"
             initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 2 }}>
@@ -308,18 +301,18 @@ export function OurStoryExperience() {
         {/* CHAPTER 1 — THE BEGINNING */}
         <div ref={chapter1Ref} className={`${layerBase} flex items-center px-8 md:px-20 lg:px-32`}>
           <div className="max-w-xl">
-            <p className="eyebrow text-gold mb-5">The Beginning · 2014</p>
+            <p className="eyebrow text-gold mb-5">The Beginning · 2019</p>
             <h2 className="font-display text-cream mb-6" style={{ fontSize: 'clamp(2.5rem, 5vw, 4rem)', lineHeight: 1.05 }}>
               A simple question that changed everything
             </h2>
             <p className="text-cream/65 text-lg leading-relaxed mb-4" style={{ fontFamily: 'Georgia, serif' }}>
-              <em>"What if keepers could learn from each other?"</em>
+              <em>"What if animal care staff could learn from each other?"</em>
             </p>
             <p className="text-cream/55 leading-relaxed" style={{ fontFamily: 'Georgia, serif' }}>
-              In a Cambridge staffroom in 2014, that question became KEEP — the UK's first official Zookeeper Exchange Programme. The idea was radical in its simplicity: instead of courses and textbooks, let keepers learn by doing, inside the world's best collections.
+              In a Facebook group in 2019, that question became UKACT — UK Animal Care Technicians, the UK's professional membership association for staff caring for animals in education settings. The idea was simple but powerful: instead of working in isolation, let staff learn from each other, across colleges and farm schools nationwide.
             </p>
             <div className="flex gap-3 mt-8">
-              {['Cambridge, 2014', '1st exchange ✓', 'Chester Zoo →'].map((note, i) => (
+              {['Facebook group, 2019', '1st CPD conference ✓', 'Halesowen College →'].map((note, i) => (
                 <div key={i} className="bg-amber-50/10 backdrop-blur-sm border border-white/10 px-3 py-1.5 text-cream/60 text-xs"
                   style={{ transform: `rotate(${[-2, 1.5, -1][i]}deg)`, fontFamily: 'Georgia, serif', fontStyle: 'italic' }}>
                   {note}
@@ -333,11 +326,11 @@ export function OurStoryExperience() {
         <div ref={photosRef} className={`${layerBase} flex items-center justify-center`}>
           <div className="relative w-full h-full">
             {[
-              { src: 'https://images.unsplash.com/photo-1564349683136-77e08dba1ef7?w=500&q=80', cap: 'Chester Zoo 2015', l: '10%', t: '15%', r: -3, s: 'w-52' },
-              { src: 'https://images.unsplash.com/photo-1474511320723-9a56873867b5?w=500&q=80', cap: 'Edinburgh 2016', l: '35%', t: '8%', r: 2.5, s: 'w-44' },
-              { src: 'https://images.unsplash.com/photo-1548767797-d8c844163c4a?w=500&q=80', cap: 'Longleat 2017', l: '60%', t: '18%', r: -2, s: 'w-56' },
-              { src: 'https://images.unsplash.com/photo-1517315003714-a071486bd9ea?w=500&q=80', cap: 'Bristol 2018', l: '18%', t: '50%', r: 3, s: 'w-48' },
-              { src: 'https://images.unsplash.com/photo-1551316679-9c6ae9dec224?w=500&q=80', cap: 'Paignton 2019', l: '50%', t: '52%', r: -1.5, s: 'w-52' },
+              { src: 'https://images.unsplash.com/photo-1564349683136-77e08dba1ef7?w=500&q=80', cap: 'Facebook Beginnings 2019', l: '10%', t: '15%', r: -3, s: 'w-52' },
+              { src: 'https://images.unsplash.com/photo-1474511320723-9a56873867b5?w=500&q=80', cap: 'Halesowen College 2021', l: '35%', t: '8%', r: 2.5, s: 'w-44' },
+              { src: 'https://images.unsplash.com/photo-1548767797-d8c844163c4a?w=500&q=80', cap: '1,000 Members 2022', l: '60%', t: '18%', r: -2, s: 'w-56' },
+              { src: 'https://images.unsplash.com/photo-1517315003714-a071486bd9ea?w=500&q=80', cap: 'Formalising UKACT 2023', l: '18%', t: '50%', r: 3, s: 'w-48' },
+              { src: 'https://images.unsplash.com/photo-1551316679-9c6ae9dec224?w=500&q=80', cap: 'BIAZA Partnership 2024', l: '50%', t: '52%', r: -1.5, s: 'w-52' },
             ].map((p, i) => (
               <motion.div
                 key={i}
@@ -359,7 +352,7 @@ export function OurStoryExperience() {
         {/* WORLD MAP */}
         <div ref={mapLayerRef} className={`${layerBase} flex flex-col items-center justify-center px-8`}>
           <div className="text-center mb-8">
-            <p className="eyebrow text-gold mb-3">Growing Around the World</p>
+            <p className="eyebrow text-gold mb-3">Connected to the Wider World</p>
             <h2 className="font-display text-cream text-4xl md:text-5xl">A Network Built on Trust</h2>
           </div>
           <div className="relative w-full max-w-3xl">
@@ -397,7 +390,7 @@ export function OurStoryExperience() {
             </svg>
           </div>
           <div className="flex gap-8 mt-6 text-center">
-            {[['24', 'Countries'], ['80+', 'Collections'], ['1,200+', 'Keepers']].map(([n, l]) => (
+            {[['120+', 'Colleges'], ['130+', 'Farm Schools'], ['1,000+', 'Members']].map(([n, l]) => (
               <div key={l}>
                 <p className="font-display text-gold text-3xl font-bold">{n}</p>
                 <p className="text-cream/50 text-xs mt-1">{l}</p>
@@ -412,13 +405,13 @@ export function OurStoryExperience() {
             <div className="text-gold/30 mb-4" style={{ fontSize: '5rem', fontFamily: 'Georgia', lineHeight: 0.5 }}>"</div>
             <blockquote className="font-display text-cream italic leading-snug mb-6"
               style={{ fontSize: 'clamp(1.6rem, 3vw, 2.5rem)' }}>
-              Three weeks. That is all it took to completely change how I approach animal care.
+              A few weeks of shared practice. That is all it took to completely change how I approach animal care.
             </blockquote>
             <div className="flex items-center gap-3">
               <div className="w-8 h-px bg-gold/50" />
               <div>
                 <p className="text-cream text-sm font-semibold">Sarah Mitchell</p>
-                <p className="text-sage/60 text-xs">Senior Keeper · Chester Zoo</p>
+                <p className="text-sage/60 text-xs">Animal Unit Manager · Further Education College</p>
               </div>
             </div>
           </div>
@@ -430,12 +423,12 @@ export function OurStoryExperience() {
             <div className="text-gold/30 mb-4 text-right" style={{ fontSize: '5rem', fontFamily: 'Georgia', lineHeight: 0.5 }}>"</div>
             <blockquote className="font-display text-cream italic leading-snug mb-6"
               style={{ fontSize: 'clamp(1.6rem, 3vw, 2.5rem)' }}>
-              KEEP gave me access to knowledge I could never have learned from a textbook or training course.
+              UKACT gave me access to knowledge I could never have learned from a textbook or training course.
             </blockquote>
             <div className="flex items-center justify-end gap-3">
               <div>
                 <p className="text-cream text-sm font-semibold">James Hartley</p>
-                <p className="text-sage/60 text-xs">Marine Specialist · SeaLife Brighton</p>
+                <p className="text-sage/60 text-xs">Head of Animal Care · Agricultural College</p>
               </div>
               <div className="w-8 h-px bg-gold/50" />
             </div>
@@ -449,7 +442,7 @@ export function OurStoryExperience() {
             <h3 className="font-display text-cream text-4xl font-semibold mb-2">Jaguar</h3>
             <p className="text-gold/70 text-xs font-bold uppercase tracking-wider mb-4">● Near Threatened · Central & South America</p>
             <p className="text-cream/65 leading-relaxed text-sm">
-              KEEP keeper exchanges have supported jaguar enrichment programme development at three partner collections, directly improving daily care and behavioural wellbeing.
+              UKACT supports knowledge-sharing on jaguar enrichment programme development across member colleges with big cat collections, directly improving daily care and behavioural wellbeing.
             </p>
           </div>
         </div>
@@ -461,7 +454,7 @@ export function OurStoryExperience() {
             <h3 className="font-display text-cream text-4xl font-semibold mb-2">African Elephant</h3>
             <p className="text-gold/70 text-xs font-bold uppercase tracking-wider mb-4">● Vulnerable · Sub-Saharan Africa</p>
             <p className="text-cream/65 leading-relaxed text-sm">
-              Exchange keepers trained in advanced elephant behaviour returned with social herd management techniques that transformed care at multiple UK collections.
+              Members trained in advanced elephant behaviour share social herd management techniques that have transformed care at multiple UK institutions.
             </p>
           </div>
         </div>
@@ -475,8 +468,8 @@ export function OurStoryExperience() {
           <div className="space-y-3 mb-14 max-w-2xl">
             {[
               ['Every exchange creates knowledge.', false],
-              ['Every project creates hope.', false],
-              ['Every partnership protects wildlife.', false],
+              ['Every conversation raises standards.', false],
+              ['Every partnership improves animal welfare.', false],
               ['Our story is still being written.', true],
             ].map(([line, isGold]) => (
               <motion.p key={line as string}
@@ -490,7 +483,7 @@ export function OurStoryExperience() {
               </motion.p>
             ))}
           </div>
-          <Link href="/joining-keep"
+          <Link href="/joining-ukact"
             className="inline-flex items-center gap-3 px-8 py-4 bg-gold text-cream font-semibold rounded-xl text-lg hover:bg-gold-light transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl hover:shadow-gold/30">
             Become Part of the Story
             <motion.span animate={{ x: [0, 5, 0] }} transition={{ duration: 1.5, repeat: Infinity }}>
@@ -500,7 +493,7 @@ export function OurStoryExperience() {
           <div className="flex items-center gap-8 mt-8">
             <Link href="/listings" className="text-cream/40 hover:text-gold text-sm transition-colors">Browse Placements</Link>
             <span className="w-px h-4 bg-white/15" />
-            <Link href="/about/sponsors" className="text-cream/40 hover:text-gold text-sm transition-colors">Support KEEP</Link>
+            <Link href="/about/sponsors" className="text-cream/40 hover:text-gold text-sm transition-colors">Support UKACT</Link>
           </div>
         </div>
 

@@ -6,7 +6,7 @@ import { getCmsNavItems } from '@/lib/getCmsNavItems'
 import { getSiteSettings, parseSetting, DEFAULT_ABOUT_TIMELINE, DEFAULT_ABOUT_VALUES, DEFAULT_ABOUT_STATS } from '@/lib/getSiteSettings'
 import type { Profile } from '@/types'
 
-export const metadata = { title: 'About KEEP' }
+export const metadata = { title: 'About UKACT' }
 
 export default async function AboutPage() {
   const supabase = await createClient()
@@ -27,7 +27,7 @@ export default async function AboutPage() {
       <Navbar profile={profile as any} cmsItems={cmsItems} logoUrl={s["branding.logo_url"]} navConfig={parseSetting(s["nav.items"], undefined)} navCustom={parseSetting(s["nav.custom"], [])} />
       <main className="flex-1">
         <PageHero
-          eyebrow="About KEEP"
+          eyebrow="About UKACT"
           title={s['about.hero_title']}
           subtitle={s['about.hero_subtitle']}
           image={s['about.hero_image']}

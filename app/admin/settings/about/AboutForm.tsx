@@ -62,7 +62,7 @@ export function AboutForm({ initial }: { initial: AboutData }) {
             onChange={v => set('stats', v)}
             fields={[
               { key: 'number', label: 'Number', placeholder: '1,200+' },
-              { key: 'label', label: 'Label', placeholder: 'Keepers Placed' },
+              { key: 'label', label: 'Label', placeholder: 'Members' },
             ]}
             itemLabel={item => item.label || 'Stat'}
           />
@@ -78,7 +78,7 @@ export function AboutForm({ initial }: { initial: AboutData }) {
             onChange={v => set('timeline', v)}
             fields={[
               { key: 'year', label: 'Year', placeholder: '2014' },
-              { key: 'title', label: 'Title', placeholder: 'KEEP Founded' },
+              { key: 'title', label: 'Title', placeholder: 'UKACT Founded' },
               { key: 'desc', label: 'Description', type: 'textarea' },
             ]}
             itemLabel={item => `${item.year ?? ''} – ${item.title ?? ''}`}

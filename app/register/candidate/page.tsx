@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import { RegisterForm } from '@/components/auth/RegisterForm'
 
-export const metadata: Metadata = { title: 'Register as Keeper' }
+export const metadata: Metadata = { title: 'Register as a Member' }
 
 export default function CandidateRegisterPage() {
   return (
@@ -14,19 +14,19 @@ export default function CandidateRegisterPage() {
         />
         <div className="absolute inset-0 bg-gradient-to-br from-forest/80 via-forest/60 to-canopy/80" />
         <div className="relative z-10 p-10">
-          <Link href="/" className="font-display font-bold text-2xl text-cream">KEEP</Link>
+          <Link href="/" className="font-display font-bold text-2xl text-cream">UKACT</Link>
         </div>
         <div className="relative z-10 mt-auto p-10">
           <blockquote className="text-cream/90 text-xl font-display italic leading-relaxed mb-4">
-            "Joining KEEP was the single best thing I did for my career as a keeper."
+            "Joining UKACT was the single best thing I did for my career in animal care."
           </blockquote>
-          <p className="text-sage/70 text-sm">— James Hartley, Keeper, Longleat Safari Park</p>
+          <p className="text-sage/70 text-sm">— James Hartley, Head of Animal Care, Agricultural College</p>
         </div>
       </div>
 
       <div className="flex-1 flex flex-col justify-center px-6 py-12 lg:px-16 bg-cream">
         <div className="lg:hidden mb-10">
-          <Link href="/" className="font-display font-bold text-2xl text-forest">KEEP</Link>
+          <Link href="/" className="font-display font-bold text-2xl text-forest">UKACT</Link>
         </div>
         <div className="max-w-md w-full mx-auto lg:mx-0">
           <RegisterForm type="candidate" />

@@ -155,7 +155,7 @@ export function SectorsForm({ initial }: { initial: SectorData[] }) {
                 fields={[
                   { key: 'quote', label: 'Quote', type: 'textarea' },
                   { key: 'name', label: 'Name', placeholder: 'Sarah Mitchell' },
-                  { key: 'role', label: 'Role', placeholder: 'Conservation Keeper · Chester Zoo' },
+                  { key: 'role', label: 'Role', placeholder: 'Animal Unit Manager · Further Education College' },
                   { key: 'image', label: 'Avatar URL', placeholder: 'https://…' },
                 ]}
                 itemLabel={item => item.name || 'Testimonial'}

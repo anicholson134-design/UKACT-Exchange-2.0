@@ -11,7 +11,7 @@ const nav = [
   { href: '/admin/settings/team', label: 'Team' },
   { href: '/admin/settings/sponsors', label: 'Sponsors' },
   { href: '/admin/settings/partners', label: 'Partners' },
-  { href: '/admin/settings/joining', label: 'Joining KEEP' },
+  { href: '/admin/settings/joining', label: 'Join UKACT' },
   { href: '/admin/settings/contact', label: 'Contact' },
   { href: '/admin/settings/sectors', label: 'Sectors' },
 ]

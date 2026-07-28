@@ -5,7 +5,7 @@ const footerNav = [
   {
     heading: 'About',
     links: [
-      { label: 'About KEEP', href: '/about' },
+      { label: 'About UKACT', href: '/about' },
       { label: 'Meet the Team', href: '/about/team' },
       { label: 'Sponsors', href: '/about/sponsors' },
       { label: 'Partners', href: '/about/partners' },
@@ -16,7 +16,7 @@ const footerNav = [
     links: [
       { label: 'Current Placements', href: '/listings' },
       { label: 'Other Opportunities', href: '/listings/other' },
-      { label: 'Joining KEEP', href: '/joining-keep' },
+      { label: 'Join UKACT', href: '/joining-ukact' },
     ],
   },
   {
@@ -39,22 +39,22 @@ export function Footer() {
           {/* Brand column */}
           <div className="col-span-2 md:col-span-1">
             <Link href="/" className="font-display font-bold text-2xl text-cream">
-              KEEP
+              UKACT
             </Link>
             <p className="mt-4 text-sm text-sage/70 leading-relaxed max-w-xs">
-              The UK's first official Zookeeper Exchange Programme. Connecting keepers with
-              collections to develop skills and advance conservation.
+              The national network for UK Animal Care Technicians. Connecting staff across
+              animal management colleges and farm schools to develop skills and raise welfare standards.
             </p>
             <div className="mt-6 flex items-center gap-2 text-sm text-sage/50">
               <MapPin className="h-3.5 w-3.5 shrink-0" />
-              Cambridge, CB24
+              United Kingdom
             </div>
             <Link
-              href="mailto:info@keeperexchange.org"
+              href="mailto:info@ukact.keeperexchange.org"
               className="mt-2 flex items-center gap-2 text-sm text-sage/50 hover:text-gold transition-colors"
             >
               <Mail className="h-3.5 w-3.5 shrink-0" />
-              info@keeperexchange.org
+              info@ukact.keeperexchange.org
             </Link>
           </div>
 
@@ -85,11 +85,11 @@ export function Footer() {
       <div className="border-t border-white/10">
         <div className="container-keep py-6 flex flex-col sm:flex-row items-center justify-between gap-4">
           <p className="text-xs text-sage/40">
-            © {new Date().getFullYear()} KEEP – Keeper Exchange and Education Programme.
+            © {new Date().getFullYear()} UKACT – UK Animal Care Technicians.
             All rights reserved.
           </p>
           <p className="text-xs text-sage/30 flex items-center gap-1">
-            Made with <Heart className="h-3 w-3 text-gold/50" /> for conservation
+            Made with <Heart className="h-3 w-3 text-gold/50" /> for animal welfare
           </p>
         </div>
       </div>

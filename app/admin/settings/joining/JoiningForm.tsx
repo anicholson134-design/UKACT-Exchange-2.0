@@ -44,7 +44,7 @@ export function JoiningForm({ initial }: { initial: JoiningData }) {
       </section>
 
       <section>
-        <h2 className="text-base font-semibold text-forest mb-4">Keeper Benefits</h2>
+        <h2 className="text-base font-semibold text-forest mb-4">Member Benefits</h2>
         <div className={card}>
           <StringArrayField label="Benefits (for keepers)" values={d.keeper_benefits} onChange={v => set('keeper_benefits', v)} placeholder="Access to placements at 80+ collections" />
         </div>

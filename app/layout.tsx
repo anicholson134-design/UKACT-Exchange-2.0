@@ -24,12 +24,13 @@ const geistMono = Geist_Mono({
 })
 
 export const metadata: Metadata = {
-  title: { default: 'KEEP – Zookeeper Exchange Programme', template: '%s | KEEP' },
-  description: "The UK's first official Zookeeper Exchange Programme. Connecting keepers with collections worldwide to develop skills and advance conservation.",
+  metadataBase: new URL('https://ukact.keeperexchange.org'),
+  title: { default: 'UKACT Exchange – UK Animal Care Technicians', template: '%s | UKACT Exchange' },
+  description: 'The national network for UK Animal Care Technicians. Connecting staff across animal management colleges and farm schools to share best practice and raise welfare standards.',
   robots: { index: false, follow: false },
   icons: {
-    icon: '/keep-logo.webp',
-    apple: '/keep-logo.webp',
+    icon: '/UKACT-1536x730.jpg',
+    apple: '/UKACT-1536x730.jpg',
   },
 }
 

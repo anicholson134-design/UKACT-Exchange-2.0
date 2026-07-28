@@ -4,9 +4,9 @@ import { useRef } from 'react'
 import { motion, useInView } from 'framer-motion'
 
 const notes = [
-  { text: 'Cambridge, 2014', rotate: -2, x: -8 },
-  { text: '1st exchange approved ✓', rotate: 1.5, x: 12 },
-  { text: 'Chester Zoo →', rotate: -1, x: -4 },
+  { text: 'Facebook group, 2019', rotate: -2, x: -8 },
+  { text: '1st CPD conference ✓', rotate: 1.5, x: 12 },
+  { text: 'Halesowen College →', rotate: -1, x: -4 },
 ]
 
 function FadeUp({ children, delay = 0, className = '' }: { children: React.ReactNode; delay?: number; className?: string }) {
@@ -58,19 +58,19 @@ export function StoryBeginning() {
 
               <FadeUp delay={0.1}>
                 <p className="text-ink/70 text-lg leading-relaxed" style={{ fontFamily: 'Georgia, serif' }}>
-                  It started with a simple question asked in a Cambridge staffroom in 2014: <em>"What if keepers could learn from each other?"</em>
+                  It started with a simple question asked in a Facebook group in 2019: <em>"What if animal care staff could learn from each other?"</em>
                 </p>
               </FadeUp>
 
               <FadeUp delay={0.15}>
                 <p className="text-ink/60 leading-relaxed" style={{ fontFamily: 'Georgia, serif' }}>
-                  The idea was straightforward but radical — instead of expensive training programmes, why not let keepers spend time inside other collections, learning directly from the hands that had worked with different species for years.
+                  The idea was straightforward but powerful — instead of working in isolation, why not let staff across colleges and farm schools share knowledge directly with the people caring for different species every day.
                 </p>
               </FadeUp>
 
               <FadeUp delay={0.2}>
                 <p className="text-ink/60 leading-relaxed" style={{ fontFamily: 'Georgia, serif' }}>
-                  KEEP — the Keeper Exchange and Education Programme — became the UK's first official framework for structured keeper exchanges. A handshake between institutions that said: <em>we believe in learning by doing.</em>
+                  UKACT — UK Animal Care Technicians — grew from that group into the UK's professional membership association for animal care education. A community that said: <em>we believe in learning from each other.</em>
                 </p>
               </FadeUp>
 
@@ -110,11 +110,11 @@ export function StoryBeginning() {
                   <div className="bg-white p-3 pb-10">
                     <img
                       src="https://images.unsplash.com/photo-1564349683136-77e08dba1ef7?w=600&q=85"
-                      alt="Keeper at work"
+                      alt="Animal care technician at work"
                       className="w-full aspect-[4/3] object-cover"
                     />
                     <p className="text-center text-xs text-ink/40 mt-3 italic" style={{ fontFamily: 'Georgia, serif' }}>
-                      First exchange — Chester Zoo, 2014
+                      The first conversations — 2019
                     </p>
                   </div>
                 </motion.div>
@@ -148,9 +148,9 @@ export function StoryBeginning() {
                   style={{ transform: 'rotate(-15deg)' }}
                 >
                   <div>
-                    <p className="text-red-800/70 text-xs font-bold uppercase tracking-wider">KEEP</p>
-                    <p className="text-red-800/50 text-[8px] uppercase tracking-widest">Est. 2014</p>
-                    <p className="text-red-800/50 text-[8px] uppercase tracking-widest">Cambridge</p>
+                    <p className="text-red-800/70 text-xs font-bold uppercase tracking-wider">UKACT</p>
+                    <p className="text-red-800/50 text-[8px] uppercase tracking-widest">Est. 2019</p>
+                    <p className="text-red-800/50 text-[8px] uppercase tracking-widest">Online</p>
                   </div>
                 </div>
               </FadeUp>
@@ -160,7 +160,7 @@ export function StoryBeginning() {
           {/* Timeline entry */}
           <FadeUp delay={0.3} className="mt-24 border-t border-stone/30 pt-12">
             <div className="flex items-center gap-6">
-              <div className="text-5xl font-display font-bold text-gold/30">2014</div>
+              <div className="text-5xl font-display font-bold text-gold/30">2019</div>
               <div className="h-px flex-1 bg-gradient-to-r from-gold/30 to-transparent" />
               <p className="text-ink/50 text-sm italic max-w-sm text-right" style={{ fontFamily: 'Georgia, serif' }}>
                 "A small idea with an enormous purpose."

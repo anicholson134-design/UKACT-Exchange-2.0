@@ -29,7 +29,7 @@ function newBlock(type: Block['type']): Block {
     text: { text: 'Write your content here…' },
     image: { src: '', alt: '', caption: '' },
     two_col: { left_text: 'Write text here…', right_image: '', right_alt: '' },
-    cta: { title: 'Ready to get started?', body: '', button_label: 'Get started', button_href: '/joining-keep' },
+    cta: { title: 'Ready to get started?', body: '', button_label: 'Get started', button_href: '/joining-ukact' },
     stats: { items: [{ value: '', label: '' }, { value: '', label: '' }, { value: '', label: '' }, { value: '', label: '' }] },
     divider: {},
   }
@@ -180,7 +180,7 @@ function BlockEditor_({ block, onChange, onDelete, onMoveUp, onMoveDown, isFirst
                 placeholder="Button label"
                 className="w-full px-3 py-2 rounded-lg border border-stone/30 text-sm focus:outline-none focus:ring-2 focus:ring-gold/30" />
               <input type="text" value={block.data.button_href ?? ''} onChange={e => update('button_href', e.target.value)}
-                placeholder="Button link (e.g. /joining-keep)"
+                placeholder="Button link (e.g. /joining-ukact)"
                 className="w-full px-3 py-2 rounded-lg border border-stone/30 text-sm focus:outline-none focus:ring-2 focus:ring-gold/30" />
             </div>
           </>
@@ -200,7 +200,7 @@ function BlockEditor_({ block, onChange, onDelete, onMoveUp, onMoveDown, isFirst
                   const items = [...block.data.items]
                   items[i] = { ...items[i], label: e.target.value }
                   update('items', items)
-                }} placeholder={`Stat ${i + 1} label (e.g. Keepers placed)`}
+                }} placeholder={`Stat ${i + 1} label (e.g. Members)`}
                   className="w-full px-3 py-2 rounded-lg border border-stone/30 text-sm focus:outline-none focus:ring-2 focus:ring-gold/30" />
               </div>
             ))}

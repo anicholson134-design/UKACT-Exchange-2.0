@@ -5,7 +5,7 @@ import { getCmsNavItems } from '@/lib/getCmsNavItems'
 import { getSiteSettings, parseSetting } from '@/lib/getSiteSettings'
 import { ContactClient } from './ContactClient'
 
-export const metadata = { title: 'Contact KEEP' }
+export const metadata = { title: 'Contact UKACT' }
 
 export default async function ContactPage() {
   const supabase = await createClient()

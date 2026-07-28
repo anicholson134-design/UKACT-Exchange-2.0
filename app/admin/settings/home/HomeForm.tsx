@@ -88,7 +88,7 @@ export function HomeForm({ initial }: { initial: HomeData }) {
             fields={[
               { key: 'value', label: 'Number', placeholder: '50' },
               { key: 'suffix', label: 'Suffix', placeholder: '+' },
-              { key: 'label', label: 'Label', placeholder: 'Keepers Placed' },
+              { key: 'label', label: 'Label', placeholder: 'Members' },
               { key: 'desc', label: 'Description', placeholder: 'Professional exchanges completed' },
             ]}
             itemLabel={(item, i) => item.label || `Stat ${i + 1}`}
@@ -97,7 +97,7 @@ export function HomeForm({ initial }: { initial: HomeData }) {
       </section>
 
       <section>
-        <h2 className="text-base font-semibold text-forest mb-4">How KEEP Works</h2>
+        <h2 className="text-base font-semibold text-forest mb-4">How UKACT Works</h2>
         <div className={card}>
           <div><label className="block text-sm font-medium text-ink mb-1.5">Eyebrow</label><input className={inp} {...field('howitworks_eyebrow')} /></div>
           <div><label className="block text-sm font-medium text-ink mb-1.5">Heading</label><input className={inp} {...field('howitworks_heading')} /></div>
@@ -126,7 +126,7 @@ export function HomeForm({ initial }: { initial: HomeData }) {
             fields={[
               { key: 'quote', label: 'Quote', type: 'textarea' },
               { key: 'name', label: 'Name', placeholder: 'Sarah Mitchell' },
-              { key: 'role', label: 'Role', placeholder: 'Senior Keeper' },
+              { key: 'role', label: 'Role', placeholder: 'Animal Unit Manager' },
               { key: 'collection', label: 'Collection', placeholder: 'Chester Zoo' },
               { key: 'avatar', label: 'Avatar URL', placeholder: 'https://…' },
             ]}

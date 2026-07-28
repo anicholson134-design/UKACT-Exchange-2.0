@@ -1,7 +1,7 @@
 import { createServerClient } from '@supabase/ssr'
 import { NextResponse, type NextRequest } from 'next/server'
 
-const PREVIEW_EXEMPT = ['/preview-access', '/api/preview-access', '/eaza', '/auth/callback']
+const PREVIEW_EXEMPT = ['/preview-access', '/api/preview-access', '/auth/callback']
 
 export async function middleware(request: NextRequest) {
   const pathname = request.nextUrl.pathname
@@ -9,7 +9,7 @@ export async function middleware(request: NextRequest) {
   // ── Preview password gate ────────────────────────────────────
   const isExempt = PREVIEW_EXEMPT.some(p => pathname.startsWith(p))
   if (!isExempt) {
-    const previewCookie = request.cookies.get('keep_preview')
+    const previewCookie = request.cookies.get('ukact_preview')
     if (previewCookie?.value !== 'granted') {
       return NextResponse.redirect(new URL('/preview-access', request.url))
     }

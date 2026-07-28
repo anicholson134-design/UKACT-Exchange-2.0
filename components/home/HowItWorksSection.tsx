@@ -11,7 +11,7 @@ interface StepItem { title: string; desc: string }
 
 export function HowItWorksSection({
   eyebrow = 'The Process',
-  heading = 'How KEEP Works',
+  heading = 'How UKACT Works',
   steps = DEFAULT_HOWITWORKS_STEPS,
 }: {
   eyebrow?: string

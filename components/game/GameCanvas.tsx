@@ -355,7 +355,7 @@ export function GameCanvas({ best, settings, audio, onGameOver, onStatsChange }:
         className="w-full h-full touch-none"
         style={{ imageRendering: 'pixelated' }}
         role="img"
-        aria-label="KEEP the Wheelbarrow gameplay area"
+        aria-label="UKACT the Wheelbarrow gameplay area"
       />
       <div className="pointer-events-none absolute inset-0 flex items-start justify-between p-2 sm:p-3 font-pixel text-[8px] sm:text-[10px]">
         <div className="glass rounded px-2 py-1 text-cream">

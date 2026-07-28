@@ -21,17 +21,17 @@ interface NavbarProps {
 
 const NAV_CHILDREN: Record<string, { label: string; href: string; desc: string }[]> = {
   'About': [
-    { label: 'About KEEP', href: '/about', desc: 'Our mission and story' },
+    { label: 'About UKACT', href: '/about', desc: 'Our mission and story' },
     { label: 'Our Story', href: '/about/our-story', desc: 'An immersive journey' },
-    { label: 'Meet the Team', href: '/about/team', desc: 'The people behind KEEP' },
+    { label: 'Meet the Team', href: '/about/team', desc: 'The people behind UKACT' },
     { label: 'Sponsors', href: '/about/sponsors', desc: 'Those who make it possible' },
-    { label: 'Partners', href: '/about/partners', desc: 'Our global network' },
+    { label: 'Partners', href: '/about/partners', desc: 'Our national network' },
   ],
   'Sectors': [
-    { label: 'KEEP Conservation', href: '/sectors/conservation', desc: 'Wildlife & field conservation' },
-    { label: 'KEEP Zoos & Aquariums', href: '/sectors/zoos-aquariums', desc: 'Excellence in animal care' },
-    { label: 'KEEP Education', href: '/sectors/education', desc: 'Inspiring the next generation' },
-    { label: 'KEEP Researchers', href: '/sectors/researchers', desc: 'Science that drives conservation' },
+    { label: 'Conservation & Welfare', href: '/sectors/conservation', desc: 'Animal welfare & husbandry' },
+    { label: 'Animal Care Colleges', href: '/sectors/zoos-aquariums', desc: 'Excellence in animal care' },
+    { label: 'Education', href: '/sectors/education', desc: 'Inspiring the next generation' },
+    { label: 'Researchers', href: '/sectors/researchers', desc: 'Science that drives standards' },
   ],
   'Listings': [
     { label: 'Current Placements', href: '/listings', desc: 'Available exchange opportunities' },
@@ -43,11 +43,11 @@ const DEFAULT_NAV_CONFIG = [
   { label: 'About', href: '/about', visible: true },
   { label: 'Sectors', href: '/sectors/conservation', visible: true },
   { label: 'Listings', href: '/listings', visible: true },
-  { label: 'Joining KEEP', href: '/joining-keep', visible: true },
+  { label: 'Join UKACT', href: '/joining-ukact', visible: true },
   { label: 'Contact', href: '/contact', visible: true },
 ]
 
-export function Navbar({ profile, cmsItems = [], logoUrl = '/keep-logo.webp', navConfig, navCustom = [] }: NavbarProps) {
+export function Navbar({ profile, cmsItems = [], logoUrl = '/UKACT-1536x730.jpg', navConfig, navCustom = [] }: NavbarProps) {
   const router = useRouter()
   const pathname = usePathname()
   const supabase = createClient()
@@ -127,7 +127,7 @@ export function Navbar({ profile, cmsItems = [], logoUrl = '/keep-logo.webp', na
             <Link href="/" className="flex items-center">
               <Image
                 src={logoUrl}
-                alt="KEEP"
+                alt="UKACT"
                 width={112}
                 height={112}
                 className="h-24 w-24 object-contain"
@@ -217,7 +217,7 @@ export function Navbar({ profile, cmsItems = [], logoUrl = '/keep-logo.webp', na
                     href="/register/candidate"
                     className="px-4 py-2 text-sm font-medium bg-gold text-cream rounded-lg hover:bg-gold-light transition-colors duration-200"
                   >
-                    Join KEEP
+                    Join UKACT
                   </Link>
                 </div>
               )}
@@ -280,7 +280,7 @@ export function Navbar({ profile, cmsItems = [], logoUrl = '/keep-logo.webp', na
               ) : (
                 <>
                   <Link href="/register/candidate" className="w-full py-3 text-center bg-gold text-cream rounded-lg font-medium">
-                    Join KEEP
+                    Join UKACT
                   </Link>
                   <Link href="/login" className="w-full py-3 text-center text-cream/70 text-sm">
                     Log in

@@ -7,8 +7,8 @@ import { ArrowRight } from 'lucide-react'
 
 const lines = [
   'Every exchange creates knowledge.',
-  'Every project creates hope.',
-  'Every partnership protects wildlife.',
+  'Every conversation raises standards.',
+  'Every partnership improves animal welfare.',
   'Our story is still being written.',
 ]
 
@@ -83,7 +83,7 @@ export function StoryClosing() {
           transition={{ duration: 0.8, delay: 0.8 }}
         >
           <Link
-            href="/joining-keep"
+            href="/joining-ukact"
             className="group inline-flex items-center gap-3 px-8 py-4 bg-gold text-cream font-semibold rounded-xl text-lg hover:bg-gold-light transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl hover:shadow-gold/30"
           >
             Become Part of the Story
@@ -109,7 +109,7 @@ export function StoryClosing() {
           </Link>
           <span className="w-px h-4 bg-white/20" />
           <Link href="/about/sponsors" className="text-cream/50 hover:text-gold text-sm font-medium transition-colors">
-            Support KEEP
+            Support UKACT
           </Link>
         </motion.div>
       </div>

@@ -13,9 +13,9 @@ interface HeroProps {
 }
 
 export function HeroSection({
-  eyebrow = "UK's First Zookeeper Exchange Programme",
-  headline = 'Where Keepers Come to Grow.',
-  subtitle = 'KEEP connects passionate keepers with world-class collections to develop skills, deepen expertise and strengthen conservation globally.',
+  eyebrow = "The National Network for Animal Care Education",
+  headline = 'Where Animal Care Careers Begin.',
+  subtitle = 'UKACT connects staff across animal management colleges and farm schools to share best practice, raise husbandry standards and grow careers in animal care.',
   bgImage = 'https://images.unsplash.com/photo-1564349683136-77e08dba1ef7?w=1920&q=80',
 }: HeroProps) {
   const words = headline.split(' ')
@@ -39,7 +39,7 @@ export function HeroSection({
         poster={bgImage}
         className="absolute inset-0 w-full h-full object-cover"
       >
-        {/* In production replace with real KEEP footage */}
+        {/* In production replace with real UKACT footage */}
       </video>
 
       {/* Fallback cinematic image while video loads */}
@@ -108,10 +108,10 @@ export function HeroSection({
             <ArrowRight className="h-4 w-4" />
           </Link>
           <Link
-            href="/joining-keep"
+            href="/joining-ukact"
             className="inline-flex items-center gap-2 px-6 py-3 bg-white/10 text-cream font-medium rounded-lg border border-white/20 hover:bg-white/20 transition-all duration-300 backdrop-blur-sm"
           >
-            Join KEEP
+            Join UKACT
           </Link>
         </motion.div>
       </div>

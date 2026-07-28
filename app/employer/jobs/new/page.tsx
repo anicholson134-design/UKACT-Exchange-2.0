@@ -20,7 +20,7 @@ export default async function NewJobPage() {
     <div className="space-y-6">
       <div>
         <h1 className="text-3xl font-bold">Post a Placement</h1>
-        <p className="text-muted-foreground mt-1">Your listing will be reviewed by KEEP before going live.</p>
+        <p className="text-muted-foreground mt-1">Your listing will be reviewed by UKACT before going live.</p>
       </div>
       <JobForm employerLocation={emp?.location ?? null} />
     </div>

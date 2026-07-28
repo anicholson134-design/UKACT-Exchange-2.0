@@ -37,13 +37,13 @@ export async function generateShareCard(score: number, itemsStacked: number): Pr
   endBarrowTransform(ctx)
   ctx.restore()
 
-  const logo = await loadImage('/keep-logo.webp')
-  if (logo) ctx.drawImage(logo, 64, 56, 84, 84)
+  const logo = await loadImage('/UKACT-1536x730.jpg')
+  if (logo) ctx.drawImage(logo, 64, 56, 84, 40)
 
   ctx.fillStyle = PALETTE.forest
   ctx.font = 'bold 40px "Courier New", monospace'
   ctx.textAlign = 'left'
-  ctx.fillText('KEEP the Wheelbarrow', 64, 190)
+  ctx.fillText('UKACT the Wheelbarrow', 64, 190)
 
   ctx.font = 'bold 120px "Courier New", monospace'
   ctx.fillStyle = PALETTE.gold
@@ -65,7 +65,7 @@ export async function generateShareCard(score: number, itemsStacked: number): Pr
 
   ctx.font = '24px "Courier New", monospace'
   ctx.fillStyle = PALETTE.sand
-  ctx.fillText('Can you beat it? Play KEEP the Wheelbarrow', 64, 590)
+  ctx.fillText('Can you beat it? Play UKACT the Wheelbarrow', 64, 590)
 
   return canvas.toDataURL('image/png')
 }
@@ -88,5 +88,5 @@ function wrapText(ctx: CanvasRenderingContext2D, text: string, x: number, y: num
 }
 
 export function shareText(score: number, itemsStacked: number) {
-  return `I stacked ${itemsStacked} items (${score} points) before the wheelbarrow tipped in KEEP the Wheelbarrow! 🦁🛒`
+  return `I stacked ${itemsStacked} items (${score} points) before the wheelbarrow tipped in UKACT the Wheelbarrow! 🦁🛒`
 }
