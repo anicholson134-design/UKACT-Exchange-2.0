@@ -254,7 +254,7 @@ export class WheelbarrowEngine {
     for (let c = c0; c <= c1; c++) this.heightmap[c] = topY
 
     this.itemsStacked += 1
-    let gained = 1 + (this.current.bonus ?? 0)
+    const gained = 1 + (this.current.bonus ?? 0)
     this.score += gained
     this.events.push({ type: 'land', x: placed.x, y: topY, points: gained, itemName: this.current.name })
     if (this.current.rare) this.events.push({ type: 'rare', x: placed.x, y: topY, itemName: this.current.name })

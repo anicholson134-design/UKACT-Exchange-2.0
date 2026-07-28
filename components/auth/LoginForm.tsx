@@ -97,7 +97,7 @@ export function LoginForm() {
       </form>
 
       <p className="mt-6 text-center text-sm text-ink/50">
-        Don't have an account?{' '}
+        Don&apos;t have an account?{' '}
         <Link href="/register/candidate" className="text-canopy hover:text-gold font-medium transition-colors">
           Join as a keeper
         </Link>{' '}

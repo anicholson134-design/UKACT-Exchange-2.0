@@ -306,10 +306,10 @@ export function OurStoryExperience() {
               A simple question that changed everything
             </h2>
             <p className="text-cream/65 text-lg leading-relaxed mb-4" style={{ fontFamily: 'Georgia, serif' }}>
-              <em>"What if animal care staff could learn from each other?"</em>
+              <em>&quot;What if animal care staff could learn from each other?&quot;</em>
             </p>
             <p className="text-cream/55 leading-relaxed" style={{ fontFamily: 'Georgia, serif' }}>
-              In a Facebook group in 2019, that question became UKACT — UK Animal Care Technicians, the UK's professional membership association for staff caring for animals in education settings. The idea was simple but powerful: instead of working in isolation, let staff learn from each other, across colleges and farm schools nationwide.
+              In a Facebook group in 2019, that question became UKACT — UK Animal Care Technicians, the UK&apos;s professional membership association for staff caring for animals in education settings. The idea was simple but powerful: instead of working in isolation, let staff learn from each other, across colleges and farm schools nationwide.
             </p>
             <div className="flex gap-3 mt-8">
               {['Facebook group, 2019', '1st CPD conference ✓', 'Halesowen College →'].map((note, i) => (
@@ -402,7 +402,7 @@ export function OurStoryExperience() {
         {/* QUOTE 1 */}
         <div ref={quote1Ref} className={`${layerBase} flex items-end px-8 md:px-20 pb-24 md:pb-32`}>
           <div className="max-w-lg">
-            <div className="text-gold/30 mb-4" style={{ fontSize: '5rem', fontFamily: 'Georgia', lineHeight: 0.5 }}>"</div>
+            <div className="text-gold/30 mb-4" style={{ fontSize: '5rem', fontFamily: 'Georgia', lineHeight: 0.5 }}>&quot;</div>
             <blockquote className="font-display text-cream italic leading-snug mb-6"
               style={{ fontSize: 'clamp(1.6rem, 3vw, 2.5rem)' }}>
               A few weeks of shared practice. That is all it took to completely change how I approach animal care.
@@ -420,7 +420,7 @@ export function OurStoryExperience() {
         {/* QUOTE 2 */}
         <div ref={quote2Ref} className={`${layerBase} flex items-end justify-end px-8 md:px-20 pb-24 md:pb-32`}>
           <div className="max-w-lg text-right">
-            <div className="text-gold/30 mb-4 text-right" style={{ fontSize: '5rem', fontFamily: 'Georgia', lineHeight: 0.5 }}>"</div>
+            <div className="text-gold/30 mb-4 text-right" style={{ fontSize: '5rem', fontFamily: 'Georgia', lineHeight: 0.5 }}>&quot;</div>
             <blockquote className="font-display text-cream italic leading-snug mb-6"
               style={{ fontSize: 'clamp(1.6rem, 3vw, 2.5rem)' }}>
               UKACT gave me access to knowledge I could never have learned from a textbook or training course.

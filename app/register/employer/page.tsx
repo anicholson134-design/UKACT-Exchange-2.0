@@ -18,7 +18,7 @@ export default function EmployerRegisterPage() {
         </div>
         <div className="relative z-10 mt-auto p-10">
           <blockquote className="text-cream/90 text-xl font-display italic leading-relaxed mb-4">
-            "Hosting UKACT exchanges has energised our entire team. The fresh perspectives are invaluable."
+            &quot;Hosting UKACT exchanges has energised our entire team. The fresh perspectives are invaluable.&quot;
           </blockquote>
           <p className="text-sage/70 text-sm">— Head of Animal Care, Partner Institution</p>
         </div>

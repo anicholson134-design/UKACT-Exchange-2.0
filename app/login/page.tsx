@@ -23,7 +23,7 @@ export default function LoginPage() {
         {/* Quote */}
         <div className="relative z-10 mt-auto p-10">
           <blockquote className="text-cream/90 text-xl font-display italic leading-relaxed mb-4">
-            "Every exchange is a lesson that stays with you for the rest of your career."
+            &quot;Every exchange is a lesson that stays with you for the rest of your career.&quot;
           </blockquote>
           <p className="text-sage/70 text-sm">— Sarah Mitchell, Animal Unit Manager, Further Education College</p>
         </div>

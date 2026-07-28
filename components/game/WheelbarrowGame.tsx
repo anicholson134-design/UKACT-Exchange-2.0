@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { GameCanvas, type GameOverResult } from './GameCanvas'
 import { TitleScreen } from './TitleScreen'
 import { HowToPlayModal } from './HowToPlayModal'
@@ -31,9 +31,7 @@ export function WheelbarrowGame() {
   const [isNewBest, setIsNewBest] = useState(false)
   const [roundKey, setRoundKey] = useState(0)
 
-  const audioRef = useRef<RetroAudio | null>(null)
-  if (!audioRef.current) audioRef.current = new RetroAudio()
-  const audio = audioRef.current
+  const [audio] = useState(() => new RetroAudio())
 
   useEffect(() => {
     const s = getSettings()

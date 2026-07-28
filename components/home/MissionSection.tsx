@@ -51,7 +51,7 @@ export function MissionSection({
               animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.7, delay: 0.1 }}
             >
-              "{missionQuote}"
+              &quot;{missionQuote}&quot;
             </motion.h2>
 
             <motion.p

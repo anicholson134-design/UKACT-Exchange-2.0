@@ -114,7 +114,7 @@ export default async function ListingsPage({
             <div className="flex items-center justify-between mb-8">
               <p className="text-ink/60 text-sm">
                 {count ?? 0} placement{count !== 1 ? 's' : ''} found
-                {q && <span> for "<strong>{q}</strong>"</span>}
+                {q && <span> for &quot;<strong>{q}</strong>&quot;</span>}
               </p>
               {!user && (
                 <p className="text-sm text-ink/50">

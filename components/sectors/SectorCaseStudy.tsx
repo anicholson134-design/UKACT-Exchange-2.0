@@ -77,7 +77,7 @@ export function SectorCaseStudy({ label, title, body, image, stat, statLabel, qu
               transition={{ duration: 0.7, delay: 0.3 }}
             >
               <p className="text-cream/80 italic font-display text-lg leading-relaxed mb-3" style={{ fontFamily: 'Georgia, serif' }}>
-                "{quote}"
+                &quot;{quote}&quot;
               </p>
               <p className="text-sage/60 text-sm">— {quoteAuthor}</p>
             </motion.div>

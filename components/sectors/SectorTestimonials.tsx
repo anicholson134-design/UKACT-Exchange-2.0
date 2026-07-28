@@ -72,7 +72,7 @@ export function SectorTestimonials({ testimonials }: { testimonials: Testimonial
                   className="flex-1"
                 >
                   <p className="text-cream/90 font-display italic text-xl md:text-2xl leading-relaxed mb-8">
-                    "{t.quote}"
+                    &quot;{t.quote}&quot;
                   </p>
                   <div className="flex items-center gap-3">
                     <div>

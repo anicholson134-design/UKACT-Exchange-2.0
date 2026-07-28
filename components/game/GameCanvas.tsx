@@ -57,7 +57,7 @@ export function GameCanvas({ best, settings, audio, onGameOver, onStatsChange }:
   const bestRef = useRef<HTMLSpanElement>(null)
   const levelRef = useRef<HTMLSpanElement>(null)
   const settingsRef = useRef(settings)
-  settingsRef.current = settings
+  useEffect(() => { settingsRef.current = settings }, [settings])
 
   useEffect(() => {
     if (!engineRef.current) engineRef.current = new WheelbarrowEngine(best)

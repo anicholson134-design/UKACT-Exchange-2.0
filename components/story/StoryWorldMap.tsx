@@ -74,7 +74,7 @@ export function StoryWorldMap() {
             Connected to the Wider World
           </h2>
           <p className="text-cream/60 mt-4 max-w-lg mx-auto leading-relaxed">
-            From a Facebook group in 2019, UKACT has grown into the UK's national network for animal care education — connected to the wider world through partnerships with international bodies like BIAZA, ABMA and IRKA.
+            From a Facebook group in 2019, UKACT has grown into the UK&apos;s national network for animal care education — connected to the wider world through partnerships with international bodies like BIAZA, ABMA and IRKA.
           </p>
         </motion.div>
 

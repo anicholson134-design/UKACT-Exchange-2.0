@@ -80,7 +80,7 @@ export function ContactClient({ heroHeading, heroBody, email, location, response
                     <Send className="h-7 w-7 text-moss" />
                   </div>
                   <h3 className="font-display font-semibold text-2xl text-forest mb-2">Message sent</h3>
-                  <p className="text-ink/60">Thank you for getting in touch. We'll be in contact within a few working days.</p>
+                  <p className="text-ink/60">Thank you for getting in touch. We&apos;ll be in contact within a few working days.</p>
                 </div>
               ) : (
                 <form onSubmit={handleSubmit} className="bg-white rounded-2xl border border-stone/20 p-8 space-y-6">

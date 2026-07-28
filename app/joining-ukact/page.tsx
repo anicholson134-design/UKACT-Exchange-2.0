@@ -38,7 +38,7 @@ export default async function JoiningUkactPage() {
         <section className="section-padding bg-cream">
           <div className="container-keep">
             <div className="text-center mb-16">
-              <p className="eyebrow mb-4">Who It's For</p>
+              <p className="eyebrow mb-4">Who It&apos;s For</p>
               <h2 className="display-md text-forest">Built for the animal care community</h2>
             </div>
 

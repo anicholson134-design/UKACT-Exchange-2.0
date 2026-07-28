@@ -18,7 +18,7 @@ export default function CandidateRegisterPage() {
         </div>
         <div className="relative z-10 mt-auto p-10">
           <blockquote className="text-cream/90 text-xl font-display italic leading-relaxed mb-4">
-            "Joining UKACT was the single best thing I did for my career in animal care."
+            &quot;Joining UKACT was the single best thing I did for my career in animal care.&quot;
           </blockquote>
           <p className="text-sage/70 text-sm">— James Hartley, Head of Animal Care, Agricultural College</p>
         </div>

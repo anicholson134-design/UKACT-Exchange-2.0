@@ -58,7 +58,7 @@ export function StoryBeginning() {
 
               <FadeUp delay={0.1}>
                 <p className="text-ink/70 text-lg leading-relaxed" style={{ fontFamily: 'Georgia, serif' }}>
-                  It started with a simple question asked in a Facebook group in 2019: <em>"What if animal care staff could learn from each other?"</em>
+                  It started with a simple question asked in a Facebook group in 2019: <em>&quot;What if animal care staff could learn from each other?&quot;</em>
                 </p>
               </FadeUp>
 
@@ -70,7 +70,7 @@ export function StoryBeginning() {
 
               <FadeUp delay={0.2}>
                 <p className="text-ink/60 leading-relaxed" style={{ fontFamily: 'Georgia, serif' }}>
-                  UKACT — UK Animal Care Technicians — grew from that group into the UK's professional membership association for animal care education. A community that said: <em>we believe in learning from each other.</em>
+                  UKACT — UK Animal Care Technicians — grew from that group into the UK&apos;s professional membership association for animal care education. A community that said: <em>we believe in learning from each other.</em>
                 </p>
               </FadeUp>
 
@@ -163,7 +163,7 @@ export function StoryBeginning() {
               <div className="text-5xl font-display font-bold text-gold/30">2019</div>
               <div className="h-px flex-1 bg-gradient-to-r from-gold/30 to-transparent" />
               <p className="text-ink/50 text-sm italic max-w-sm text-right" style={{ fontFamily: 'Georgia, serif' }}>
-                "A small idea with an enormous purpose."
+                &quot;A small idea with an enormous purpose.&quot;
               </p>
             </div>
           </FadeUp>

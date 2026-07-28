@@ -16,7 +16,7 @@ export function SceneBackdrop({ reducedMotion = false }: { reducedMotion?: boole
     ctx.imageSmoothingEnabled = false
 
     let raf = 0
-    let start = performance.now()
+    const start = performance.now()
     function frame(now: number) {
       const t = reducedMotion ? 0 : now - start
       ctx!.clearRect(0, 0, GAME_W, GAME_H)

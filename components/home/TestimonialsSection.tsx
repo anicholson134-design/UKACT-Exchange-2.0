@@ -40,7 +40,7 @@ export function TestimonialsSection({
             <motion.div key={current} initial={{ opacity: 0, x: 30 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -30 }} transition={{ duration: 0.4, ease: 'easeInOut' }} className="text-center">
               <Quote className="h-10 w-10 text-gold/40 mx-auto mb-8" />
               <p className="text-cream/90 text-xl md:text-2xl font-display italic leading-relaxed mb-10">
-                "{items[current]?.quote}"
+                &quot;{items[current]?.quote}&quot;
               </p>
               <div className="flex items-center justify-center gap-4">
                 {items[current]?.avatar && (

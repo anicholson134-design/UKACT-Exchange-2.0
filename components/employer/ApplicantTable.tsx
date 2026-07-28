@@ -186,7 +186,7 @@ export function ApplicantTable({ applications: initial }: { applications: Enrich
             <>
               <DialogHeader>
                 <DialogTitle className="font-display text-xl text-forest">
-                  {selected.profile?.full_name ?? 'Applicant'}'s Application
+                  {selected.profile?.full_name ?? 'Applicant'}&apos;s Application
                 </DialogTitle>
                 {selected.email && (
                   <a

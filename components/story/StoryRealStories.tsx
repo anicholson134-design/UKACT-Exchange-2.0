@@ -50,7 +50,7 @@ function StoryCard({ story, index }: { story: typeof stories[0]; index: number }
         style={{ y: textY, opacity }}
       >
         <div className="max-w-lg">
-          <div className="text-gold/60 mb-6" style={{ fontSize: '6rem', fontFamily: 'Georgia', lineHeight: 0.5 }}>"</div>
+          <div className="text-gold/60 mb-6" style={{ fontSize: '6rem', fontFamily: 'Georgia', lineHeight: 0.5 }}>&quot;</div>
           <blockquote
             className="text-cream font-display italic leading-snug mb-8"
             style={{ fontSize: 'clamp(1.5rem, 3vw, 2.25rem)' }}
