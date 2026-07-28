@@ -14,7 +14,6 @@ interface HomeData {
   howitworks_eyebrow: string; howitworks_heading: string; howitworks_steps: Record<string, string>[]
   testimonials_eyebrow: string; testimonials_heading: string; testimonials: Record<string, string>[]
   partners_eyebrow: string; partners_heading: string; partners: Record<string, string>[]
-  donate_heading: string; donate_body: string; donate_bg_image: string
 }
 
 export function HomeForm({ initial }: { initial: HomeData }) {
@@ -42,8 +41,6 @@ export function HomeForm({ initial }: { initial: HomeData }) {
         'home.testimonials': JSON.stringify(d.testimonials),
         'home.partners_eyebrow': d.partners_eyebrow, 'home.partners_heading': d.partners_heading,
         'home.partners': JSON.stringify(d.partners),
-        'home.donate_heading': d.donate_heading, 'home.donate_body': d.donate_body,
-        'home.donate_bg_image': d.donate_bg_image,
       }),
     })
   }
@@ -146,15 +143,6 @@ export function HomeForm({ initial }: { initial: HomeData }) {
             onChange={names => set('partners', names.map(name => ({ name })))}
             placeholder="Chester Zoo"
           />
-        </div>
-      </section>
-
-      <section>
-        <h2 className="text-base font-semibold text-forest mb-4">Donate Section</h2>
-        <div className={card}>
-          <div><label className="block text-sm font-medium text-ink mb-1.5">Heading</label><input className={inp} {...field('donate_heading')} /></div>
-          <div><label className="block text-sm font-medium text-ink mb-1.5">Body</label><textarea rows={3} className={inp} value={d.donate_body} onChange={e => set('donate_body', e.target.value)} /></div>
-          <ImageField label="Background Image" value={d.donate_bg_image} onChange={v => set('donate_bg_image', v)} />
         </div>
       </section>
 

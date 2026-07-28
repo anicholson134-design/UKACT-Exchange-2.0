@@ -28,9 +28,6 @@ export default async function HomeSettingsPage() {
         partners_eyebrow: s['home.partners_eyebrow'],
         partners_heading: s['home.partners_heading'],
         partners: parseSetting(s['home.partners'], DEFAULT_HOME_PARTNERS),
-        donate_heading: s['home.donate_heading'],
-        donate_body: s['home.donate_body'],
-        donate_bg_image: s['home.donate_bg_image'],
       }}
     />
   )

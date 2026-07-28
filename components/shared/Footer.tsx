@@ -3,27 +3,16 @@ import { Heart, Mail, MapPin } from 'lucide-react'
 
 const footerNav = [
   {
-    heading: 'About',
-    links: [
-      { label: 'About UKACT', href: '/about' },
-      { label: 'Meet the Team', href: '/about/team' },
-      { label: 'Sponsors', href: '/about/sponsors' },
-      { label: 'Partners', href: '/about/partners' },
-    ],
-  },
-  {
     heading: 'Opportunities',
     links: [
       { label: 'Current Placements', href: '/listings' },
-      { label: 'Other Opportunities', href: '/listings/other' },
       { label: 'Join UKACT', href: '/joining-ukact' },
     ],
   },
   {
     heading: 'Support',
     links: [
-      { label: 'Contact Us', href: '/contact' },
-      { label: 'Donate', href: 'https://www.paypal.com/donate' },
+      { label: 'Contact Us', href: 'https://www.ukact.org/contact-8' },
       { label: 'Privacy Policy', href: '/privacy' },
       { label: 'Terms & Conditions', href: '/terms' },
     ],
@@ -35,7 +24,7 @@ export function Footer() {
     <footer style={{ background: 'var(--forest)' }}>
       {/* Main footer */}
       <div className="container-keep py-16 md:py-20">
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-10 md:gap-16">
+        <div className="grid grid-cols-2 md:grid-cols-3 gap-10 md:gap-16">
           {/* Brand column */}
           <div className="col-span-2 md:col-span-1">
             <Link href="/" className="font-display font-bold text-2xl text-cream">
@@ -69,6 +58,8 @@ export function Footer() {
                   <li key={link.href}>
                     <Link
                       href={link.href}
+                      target={link.href.startsWith('http') ? '_blank' : undefined}
+                      rel={link.href.startsWith('http') ? 'noopener noreferrer' : undefined}
                       className="text-sm text-sage/70 hover:text-cream transition-colors"
                     >
                       {link.label}

@@ -19,32 +19,12 @@ interface NavbarProps {
   navCustom?: { label: string; href: string; visible: boolean }[]
 }
 
-const NAV_CHILDREN: Record<string, { label: string; href: string; desc: string }[]> = {
-  'About': [
-    { label: 'About UKACT', href: '/about', desc: 'Our mission and story' },
-    { label: 'Our Story', href: '/about/our-story', desc: 'An immersive journey' },
-    { label: 'Meet the Team', href: '/about/team', desc: 'The people behind UKACT' },
-    { label: 'Sponsors', href: '/about/sponsors', desc: 'Those who make it possible' },
-    { label: 'Partners', href: '/about/partners', desc: 'Our national network' },
-  ],
-  'Sectors': [
-    { label: 'Conservation & Welfare', href: '/sectors/conservation', desc: 'Animal welfare & husbandry' },
-    { label: 'Animal Care Colleges', href: '/sectors/zoos-aquariums', desc: 'Excellence in animal care' },
-    { label: 'Education', href: '/sectors/education', desc: 'Inspiring the next generation' },
-    { label: 'Researchers', href: '/sectors/researchers', desc: 'Science that drives standards' },
-  ],
-  'Listings': [
-    { label: 'Current Placements', href: '/listings', desc: 'Available exchange opportunities' },
-    { label: 'Other Opportunities', href: '/listings/other', desc: 'Volunteering & more' },
-  ],
-}
+const NAV_CHILDREN: Record<string, { label: string; href: string; desc: string }[]> = {}
 
 const DEFAULT_NAV_CONFIG = [
-  { label: 'About', href: '/about', visible: true },
-  { label: 'Sectors', href: '/sectors/conservation', visible: true },
   { label: 'Listings', href: '/listings', visible: true },
   { label: 'Join UKACT', href: '/joining-ukact', visible: true },
-  { label: 'Contact', href: '/contact', visible: true },
+  { label: 'Contact', href: 'https://www.ukact.org/contact-8', visible: true },
 ]
 
 export function Navbar({ profile, cmsItems = [], logoUrl = '/UKACT-1536x730.jpg', navConfig, navCustom = [] }: NavbarProps) {
@@ -147,6 +127,8 @@ export function Navbar({ profile, cmsItems = [], logoUrl = '/UKACT-1536x730.jpg'
                 >
                   <Link
                     href={item.href}
+                    target={item.href.startsWith('http') ? '_blank' : undefined}
+                    rel={item.href.startsWith('http') ? 'noopener noreferrer' : undefined}
                     className={`flex items-center gap-1 px-4 py-2 text-sm font-medium rounded-md transition-colors duration-200 ${textColor} hover:text-gold`}
                   >
                     {item.label}
@@ -182,14 +164,6 @@ export function Navbar({ profile, cmsItems = [], logoUrl = '/UKACT-1536x730.jpg'
 
             {/* Right actions */}
             <div className="hidden lg:flex items-center gap-3">
-              <Link
-                href="https://www.paypal.com/donate"
-                target="_blank"
-                className={`text-sm font-medium transition-colors duration-200 ${textColor} hover:text-gold link-underline`}
-              >
-                Donate £5
-              </Link>
-
               {profile ? (
                 <div className="flex items-center gap-2">
                   <Link
@@ -250,6 +224,8 @@ export function Navbar({ profile, cmsItems = [], logoUrl = '/UKACT-1536x730.jpg'
                 <div key={item.label}>
                   <Link
                     href={item.href}
+                    target={item.href.startsWith('http') ? '_blank' : undefined}
+                    rel={item.href.startsWith('http') ? 'noopener noreferrer' : undefined}
                     className="flex items-center py-3 text-lg font-medium text-cream border-b border-white/10"
                   >
                     {item.label}

@@ -7,13 +7,8 @@ const nav = [
   { href: '/admin/settings/branding', label: 'Branding' },
   { href: '/admin/settings/nav', label: 'Navigation' },
   { href: '/admin/settings/home', label: 'Homepage' },
-  { href: '/admin/settings/about', label: 'About' },
-  { href: '/admin/settings/team', label: 'Team' },
-  { href: '/admin/settings/sponsors', label: 'Sponsors' },
-  { href: '/admin/settings/partners', label: 'Partners' },
   { href: '/admin/settings/joining', label: 'Join UKACT' },
   { href: '/admin/settings/contact', label: 'Contact' },
-  { href: '/admin/settings/sectors', label: 'Sectors' },
 ]
 
 export default function SettingsLayout({ children }: { children: React.ReactNode }) {

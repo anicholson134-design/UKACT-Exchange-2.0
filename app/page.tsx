@@ -10,7 +10,6 @@ import { HowItWorksSection } from '@/components/home/HowItWorksSection'
 import { FeaturedListings } from '@/components/home/FeaturedListings'
 import { TestimonialsSection } from '@/components/home/TestimonialsSection'
 import { PartnersSection } from '@/components/home/PartnersSection'
-import { DonateSection } from '@/components/home/DonateSection'
 import type { Profile } from '@/types'
 import { parseSetting, DEFAULT_STATS, DEFAULT_HOWITWORKS_STEPS, DEFAULT_TESTIMONIALS, DEFAULT_HOME_PARTNERS } from '@/lib/getSiteSettings'
 
@@ -72,11 +71,6 @@ export default async function HomePage() {
           eyebrow={s['home.partners_eyebrow']}
           heading={s['home.partners_heading']}
           partners={parseSetting(s['home.partners'], DEFAULT_HOME_PARTNERS)}
-        />
-        <DonateSection
-          heading={s['home.donate_heading']}
-          body={s['home.donate_body']}
-          bgImage={s['home.donate_bg_image']}
         />
       </main>
       <Footer />

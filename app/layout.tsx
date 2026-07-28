@@ -29,8 +29,12 @@ export const metadata: Metadata = {
   description: 'The national network for UK Animal Care Technicians. Connecting staff across animal management colleges and farm schools to share best practice and raise welfare standards.',
   robots: { index: false, follow: false },
   icons: {
-    icon: '/UKACT-1536x730.jpg',
-    apple: '/UKACT-1536x730.jpg',
+    icon: [
+      { url: '/favicon.ico', sizes: 'any' },
+      { url: '/favicon-16x16.png', sizes: '16x16', type: 'image/png' },
+      { url: '/favicon-32x32.png', sizes: '32x32', type: 'image/png' },
+    ],
+    apple: '/apple-touch-icon.png',
   },
 }
 
