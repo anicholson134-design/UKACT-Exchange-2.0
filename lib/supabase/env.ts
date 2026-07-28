@@ -9,3 +9,8 @@
 export const SUPABASE_URL = process.env.NEXT_PUBLIC_SUPABASE_URL || 'https://placeholder.supabase.co'
 export const SUPABASE_ANON_KEY = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || 'placeholder-anon-key'
 export const SUPABASE_SERVICE_ROLE_KEY = process.env.SUPABASE_SERVICE_ROLE_KEY || 'placeholder-service-role-key'
+
+// True when NEXT_PUBLIC_SUPABASE_URL was missing at build time and we're
+// running on the inert fallback above — used to surface a clear warning
+// instead of a cryptic network error the moment a Supabase call is made.
+export const isSupabasePlaceholder = !process.env.NEXT_PUBLIC_SUPABASE_URL

@@ -28,7 +28,7 @@ export function HeroSection({
   }, [])
 
   return (
-    <section className="relative h-screen min-h-[600px] flex items-end overflow-hidden bg-forest pt-28 md:pt-32">
+    <section className="relative h-screen min-h-[600px] flex flex-col overflow-hidden bg-forest">
       {/* Video background */}
       <video
         ref={videoRef}
@@ -52,8 +52,11 @@ export function HeroSection({
       <div className="absolute inset-0 bg-gradient-to-t from-forest/90 via-forest/40 to-forest/10" />
       <div className="absolute inset-0 bg-gradient-to-r from-forest/60 via-transparent to-transparent" />
 
+      {/* Reserves space for the fixed navbar so content below can never render underneath it */}
+      <div className="relative z-10 h-16 md:h-20 shrink-0" aria-hidden="true" />
+
       {/* Content */}
-      <div className="relative z-10 container-keep w-full pb-16 md:pb-24">
+      <div className="relative z-10 container-keep w-full mt-auto pb-16 md:pb-24">
         {/* Eyebrow */}
         <motion.p
           className="eyebrow text-gold mb-6"
