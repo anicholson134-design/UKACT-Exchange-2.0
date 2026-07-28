@@ -9,8 +9,11 @@ drop trigger if exists set_jobs_updated_at on jobs;
 drop trigger if exists set_profiles_updated_at on profiles;
 drop trigger if exists on_auth_user_created on auth.users;
 
-drop function if exists handle_new_user();
-drop function if exists set_updated_at();
+drop function if exists handle_new_user() cascade;
+-- cascade: set_updated_at() is shared with cms_pages' updated_at trigger
+-- (from the CMS pages step) if that's been run — it gets recreated below,
+-- but re-run that step afterward too, since its trigger just got dropped.
+drop function if exists set_updated_at() cascade;
 
 drop table if exists audit_log cascade;
 drop table if exists saved_jobs cascade;
