@@ -1,17 +1,21 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import { LoginForm } from '@/components/auth/LoginForm'
+import { getSiteSettings } from '@/lib/getSiteSettings'
 
 export const metadata: Metadata = { title: 'Sign In' }
+export const dynamic = 'force-dynamic'
 
-export default function LoginPage() {
+export default async function LoginPage() {
+  const s = await getSiteSettings()
+
   return (
     <div className="min-h-screen flex">
       {/* Left — cinematic image panel */}
       <div className="hidden lg:flex lg:w-[45%] relative flex-col">
         <div
           className="absolute inset-0 bg-cover bg-center"
-          style={{ backgroundImage: `url('https://images.unsplash.com/photo-1474511320723-9a56873867b5?w=1200&q=85')` }}
+          style={{ backgroundImage: `url('${s['auth.login_image']}')` }}
         />
         <div className="absolute inset-0 bg-gradient-to-br from-forest/80 via-forest/60 to-canopy/80" />
 
@@ -23,9 +27,9 @@ export default function LoginPage() {
         {/* Quote */}
         <div className="relative z-10 mt-auto p-10">
           <blockquote className="text-cream/90 text-xl font-display italic leading-relaxed mb-4">
-            &quot;Every exchange is a lesson that stays with you for the rest of your career.&quot;
+            &quot;{s['auth.login_quote']}&quot;
           </blockquote>
-          <p className="text-sage/70 text-sm">— Sarah Mitchell, Animal Unit Manager, Further Education College</p>
+          <p className="text-sage/70 text-sm">— {s['auth.login_quote_author']}</p>
         </div>
       </div>
 

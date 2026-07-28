@@ -108,6 +108,18 @@ export const SETTING_DEFAULTS: Record<string, string> = {
   'contact.location': 'United Kingdom',
   'contact.response_time': 'Usually within 2–3 working days',
 
+  'auth.login_image': 'https://images.unsplash.com/photo-1474511320723-9a56873867b5?w=1200&q=85',
+  'auth.login_quote': 'Every exchange is a lesson that stays with you for the rest of your career.',
+  'auth.login_quote_author': 'Sarah Mitchell, Animal Unit Manager, Further Education College',
+
+  'auth.candidate_image': 'https://images.unsplash.com/photo-1548767797-d8c844163c4a?w=1200&q=85',
+  'auth.candidate_quote': 'Joining UKACT was the single best thing I did for my career in animal care.',
+  'auth.candidate_quote_author': 'James Hartley, Head of Animal Care, Agricultural College',
+
+  'auth.employer_image': 'https://images.unsplash.com/photo-1503656142023-618e7d1f435a?w=1200&q=85',
+  'auth.employer_quote': 'Hosting UKACT exchanges has energised our entire team. The fresh perspectives are invaluable.',
+  'auth.employer_quote_author': 'Head of Animal Care, Partner Institution',
+
   'nav.items': JSON.stringify([
     { label: 'Listings', href: '/listings', visible: true },
     { label: 'Join UKACT', href: '/joining-ukact', visible: true },

@@ -7,6 +7,7 @@ const nav = [
   { href: '/admin/settings/branding', label: 'Branding' },
   { href: '/admin/settings/nav', label: 'Navigation' },
   { href: '/admin/settings/home', label: 'Homepage' },
+  { href: '/admin/settings/auth', label: 'Sign In / Sign Up' },
   { href: '/admin/settings/joining', label: 'Join UKACT' },
   { href: '/admin/settings/contact', label: 'Contact' },
 ]

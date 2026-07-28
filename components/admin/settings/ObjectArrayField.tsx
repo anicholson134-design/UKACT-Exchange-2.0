@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import { Plus, Trash2, ChevronDown, ChevronUp } from 'lucide-react'
+import { ImageField } from './ImageField'
 
 export interface FieldDef {
   key: string
@@ -67,23 +68,33 @@ export function ObjectArrayField({ label, items, fields, onChange, newItem, item
               <div className="px-4 py-4 space-y-3 bg-white">
                 {fields.map(f => (
                   <div key={f.key}>
-                    <label className="block text-xs font-medium text-ink/60 mb-1">{f.label}</label>
-                    {f.type === 'textarea' ? (
-                      <textarea
+                    {f.type === 'image' ? (
+                      <ImageField
+                        label={f.label}
                         value={item[f.key] ?? ''}
-                        onChange={e => update(i, f.key, e.target.value)}
-                        rows={3}
-                        placeholder={f.placeholder}
-                        className="w-full px-3 py-2 text-sm border border-stone/30 rounded-lg focus:outline-none focus:ring-2 focus:ring-canopy/30 resize-y"
+                        onChange={val => update(i, f.key, val)}
                       />
                     ) : (
-                      <input
-                        type="text"
-                        value={item[f.key] ?? ''}
-                        onChange={e => update(i, f.key, e.target.value)}
-                        placeholder={f.placeholder}
-                        className="w-full px-3 py-2 text-sm border border-stone/30 rounded-lg focus:outline-none focus:ring-2 focus:ring-canopy/30"
-                      />
+                      <>
+                        <label className="block text-xs font-medium text-ink/60 mb-1">{f.label}</label>
+                        {f.type === 'textarea' ? (
+                          <textarea
+                            value={item[f.key] ?? ''}
+                            onChange={e => update(i, f.key, e.target.value)}
+                            rows={3}
+                            placeholder={f.placeholder}
+                            className="w-full px-3 py-2 text-sm border border-stone/30 rounded-lg focus:outline-none focus:ring-2 focus:ring-canopy/30 resize-y"
+                          />
+                        ) : (
+                          <input
+                            type="text"
+                            value={item[f.key] ?? ''}
+                            onChange={e => update(i, f.key, e.target.value)}
+                            placeholder={f.placeholder}
+                            className="w-full px-3 py-2 text-sm border border-stone/30 rounded-lg focus:outline-none focus:ring-2 focus:ring-canopy/30"
+                          />
+                        )}
+                      </>
                     )}
                   </div>
                 ))}

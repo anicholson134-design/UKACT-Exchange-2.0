@@ -1,16 +1,20 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import { RegisterForm } from '@/components/auth/RegisterForm'
+import { getSiteSettings } from '@/lib/getSiteSettings'
 
 export const metadata: Metadata = { title: 'Register as a Member' }
+export const dynamic = 'force-dynamic'
 
-export default function CandidateRegisterPage() {
+export default async function CandidateRegisterPage() {
+  const s = await getSiteSettings()
+
   return (
     <div className="min-h-screen flex">
       <div className="hidden lg:flex lg:w-[45%] relative flex-col">
         <div
           className="absolute inset-0 bg-cover bg-center"
-          style={{ backgroundImage: `url('https://images.unsplash.com/photo-1548767797-d8c844163c4a?w=1200&q=85')` }}
+          style={{ backgroundImage: `url('${s['auth.candidate_image']}')` }}
         />
         <div className="absolute inset-0 bg-gradient-to-br from-forest/80 via-forest/60 to-canopy/80" />
         <div className="relative z-10 p-10">
@@ -18,9 +22,9 @@ export default function CandidateRegisterPage() {
         </div>
         <div className="relative z-10 mt-auto p-10">
           <blockquote className="text-cream/90 text-xl font-display italic leading-relaxed mb-4">
-            &quot;Joining UKACT was the single best thing I did for my career in animal care.&quot;
+            &quot;{s['auth.candidate_quote']}&quot;
           </blockquote>
-          <p className="text-sage/70 text-sm">— James Hartley, Head of Animal Care, Agricultural College</p>
+          <p className="text-sage/70 text-sm">— {s['auth.candidate_quote_author']}</p>
         </div>
       </div>
 

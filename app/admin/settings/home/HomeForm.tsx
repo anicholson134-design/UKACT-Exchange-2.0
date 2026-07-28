@@ -125,7 +125,7 @@ export function HomeForm({ initial }: { initial: HomeData }) {
               { key: 'name', label: 'Name', placeholder: 'Sarah Mitchell' },
               { key: 'role', label: 'Role', placeholder: 'Animal Unit Manager' },
               { key: 'collection', label: 'Collection', placeholder: 'Chester Zoo' },
-              { key: 'avatar', label: 'Avatar URL', placeholder: 'https://…' },
+              { key: 'avatar', label: 'Avatar', type: 'image' },
             ]}
             itemLabel={item => item.name || 'Testimonial'}
           />
