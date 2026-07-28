@@ -37,7 +37,7 @@ export default async function ContactPage() {
     <div className="flex flex-col min-h-screen">
       <Navbar profile={profile as any} cmsItems={cmsItems} logoUrl={s["branding.logo_url"]} navConfig={parseSetting(s["nav.items"], undefined)} navCustom={parseSetting(s["nav.custom"], [])} />
       <main className="flex-1">
-        {blocks.map(type => renderBlock(type, blockData, featuredJobs))}
+        {blocks.map((type, i) => renderBlock(type, blockData, featuredJobs, `${type}-${i}`))}
       </main>
       <Footer />
     </div>

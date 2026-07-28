@@ -38,7 +38,8 @@ export function PageBlocksForm({ blocksKey, initialBlocks, initialData }: Props)
     <div className="max-w-2xl space-y-8">
       <SectionBlocksField catalog={BLOCK_CATALOG} value={blocks} onChange={setBlocks} />
 
-      {blocks.map(type => renderBlockEditor(type, d, set))}
+      {/* Content is shared across repeated instances of the same block, so each type's editor is shown once. */}
+      {[...new Set(blocks)].map(type => renderBlockEditor(type, d, set))}
 
       <SaveBar onSave={save} />
     </div>

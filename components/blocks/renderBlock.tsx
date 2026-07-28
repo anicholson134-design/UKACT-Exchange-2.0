@@ -14,35 +14,39 @@ import { ContactDetailsFormBlock } from '@/components/blocks/ContactDetailsFormB
 import type { BlockData } from '@/lib/blockLibrary'
 import type { Job } from '@/types'
 
-/** Renders any block type from the shared library, given the site's block content and (if needed) live jobs. */
-export function renderBlock(type: string, d: BlockData, jobs: Job[] = []): React.ReactNode {
+/**
+ * Renders any block type from the shared library, given the site's block content and (if needed) live jobs.
+ * `key` must be unique per position — the same block type can appear more than once on a page.
+ */
+export function renderBlock(type: string, d: BlockData, jobs: Job[] = [], key?: string): React.ReactNode {
+  const k = key ?? type
   switch (type) {
     case 'home_hero':
-      return <HeroSection key={type} eyebrow={d.home_hero_eyebrow} headline={d.home_hero_headline} subtitle={d.home_hero_subtitle} bgImage={d.home_hero_bg_image} />
+      return <HeroSection key={k} eyebrow={d.home_hero_eyebrow} headline={d.home_hero_headline} subtitle={d.home_hero_subtitle} bgImage={d.home_hero_bg_image} />
     case 'mission':
-      return <MissionSection key={type} quote={d.mission_quote} body1={d.mission_body_1} body2={d.mission_body_2} image={d.mission_image} statNumber={d.mission_stat_number} statLabel={d.mission_stat_label} />
+      return <MissionSection key={k} quote={d.mission_quote} body1={d.mission_body_1} body2={d.mission_body_2} image={d.mission_image} statNumber={d.mission_stat_number} statLabel={d.mission_stat_label} />
     case 'stats':
-      return <StatsSection key={type} stats={d.stats.map(st => ({ value: Number(st.value), suffix: st.suffix, label: st.label, desc: st.desc }))} />
+      return <StatsSection key={k} stats={d.stats.map(st => ({ value: Number(st.value), suffix: st.suffix, label: st.label, desc: st.desc }))} />
     case 'how_it_works':
-      return <HowItWorksSection key={type} eyebrow={d.howitworks_eyebrow} heading={d.howitworks_heading} steps={d.howitworks_steps} />
+      return <HowItWorksSection key={k} eyebrow={d.howitworks_eyebrow} heading={d.howitworks_heading} steps={d.howitworks_steps} />
     case 'featured_listings':
-      return <FeaturedListings key={type} jobs={jobs} />
+      return <FeaturedListings key={k} jobs={jobs} />
     case 'testimonials':
-      return <TestimonialsSection key={type} eyebrow={d.testimonials_eyebrow} heading={d.testimonials_heading} testimonials={d.testimonials} />
+      return <TestimonialsSection key={k} eyebrow={d.testimonials_eyebrow} heading={d.testimonials_heading} testimonials={d.testimonials} />
     case 'partners':
-      return <PartnersSection key={type} eyebrow={d.partners_eyebrow} heading={d.partners_heading} partners={d.partners} />
+      return <PartnersSection key={k} eyebrow={d.partners_eyebrow} heading={d.partners_heading} partners={d.partners} />
     case 'joining_hero':
-      return <PageHero key={type} eyebrow="Get Started" title={d.joining_hero_title} subtitle={d.joining_hero_subtitle} image={d.joining_hero_image} />
+      return <PageHero key={k} eyebrow="Get Started" title={d.joining_hero_title} subtitle={d.joining_hero_subtitle} image={d.joining_hero_image} />
     case 'benefits':
-      return <BenefitsSection key={type} keeperBenefits={d.keeper_benefits} collectionBenefits={d.collection_benefits} />
+      return <BenefitsSection key={k} keeperBenefits={d.keeper_benefits} collectionBenefits={d.collection_benefits} />
     case 'joining_steps':
-      return <StepsSection key={type} steps={d.joining_steps} />
+      return <StepsSection key={k} steps={d.joining_steps} />
     case 'faqs':
-      return <FaqsSection key={type} faqs={d.faqs} />
+      return <FaqsSection key={k} faqs={d.faqs} />
     case 'contact_hero':
-      return <ContactHeroSection key={type} heading={d.contact_hero_heading} body={d.contact_hero_body} />
+      return <ContactHeroSection key={k} heading={d.contact_hero_heading} body={d.contact_hero_body} />
     case 'contact_details_form':
-      return <ContactDetailsFormBlock key={type} email={d.contact_email} location={d.contact_location} responseTime={d.contact_response_time} />
+      return <ContactDetailsFormBlock key={k} email={d.contact_email} location={d.contact_location} responseTime={d.contact_response_time} />
     default:
       return null
   }

@@ -42,7 +42,7 @@ export default async function HomePage() {
         navCustom={parseSetting(s['nav.custom'], [])}
       />
       <main className="flex-1">
-        {blocks.map(type => renderBlock(type, blockData, featuredJobs))}
+        {blocks.map((type, i) => renderBlock(type, blockData, featuredJobs, `${type}-${i}`))}
       </main>
       <Footer />
     </div>
