@@ -1,0 +1,187 @@
+'use client'
+
+import { useState } from 'react'
+import { useRouter } from 'next/navigation'
+import { useForm } from 'react-hook-form'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { toast } from 'sonner'
+import { jobSchema, type JobInput } from '@/lib/validations/job'
+import { Button } from '@/components/ui/button'
+import { Input } from '@/components/ui/input'
+import { Label } from '@/components/ui/label'
+import type { Job } from '@/types'
+
+interface JobFormProps {
+  job?: Job
+  employerLocation?: string | null
+}
+
+export function JobForm({ job, employerLocation }: JobFormProps) {
+  const router = useRouter()
+  const [loading, setLoading] = useState(false)
+  const [skillInput, setSkillInput] = useState('')
+  const [skills, setSkills] = useState<string[]>(job?.skills_required ?? [])
+
+  const { register, handleSubmit, formState: { errors } } = useForm<JobInput>({
+    resolver: zodResolver(jobSchema) as any,
+    defaultValues: job
+      ? {
+          title: job.title,
+          description: job.description,
+          location: job.location ?? employerLocation ?? '',
+          start_date: (job as any).start_date ?? '',
+          expires_at: job.expires_at ? job.expires_at.split('T')[0] : '',
+          skills_required: job.skills_required,
+        }
+      : {
+          location: employerLocation ?? '',
+          skills_required: [],
+        },
+  })
+
+  function addSkill() {
+    const s = skillInput.trim()
+    if (s && !skills.includes(s)) {
+      const next = [...skills, s]
+      setSkills(next)
+    }
+    setSkillInput('')
+  }
+
+  function removeSkill(s: string) {
+    setSkills(prev => prev.filter(x => x !== s))
+  }
+
+  async function onSubmit(data: JobInput) {
+    setLoading(true)
+    const method = job ? 'PATCH' : 'POST'
+    const url = job ? `/api/jobs/${job.id}` : '/api/jobs'
+
+    const res = await fetch(url, {
+      method,
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        ...data,
+        skills_required: skills,
+        // Always set contract_type to 'contract' for exchanges
+        contract_type: 'contract',
+        remote: false,
+      }),
+    })
+
+    const result = await res.json()
+
+    if (!res.ok) {
+      toast.error(result.error ?? 'Failed to save listing')
+    } else {
+      toast.success(job ? 'Listing updated' : 'Listing submitted for review')
+      router.push('/employer/jobs')
+      router.refresh()
+    }
+
+    setLoading(false)
+  }
+
+  return (
+    <form onSubmit={handleSubmit(onSubmit)} className="space-y-6 max-w-2xl">
+
+      {/* Title */}
+      <div className="space-y-2">
+        <Label htmlFor="title">Placement title *</Label>
+        <Input
+          id="title"
+          {...register('title')}
+          placeholder="e.g. Carnivore Keeper"
+        />
+        {errors.title && <p className="text-sm text-destructive">{errors.title.message}</p>}
+      </div>
+
+      {/* Description */}
+      <div className="space-y-2">
+        <Label htmlFor="description">Description *</Label>
+        <textarea
+          id="description"
+          {...register('description')}
+          rows={8}
+          className="w-full rounded-md border border-input bg-background px-3 py-2 text-sm placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring resize-y"
+          placeholder="Describe the placement, what the keeper will learn, daily responsibilities, species involved…"
+        />
+        {errors.description && <p className="text-sm text-destructive">{errors.description.message}</p>}
+      </div>
+
+      {/* Exchange length — start and end dates */}
+      <div className="space-y-2">
+        <Label>Exchange length *</Label>
+        <div className="grid grid-cols-2 gap-4">
+          <div className="space-y-1.5">
+            <span className="text-xs text-muted-foreground">Start date</span>
+            <Input
+              id="start_date"
+              type="date"
+              {...register('start_date')}
+            />
+          </div>
+          <div className="space-y-1.5">
+            <span className="text-xs text-muted-foreground">End date</span>
+            <Input
+              id="expires_at"
+              type="date"
+              {...register('expires_at')}
+            />
+          </div>
+        </div>
+      </div>
+
+      {/* Location */}
+      <div className="space-y-2">
+        <Label htmlFor="location">Collection address</Label>
+        <Input
+          id="location"
+          {...register('location')}
+          placeholder="e.g. Chester Zoo, Cedar House, Caughall Road, Chester, CH2 1LH"
+        />
+        <p className="text-xs text-muted-foreground">
+          Pre-filled from your collection profile. Update if the keeper should report to a different address.
+        </p>
+      </div>
+
+      {/* Required skills / experience */}
+      <div className="space-y-2">
+        <Label>Requirements &amp; experience</Label>
+        <div className="flex gap-2">
+          <Input
+            value={skillInput}
+            onChange={e => setSkillInput(e.target.value)}
+            onKeyDown={e => { if (e.key === 'Enter') { e.preventDefault(); addSkill() } }}
+            placeholder="e.g. 1 year experience, Carnivores"
+          />
+          <Button type="button" variant="outline" onClick={addSkill}>Add</Button>
+        </div>
+        <p className="text-xs text-muted-foreground">Press Enter or click Add after each requirement. Click a tag to remove it.</p>
+        {skills.length > 0 && (
+          <div className="flex flex-wrap gap-1.5 mt-2">
+            {skills.map(s => (
+              <span
+                key={s}
+                onClick={() => removeSkill(s)}
+                className="cursor-pointer text-xs bg-secondary text-secondary-foreground rounded-full px-2.5 py-0.5 hover:bg-destructive hover:text-destructive-foreground transition-colors"
+              >
+                {s} ×
+              </span>
+            ))}
+          </div>
+        )}
+      </div>
+
+      {/* Actions */}
+      <div className="flex gap-3 pt-2">
+        <Button type="submit" disabled={loading}>
+          {loading ? 'Saving…' : job ? 'Save changes' : 'Submit for review'}
+        </Button>
+        <Button type="button" variant="outline" onClick={() => router.back()}>
+          Cancel
+        </Button>
+      </div>
+    </form>
+  )
+}
