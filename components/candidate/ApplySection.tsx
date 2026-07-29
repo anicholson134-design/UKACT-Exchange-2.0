@@ -21,6 +21,7 @@ interface ApplySectionProps {
   isCandidate: boolean
   isApproved: boolean
   alreadyApplied: boolean
+  deadlinePassed?: boolean
   cvFilename: string | null
   cvUrl: string | null
 }
@@ -32,6 +33,7 @@ export function ApplySection({
   isCandidate,
   isApproved,
   alreadyApplied,
+  deadlinePassed,
   cvFilename,
   cvUrl,
 }: ApplySectionProps) {
@@ -104,6 +106,18 @@ export function ApplySection({
         >
           View your applications →
         </Link>
+      </div>
+    )
+  }
+
+  // Deadline passed — closed to everyone, regardless of auth state
+  if (deadlinePassed) {
+    return (
+      <div className="rounded-2xl border border-stone/20 bg-mist p-6 text-center space-y-2">
+        <p className="font-display font-semibold text-forest">Applications closed</p>
+        <p className="text-sm text-ink/60 leading-relaxed">
+          The application deadline for this placement has passed.
+        </p>
       </div>
     )
   }

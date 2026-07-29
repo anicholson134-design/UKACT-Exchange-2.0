@@ -29,6 +29,11 @@ export function formatDate(date: string): string {
   return new Intl.DateTimeFormat('en-GB', { day: 'numeric', month: 'short', year: 'numeric' }).format(new Date(date))
 }
 
+export function isPastDeadline(date: string | null | undefined): boolean {
+  if (!date) return false
+  return new Date(date).getTime() < Date.now()
+}
+
 export function applicationStatusColor(status: ApplicationStatus): string {
   const map: Record<ApplicationStatus, string> = {
     submitted: 'bg-blue-100 text-blue-800',

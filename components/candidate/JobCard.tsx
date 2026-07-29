@@ -1,9 +1,9 @@
 import Link from 'next/link'
-import { MapPin, Clock, Bookmark } from 'lucide-react'
+import { MapPin, Clock, Bookmark, CalendarClock } from 'lucide-react'
 import { Card, CardContent, CardHeader } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { StatusBadge } from '@/components/shared/StatusBadge'
-import { formatSalary, formatContractType, formatDate } from '@/lib/utils'
+import { formatSalary, formatContractType, formatDate, isPastDeadline } from '@/lib/utils'
 import type { Job } from '@/types'
 
 interface JobCardProps {
@@ -14,6 +14,7 @@ interface JobCardProps {
 
 export function JobCard({ job, href, saved }: JobCardProps) {
   const image = job.image_url ?? job.employer_profiles?.logo_url
+  const deadlinePassed = isPastDeadline(job.application_deadline)
 
   return (
     <Card className="hover:shadow-md transition-shadow">
@@ -52,6 +53,12 @@ export function JobCard({ job, href, saved }: JobCardProps) {
             <Clock className="h-3.5 w-3.5" />
             {formatContractType(job.contract_type)}
           </span>
+          {job.application_deadline && (
+            <span className={`flex items-center gap-1 ${deadlinePassed ? 'text-red-600' : ''}`}>
+              <CalendarClock className="h-3.5 w-3.5" />
+              {deadlinePassed ? 'Applications closed' : `Apply by ${formatDate(job.application_deadline)}`}
+            </span>
+          )}
         </div>
 
         {(job.salary_min || job.salary_max) && (

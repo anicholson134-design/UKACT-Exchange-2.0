@@ -5,6 +5,7 @@ import { notFound } from 'next/navigation'
 import { Navbar } from '@/components/shared/Navbar'
 import { Footer } from '@/components/shared/Footer'
 import { ApplySection } from '@/components/candidate/ApplySection'
+import { isPastDeadline } from '@/lib/utils'
 import { MapPin, Calendar, Clock, Building2, Globe, ArrowLeft } from 'lucide-react'
 import Link from 'next/link'
 import type { Metadata } from 'next'
@@ -75,11 +76,14 @@ export default async function JobDetailPage({ params }: Props) {
 
   function getDuration(start: string, end: string) {
     const ms = new Date(end).getTime() - new Date(start).getTime()
-    const weeks = Math.round(ms / (1000 * 60 * 60 * 24 * 7))
-    if (weeks < 4) return `${weeks} week${weeks !== 1 ? 's' : ''}`
-    const months = Math.round(weeks / 4.33)
+    const days = Math.round(ms / (1000 * 60 * 60 * 24))
+    if (days < 28) return `${days} day${days !== 1 ? 's' : ''}`
+    const months = Math.round(days / 30.44)
     return `${months} month${months !== 1 ? 's' : ''}`
   }
+
+  const deadline = (job as any).application_deadline
+  const deadlinePassed = isPastDeadline(deadline)
 
   return (
     <div className="flex flex-col min-h-screen">
@@ -94,11 +98,6 @@ export default async function JobDetailPage({ params }: Props) {
         </div>
 
         <div className="container-keep pb-16">
-          {job.image_url && (
-            <div className="rounded-2xl overflow-hidden mb-10 aspect-[21/9] bg-mist">
-              <img src={job.image_url} alt={job.title} className="w-full h-full object-cover" />
-            </div>
-          )}
           <div className="grid lg:grid-cols-3 gap-10 lg:gap-16 items-start">
 
             {/* Main content */}
@@ -133,6 +132,12 @@ export default async function JobDetailPage({ params }: Props) {
                       Starts {formatDateShort(startDate)}
                     </span>
                   )}
+                  {deadline && (
+                    <span className={`flex items-center gap-1.5 ${deadlinePassed ? 'text-red-600' : ''}`}>
+                      <Calendar className="h-4 w-4 text-stone" />
+                      {deadlinePassed ? 'Applications closed' : `Apply by ${formatDateShort(deadline)}`}
+                    </span>
+                  )}
                 </div>
               </div>
 
@@ -157,6 +162,13 @@ export default async function JobDetailPage({ params }: Props) {
                   {job.description}
                 </div>
               </div>
+
+              {/* Placement photo */}
+              {job.image_url && (
+                <div className="rounded-2xl overflow-hidden aspect-[16/9] bg-mist">
+                  <img src={job.image_url} alt={job.title} className="w-full h-full object-cover" />
+                </div>
+              )}
 
               {/* Exchange dates */}
               {(startDate || endDate) && (
@@ -239,6 +251,7 @@ export default async function JobDetailPage({ params }: Props) {
                 isCandidate={profile?.role === 'candidate'}
                 isApproved={(candidateProfile as any)?.status === 'approved'}
                 alreadyApplied={alreadyApplied}
+                deadlinePassed={deadlinePassed}
                 cvFilename={(candidateProfile as any)?.cv_filename ?? null}
                 cvUrl={(candidateProfile as any)?.cv_url ?? null}
               />

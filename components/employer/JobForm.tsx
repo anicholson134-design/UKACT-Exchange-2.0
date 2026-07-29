@@ -33,6 +33,7 @@ export function JobForm({ job, employerLocation }: JobFormProps) {
           location: job.location ?? employerLocation ?? '',
           start_date: (job as any).start_date ?? '',
           expires_at: job.expires_at ? job.expires_at.split('T')[0] : '',
+          application_deadline: job.application_deadline ? job.application_deadline.split('T')[0] : '',
           skills_required: job.skills_required,
         }
       : {
@@ -133,6 +134,19 @@ export function JobForm({ job, employerLocation }: JobFormProps) {
             />
           </div>
         </div>
+      </div>
+
+      {/* Application deadline */}
+      <div className="space-y-2">
+        <Label htmlFor="application_deadline">Application deadline</Label>
+        <Input
+          id="application_deadline"
+          type="date"
+          {...register('application_deadline')}
+        />
+        <p className="text-xs text-muted-foreground">
+          Last day candidates can apply. Leave blank to accept applications until the placement starts.
+        </p>
       </div>
 
       {/* Location */}

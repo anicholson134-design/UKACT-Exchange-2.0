@@ -33,7 +33,7 @@ export async function PATCH(request: Request, { params }: Params) {
   const parsed = jobSchema.partial().safeParse(body)
   if (!parsed.success) return NextResponse.json({ error: parsed.error.flatten() }, { status: 422 })
 
-  const { start_date, expires_at, ...rest } = parsed.data
+  const { start_date, expires_at, application_deadline, ...rest } = parsed.data
 
   const { data, error } = await supabase
     .from('jobs')
@@ -41,6 +41,7 @@ export async function PATCH(request: Request, { params }: Params) {
       ...rest,
       start_date: start_date || null,
       expires_at: expires_at ? new Date(expires_at).toISOString() : null,
+      application_deadline: application_deadline ? new Date(application_deadline).toISOString() : null,
     })
     .eq('id', id)
     .select()

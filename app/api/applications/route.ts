@@ -38,6 +38,13 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: 'Your account is still awaiting approval' }, { status: 403 })
   }
 
+  const { data: job } = await supabase
+    .from('jobs').select('application_deadline').eq('id', parsed.data.job_id).single()
+
+  if (job?.application_deadline && new Date(job.application_deadline).getTime() < Date.now()) {
+    return NextResponse.json({ error: 'The application deadline for this placement has passed' }, { status: 403 })
+  }
+
   const { data, error } = await supabase
     .from('applications')
     .insert({

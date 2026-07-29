@@ -60,6 +60,7 @@ export interface Job {
   status: JobStatus
   image_url: string | null
   expires_at: string | null
+  application_deadline: string | null
   created_at: string
   updated_at: string
   employer_profiles?: Pick<EmployerProfile, 'company_name' | 'logo_url' | 'location'>
