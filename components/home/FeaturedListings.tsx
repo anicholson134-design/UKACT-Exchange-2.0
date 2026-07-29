@@ -93,7 +93,7 @@ export function FeaturedListings({ jobs }: FeaturedListingsProps) {
               transition={{ duration: 0.6, delay: 0.1 + i * 0.1, ease: [0.22, 1, 0.36, 1] }}
             >
               <Link
-                href={`/jobs/${job.id}`}
+                href={`/jobs/${job.slug ?? job.id}`}
                 className="group flex flex-col h-full bg-white rounded-2xl overflow-hidden border border-stone/20 hover:shadow-xl hover:-translate-y-1 transition-all duration-300"
               >
                 {/* Image */}

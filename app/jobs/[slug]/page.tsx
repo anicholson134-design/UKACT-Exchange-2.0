@@ -1,5 +1,4 @@
 import { createClient } from '@/lib/supabase/server'
-import { getCmsNavItems } from '@/lib/getCmsNavItems'
 import { getSiteSettings } from '@/lib/getSiteSettings'
 import { notFound } from 'next/navigation'
 import { Navbar } from '@/components/shared/Navbar'
@@ -10,22 +9,21 @@ import { MapPin, Calendar, Clock, Building2, Globe, ArrowLeft } from 'lucide-rea
 import Link from 'next/link'
 import type { Metadata } from 'next'
 
-type Props = { params: Promise<{ id: string }> }
+type Props = { params: Promise<{ slug: string }> }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const { id } = await params
+  const { slug } = await params
   const supabase = await createClient()
-  const settings = await getSiteSettings()
   const { data: job } = await supabase
     .from('jobs')
     .select('title')
-    .eq('id', id)
+    .eq('slug', slug)
     .single()
   return { title: job?.title ?? 'Placement' }
 }
 
 export default async function JobDetailPage({ params }: Props) {
-  const { id } = await params
+  const { slug } = await params
   const supabase = await createClient()
   const settings = await getSiteSettings()
 
@@ -46,25 +44,25 @@ export default async function JobDetailPage({ params }: Props) {
     }
   }
 
+  const { data: job } = await supabase
+    .from('jobs')
+    .select('*, employer_profiles(company_name, logo_url, location, website, description)')
+    .eq('slug', slug)
+    .single()
+
+  if (!job || job.status !== 'active') notFound()
+
   // Check if already applied
   let alreadyApplied = false
   if (user && profile?.role === 'candidate') {
     const { data: existing } = await supabase
       .from('applications')
       .select('id')
-      .eq('job_id', id)
+      .eq('job_id', job.id)
       .eq('candidate_id', user.id)
       .maybeSingle()
     alreadyApplied = !!existing
   }
-
-  const { data: job } = await supabase
-    .from('jobs')
-    .select('*, employer_profiles(company_name, logo_url, location, website, description)')
-    .eq('id', id)
-    .single()
-
-  if (!job || job.status !== 'active') notFound()
 
   const emp = job.employer_profiles as any
   const startDate = (job as any).start_date
@@ -245,7 +243,7 @@ export default async function JobDetailPage({ params }: Props) {
 
               {/* Apply section — client component handles auth state */}
               <ApplySection
-                jobId={id}
+                jobId={job.id}
                 jobTitle={job.title}
                 isLoggedIn={!!user}
                 isCandidate={profile?.role === 'candidate'}

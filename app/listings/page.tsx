@@ -104,7 +104,7 @@ export default async function ListingsPage({
                   <JobCard
                     key={job.id}
                     job={job}
-                    href={`/jobs/${job.id}`}
+                    href={`/jobs/${job.slug}`}
                   />
                 ))}
               </div>

@@ -61,6 +61,7 @@ export interface Job {
   image_url: string | null
   expires_at: string | null
   application_deadline: string | null
+  slug: string
   created_at: string
   updated_at: string
   employer_profiles?: Pick<EmployerProfile, 'company_name' | 'logo_url' | 'location'>
