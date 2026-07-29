@@ -41,6 +41,11 @@ export default async function AdminEmployersPage({
   const profileMap: Record<string, { full_name: string; created_at: string }> =
     Object.fromEntries((profilesData ?? []).map((p: any) => [p.id, p]))
 
+  // Emails live in auth.users, not profiles — fetch them in one bulk admin call.
+  const { data: userList } = await admin.auth.admin.listUsers({ perPage: 1000 })
+  const emailMap: Record<string, string> =
+    Object.fromEntries((userList?.users ?? []).map(u => [u.id, u.email ?? '']))
+
   return (
     <div className="space-y-6">
       <div className="flex items-center justify-between">
@@ -64,6 +69,7 @@ export default async function AdminEmployersPage({
             <tr className="border-b bg-muted/50">
               <th className="text-left px-4 py-3 font-medium">Company</th>
               <th className="text-left px-4 py-3 font-medium">Contact</th>
+              <th className="text-left px-4 py-3 font-medium">Email</th>
               <th className="text-left px-4 py-3 font-medium">Status</th>
               <th className="text-left px-4 py-3 font-medium">Joined</th>
               <th className="text-left px-4 py-3 font-medium">Action</th>
@@ -76,6 +82,7 @@ export default async function AdminEmployersPage({
                 <td className="px-4 py-3 text-muted-foreground">
                   {profileMap[emp.id]?.full_name ?? 'N/A'}
                 </td>
+                <td className="px-4 py-3 text-muted-foreground">{emailMap[emp.id] || 'N/A'}</td>
                 <td className="px-4 py-3"><StatusBadge status={emp.status} /></td>
                 <td className="px-4 py-3 text-muted-foreground">
                   {profileMap[emp.id] ? formatDate(profileMap[emp.id].created_at) : 'N/A'}
@@ -89,7 +96,7 @@ export default async function AdminEmployersPage({
             ))}
             {!employers?.length && (
               <tr>
-                <td colSpan={5} className="px-4 py-12 text-center text-muted-foreground">
+                <td colSpan={6} className="px-4 py-12 text-center text-muted-foreground">
                   No employers found.
                 </td>
               </tr>

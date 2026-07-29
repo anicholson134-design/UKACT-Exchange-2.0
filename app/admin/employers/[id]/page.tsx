@@ -34,12 +34,16 @@ export default async function AdminEmployerDetailPage({
     .eq('id', id)
     .single()
 
+  const { data: userData } = await admin.auth.admin.getUserById(id)
+  const email = userData?.user?.email
+
   const details = [
     ['Industry', emp.industry],
     ['Company size', emp.company_size],
     ['Location', emp.location],
     ['Website', emp.website],
     ['Contact name', profile?.full_name],
+    ['Email', email],
     ['Registered', profile?.created_at ? formatDate(profile.created_at) : null],
   ].filter(([, v]) => v) as [string, string][]
 
