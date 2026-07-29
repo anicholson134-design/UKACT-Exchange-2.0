@@ -6,7 +6,7 @@ import { formatDate } from '@/lib/utils'
 import { EmployerApprovalForm } from '@/components/admin/EmployerApprovalForm'
 import type { Metadata } from 'next'
 
-export const metadata: Metadata = { title: 'Review Employer' }
+export const metadata: Metadata = { title: 'Review Collection' }
 
 export default async function AdminEmployerDetailPage({
   params,
@@ -59,9 +59,9 @@ export default async function AdminEmployerDetailPage({
         <StatusBadge status={emp.status} />
       </div>
 
-      {/* Company details */}
+      {/* Collection details */}
       <div className="rounded-lg border bg-card p-6 space-y-4">
-        <h2 className="font-semibold text-lg">Company Details</h2>
+        <h2 className="font-semibold text-lg">Collection Details</h2>
         <div className="grid grid-cols-2 gap-3 text-sm">
           {details.map(([label, value]) => (
             <div key={label}>

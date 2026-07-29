@@ -1,6 +1,8 @@
 import { NextResponse } from 'next/server'
 import { createClient } from '@/lib/supabase/server'
+import { createAdminClient } from '@/lib/supabase/admin'
 import { applicationSchema } from '@/lib/validations/application'
+import { sendEmail, newApplicationEmail, SITE_URL } from '@/lib/email'
 
 export async function GET() {
   const supabase = await createClient()
@@ -24,7 +26,7 @@ export async function POST(request: Request) {
   if (!user) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
 
   const { data: profile } = await supabase
-    .from('profiles').select('role').eq('id', user.id).single()
+    .from('profiles').select('role, full_name').eq('id', user.id).single()
   if (profile?.role !== 'candidate') return NextResponse.json({ error: 'Forbidden' }, { status: 403 })
 
   const body = await request.json()
@@ -39,7 +41,7 @@ export async function POST(request: Request) {
   }
 
   const { data: job } = await supabase
-    .from('jobs').select('application_deadline').eq('id', parsed.data.job_id).single()
+    .from('jobs').select('title, employer_id, application_deadline').eq('id', parsed.data.job_id).single()
 
   if (job?.application_deadline && new Date(job.application_deadline).getTime() < Date.now()) {
     return NextResponse.json({ error: 'The application deadline for this placement has passed' }, { status: 403 })
@@ -60,6 +62,19 @@ export async function POST(request: Request) {
   if (error) {
     if (error.code === '23505') return NextResponse.json({ error: 'Already applied to this job' }, { status: 409 })
     return NextResponse.json({ error: error.message }, { status: 500 })
+  }
+
+  if (job?.employer_id) {
+    const admin = createAdminClient()
+    const { data: authUser } = await admin.auth.admin.getUserById(job.employer_id)
+    if (authUser?.user?.email) {
+      const { subject, html } = newApplicationEmail({
+        jobTitle: job.title,
+        candidateName: profile?.full_name ?? 'A candidate',
+        reviewUrl: `${SITE_URL}/employer/jobs/${parsed.data.job_id}/applicants`,
+      })
+      await sendEmail({ to: authUser.user.email, subject, html })
+    }
   }
 
   return NextResponse.json(data, { status: 201 })

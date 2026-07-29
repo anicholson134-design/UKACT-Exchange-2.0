@@ -3,7 +3,7 @@ import { redirect } from 'next/navigation'
 import { CompanyProfileForm } from '@/components/employer/CompanyProfileForm'
 import type { Metadata } from 'next'
 
-export const metadata: Metadata = { title: 'Company Profile' }
+export const metadata: Metadata = { title: 'Collection Profile' }
 
 export default async function EmployerProfilePage() {
   const supabase = await createClient()
@@ -19,7 +19,7 @@ export default async function EmployerProfilePage() {
   return (
     <div className="space-y-8">
       <div>
-        <h1 className="text-3xl font-bold">Company Profile</h1>
+        <h1 className="text-3xl font-bold">Collection Profile</h1>
         <p className="text-muted-foreground mt-1">
           This appears alongside your placement adverts — including your logo.
         </p>

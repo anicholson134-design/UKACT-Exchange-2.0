@@ -44,9 +44,10 @@ export function RegisterForm({ type }: RegisterFormProps) {
     if (type === 'employer') {
       const emp = data as EmployerRegisterInput
       metadata.company_name = emp.company_name
+      if (emp.location) metadata.location = emp.location
     }
 
-    const { error } = await supabase.auth.signUp({
+    const { data: signUpData, error } = await supabase.auth.signUp({
       email: data.email,
       password: data.password,
       options: { data: metadata },
@@ -56,6 +57,20 @@ export function RegisterForm({ type }: RegisterFormProps) {
       toast.error(error.message)
       setLoading(false)
       return
+    }
+
+    if (signUpData.user) {
+      fetch('/api/notifications/new-signup', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          role: type,
+          userId: signUpData.user.id,
+          name: data.full_name,
+          email: data.email,
+          companyName: type === 'employer' ? (data as EmployerRegisterInput).company_name : undefined,
+        }),
+      }).catch(() => {})
     }
 
     setDone(true)
@@ -86,7 +101,7 @@ export function RegisterForm({ type }: RegisterFormProps) {
           {type === 'candidate' ? 'Find your next role' : 'Hire top talent'}
         </CardTitle>
         <CardDescription>
-          Create your {type === 'candidate' ? 'candidate' : 'employer'} account
+          Create your {type === 'candidate' ? 'candidate' : 'collection'} account
         </CardDescription>
       </CardHeader>
       <CardContent>
@@ -98,10 +113,23 @@ export function RegisterForm({ type }: RegisterFormProps) {
           </div>
 
           {type === 'employer' && (
-            <div className="space-y-2">
-              <Label htmlFor="company_name">Company name</Label>
-              <Input id="company_name" {...register('company_name' as keyof EmployerRegisterInput)} />
-            </div>
+            <>
+              <div className="space-y-2">
+                <Label htmlFor="company_name">Collection name</Label>
+                <Input id="company_name" {...register('company_name' as keyof EmployerRegisterInput)} />
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="location">Collection address</Label>
+                <Input
+                  id="location"
+                  {...register('location' as keyof EmployerRegisterInput)}
+                  placeholder="e.g. Chester Zoo, Cedar House, Chester, CH2 1LH"
+                />
+                <p className="text-xs text-muted-foreground">
+                  Pre-fills the address on every placement you post — you can update it later from your collection profile.
+                </p>
+              </div>
+            </>
           )}
 
           <div className="space-y-2">
@@ -127,7 +155,7 @@ export function RegisterForm({ type }: RegisterFormProps) {
         <div className="mt-2 text-center text-sm text-muted-foreground">
           {type === 'candidate' ? (
             <>Looking to hire?{' '}
-              <Link href="/register/employer" className="text-primary hover:underline">Register as employer</Link>
+              <Link href="/register/employer" className="text-primary hover:underline">Register as a collection</Link>
             </>
           ) : (
             <>Looking for work?{' '}

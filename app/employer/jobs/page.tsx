@@ -3,6 +3,7 @@ import { redirect } from 'next/navigation'
 import Link from 'next/link'
 import { Button } from '@/components/ui/button'
 import { StatusBadge } from '@/components/shared/StatusBadge'
+import { JobActions } from '@/components/employer/JobActions'
 import { formatDate, formatContractType } from '@/lib/utils'
 import { Plus } from 'lucide-react'
 import type { Metadata } from 'next'
@@ -51,14 +52,7 @@ export default async function EmployerJobsPage() {
                 <td className="px-4 py-3"><StatusBadge status={job.status} /></td>
                 <td className="px-4 py-3 text-muted-foreground">{formatDate(job.created_at)}</td>
                 <td className="px-4 py-3">
-                  <div className="flex gap-2">
-                    <Button variant="ghost" size="sm" asChild>
-                      <Link href={`/employer/jobs/${job.id}`}>Edit</Link>
-                    </Button>
-                    <Button variant="ghost" size="sm" asChild>
-                      <Link href={`/employer/jobs/${job.id}/applicants`}>Applicants</Link>
-                    </Button>
-                  </div>
+                  <JobActions id={job.id} status={job.status} />
                 </td>
               </tr>
             ))}

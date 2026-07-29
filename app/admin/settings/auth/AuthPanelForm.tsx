@@ -38,7 +38,7 @@ export function AuthPanelForm({ initial }: { initial: AuthPanelData }) {
   const sections: { heading: string; imgKey: keyof AuthPanelData; quoteKey: keyof AuthPanelData; authorKey: keyof AuthPanelData; desc: string }[] = [
     { heading: 'Sign In', imgKey: 'login_image', quoteKey: 'login_quote', authorKey: 'login_quote_author', desc: 'Shown beside the login form.' },
     { heading: 'Candidate Sign Up', imgKey: 'candidate_image', quoteKey: 'candidate_quote', authorKey: 'candidate_quote_author', desc: 'Shown beside the member registration form.' },
-    { heading: 'Institution Sign Up', imgKey: 'employer_image', quoteKey: 'employer_quote', authorKey: 'employer_quote_author', desc: 'Shown beside the institution registration form.' },
+    { heading: 'Collection Sign Up', imgKey: 'employer_image', quoteKey: 'employer_quote', authorKey: 'employer_quote_author', desc: 'Shown beside the collection registration form.' },
   ]
 
   return (
@@ -68,7 +68,7 @@ export function AuthPanelForm({ initial }: { initial: AuthPanelData }) {
                 className={inp}
                 value={d[sec.authorKey]}
                 onChange={e => set(sec.authorKey, e.target.value)}
-                placeholder="Name, role, institution"
+                placeholder="Name, role, collection"
               />
             </div>
           </div>

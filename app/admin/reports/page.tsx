@@ -28,7 +28,7 @@ export default async function AdminReportsPage() {
 
   const stats = [
     { label: 'Total Candidates', value: candidates.count ?? 0, icon: Users },
-    { label: 'Approved Employers', value: employers.count ?? 0, icon: Building2 },
+    { label: 'Approved Collections', value: employers.count ?? 0, icon: Building2 },
     { label: 'Active Jobs', value: activeJobs.count ?? 0, icon: Briefcase },
     { label: 'Closed Jobs', value: closedJobs.count ?? 0, icon: Briefcase },
     { label: 'Total Applications', value: applications.count ?? 0, icon: Send },

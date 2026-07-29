@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server'
 import { createClient } from '@/lib/supabase/server'
 import { createAdminClient } from '@/lib/supabase/admin'
+import { sendEmail, jobDecisionEmail, SITE_URL } from '@/lib/email'
 import { z } from 'zod'
 
 const schema = z.object({
@@ -25,7 +26,7 @@ export async function POST(request: Request, { params }: Params) {
 
   const adminClient = createAdminClient()
 
-  const { error } = await adminClient
+  const { data: job, error } = await adminClient
     .from('jobs')
     .update({
       status: parsed.data.action,
@@ -33,6 +34,8 @@ export async function POST(request: Request, { params }: Params) {
       reviewed_at: new Date().toISOString(),
     })
     .eq('id', id)
+    .select('title, slug, employer_id')
+    .single()
 
   if (error) return NextResponse.json({ error: error.message }, { status: 500 })
 
@@ -42,6 +45,18 @@ export async function POST(request: Request, { params }: Params) {
     entity: 'jobs',
     entity_id: id,
   })
+
+  if (job && (parsed.data.action === 'active' || parsed.data.action === 'rejected')) {
+    const { data: authUser } = await adminClient.auth.admin.getUserById(job.employer_id)
+    if (authUser?.user?.email) {
+      const { subject, html } = jobDecisionEmail({
+        approved: parsed.data.action === 'active',
+        title: job.title,
+        liveUrl: `${SITE_URL}/jobs/${job.slug}`,
+      })
+      await sendEmail({ to: authUser.user.email, subject, html })
+    }
+  }
 
   return NextResponse.json({ success: true })
 }

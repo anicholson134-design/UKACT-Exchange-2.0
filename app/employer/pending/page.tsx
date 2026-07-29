@@ -29,8 +29,8 @@ export default async function PendingPage() {
           </CardTitle>
           <CardDescription>
             {emp?.status === 'rejected'
-              ? 'Your employer account was not approved.'
-              : `Your account for ${emp?.company_name ?? 'your company'} is under review. We'll notify you by email once approved.`}
+              ? 'Your collection account was not approved.'
+              : `Your account for ${emp?.company_name ?? 'your collection'} is under review. We'll notify you by email once approved.`}
           </CardDescription>
         </CardHeader>
         {emp?.rejection_reason && (

@@ -7,7 +7,7 @@ import { formatDate } from '@/lib/utils'
 import { Button } from '@/components/ui/button'
 import type { Metadata } from 'next'
 
-export const metadata: Metadata = { title: 'Employer Management' }
+export const metadata: Metadata = { title: 'Collection Management' }
 
 export default async function AdminEmployersPage({
   searchParams,
@@ -49,7 +49,7 @@ export default async function AdminEmployersPage({
   return (
     <div className="space-y-6">
       <div className="flex items-center justify-between">
-        <h1 className="text-3xl font-bold">Employers</h1>
+        <h1 className="text-3xl font-bold">Collections</h1>
         <div className="flex gap-2">
           <Button variant={!statusFilter ? 'default' : 'outline'} size="sm" asChild>
             <Link href="/admin/employers">All</Link>
@@ -67,9 +67,8 @@ export default async function AdminEmployersPage({
         <table className="w-full text-sm">
           <thead>
             <tr className="border-b bg-muted/50">
-              <th className="text-left px-4 py-3 font-medium">Company</th>
+              <th className="text-left px-4 py-3 font-medium">Collection</th>
               <th className="text-left px-4 py-3 font-medium">Contact</th>
-              <th className="text-left px-4 py-3 font-medium">Email</th>
               <th className="text-left px-4 py-3 font-medium">Status</th>
               <th className="text-left px-4 py-3 font-medium">Joined</th>
               <th className="text-left px-4 py-3 font-medium">Action</th>
@@ -80,9 +79,8 @@ export default async function AdminEmployersPage({
               <tr key={emp.id} className="border-b last:border-0 hover:bg-muted/30">
                 <td className="px-4 py-3 font-medium">{emp.company_name}</td>
                 <td className="px-4 py-3 text-muted-foreground">
-                  {profileMap[emp.id]?.full_name ?? 'N/A'}
+                  {emailMap[emp.id] || 'N/A'}
                 </td>
-                <td className="px-4 py-3 text-muted-foreground">{emailMap[emp.id] || 'N/A'}</td>
                 <td className="px-4 py-3"><StatusBadge status={emp.status} /></td>
                 <td className="px-4 py-3 text-muted-foreground">
                   {profileMap[emp.id] ? formatDate(profileMap[emp.id].created_at) : 'N/A'}
@@ -96,7 +94,7 @@ export default async function AdminEmployersPage({
             ))}
             {!employers?.length && (
               <tr>
-                <td colSpan={6} className="px-4 py-12 text-center text-muted-foreground">
+                <td colSpan={5} className="px-4 py-12 text-center text-muted-foreground">
                   No employers found.
                 </td>
               </tr>

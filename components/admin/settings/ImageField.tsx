@@ -1,6 +1,7 @@
 'use client'
 
 import { useRef, useState } from 'react'
+import { toast } from 'sonner'
 
 interface Props {
   label: string
@@ -20,6 +21,7 @@ export function ImageField({ label, value, onChange }: Props) {
       const res = await fetch('/api/cms/upload', { method: 'POST', body: fd })
       const json = await res.json()
       if (json.url) onChange(json.url)
+      else toast.error(json.error ?? 'Upload failed')
     } finally {
       setUploading(false)
     }

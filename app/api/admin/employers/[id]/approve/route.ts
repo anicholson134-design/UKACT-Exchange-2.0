@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server'
 import { createClient } from '@/lib/supabase/server'
 import { createAdminClient } from '@/lib/supabase/admin'
+import { sendEmail, accountDecisionEmail } from '@/lib/email'
 import { z } from 'zod'
 
 const schema = z.object({
@@ -46,6 +47,22 @@ export async function POST(request: Request, { params }: Params) {
     entity_id: id,
     payload: { rejection_reason: parsed.data.rejection_reason },
   })
+
+  if (parsed.data.action === 'approved' || parsed.data.action === 'rejected') {
+    const [{ data: authUser }, { data: emp }] = await Promise.all([
+      adminClient.auth.admin.getUserById(id),
+      adminClient.from('profiles').select('full_name').eq('id', id).single(),
+    ])
+    if (authUser?.user?.email) {
+      const { subject, html } = accountDecisionEmail({
+        approved: parsed.data.action === 'approved',
+        role: 'employer',
+        name: emp?.full_name ?? 'there',
+        rejectionReason: parsed.data.rejection_reason,
+      })
+      await sendEmail({ to: authUser.user.email, subject, html })
+    }
+  }
 
   return NextResponse.json({ success: true })
 }

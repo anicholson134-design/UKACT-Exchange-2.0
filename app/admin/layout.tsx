@@ -8,7 +8,7 @@ import type { Profile } from '@/types'
 
 const adminNav = [
   { href: '/admin/dashboard', label: 'Dashboard', icon: LayoutDashboard },
-  { href: '/admin/employers', label: 'Employers', icon: Building2 },
+  { href: '/admin/employers', label: 'Collections', icon: Building2 },
   { href: '/admin/jobs', label: 'Jobs', icon: Briefcase },
   { href: '/admin/candidates', label: 'Candidates', icon: Users },
   { href: '/admin/reports', label: 'Reports', icon: BarChart3 },

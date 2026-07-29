@@ -1,6 +1,8 @@
 import { NextResponse } from 'next/server'
 import { createClient } from '@/lib/supabase/server'
+import { createAdminClient } from '@/lib/supabase/admin'
 import { applicationStatusSchema } from '@/lib/validations/application'
+import { sendEmail, applicationStatusEmail } from '@/lib/email'
 
 type Params = { params: Promise<{ id: string }> }
 
@@ -10,15 +12,18 @@ export async function PATCH(request: Request, { params }: Params) {
   const { data: { user } } = await supabase.auth.getUser()
   if (!user) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
 
-  // verify employer owns the job this application belongs to
+  const { data: profile } = await supabase.from('profiles').select('role').eq('id', user.id).single()
+  const isAdmin = profile?.role === 'admin'
+
+  // verify employer owns the job this application belongs to (admins can act on any)
   const { data: app } = await supabase
     .from('applications')
-    .select('job_id, jobs(employer_id)')
+    .select('job_id, candidate_id, jobs(employer_id, title, employer_profiles(company_name))')
     .eq('id', id)
     .single()
 
   const jobEmployerId = (app?.jobs as any)?.employer_id
-  if (!app || jobEmployerId !== user.id) {
+  if (!app || (!isAdmin && jobEmployerId !== user.id)) {
     return NextResponse.json({ error: 'Forbidden' }, { status: 403 })
   }
 
@@ -26,7 +31,12 @@ export async function PATCH(request: Request, { params }: Params) {
   const parsed = applicationStatusSchema.safeParse(body)
   if (!parsed.success) return NextResponse.json({ error: parsed.error.flatten() }, { status: 422 })
 
-  const { data, error } = await supabase
+  // Admins updating another collection's application need the service-role
+  // client — the "employer update application status" RLS policy only
+  // permits the job's own employer.
+  const client = isAdmin ? createAdminClient() : supabase
+
+  const { data, error } = await client
     .from('applications')
     .update(parsed.data)
     .eq('id', id)
@@ -34,6 +44,20 @@ export async function PATCH(request: Request, { params }: Params) {
     .single()
 
   if (error) return NextResponse.json({ error: error.message }, { status: 500 })
+
+  if (parsed.data.status && app?.candidate_id) {
+    const admin = createAdminClient()
+    const { data: authUser } = await admin.auth.admin.getUserById(app.candidate_id)
+    if (authUser?.user?.email) {
+      const jobInfo = app.jobs as any
+      const { subject, html } = applicationStatusEmail({
+        jobTitle: jobInfo?.title ?? 'your placement',
+        companyName: jobInfo?.employer_profiles?.company_name ?? 'the collection',
+        status: parsed.data.status,
+      })
+      await sendEmail({ to: authUser.user.email, subject, html })
+    }
+  }
 
   return NextResponse.json(data)
 }

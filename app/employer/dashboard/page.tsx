@@ -9,7 +9,7 @@ import { Briefcase, Users, Plus, Building2 } from 'lucide-react'
 import type { Metadata } from 'next'
 import type { Job } from '@/types'
 
-export const metadata: Metadata = { title: 'Employer Dashboard' }
+export const metadata: Metadata = { title: 'Collection Dashboard' }
 
 export default async function EmployerDashboardPage() {
   const supabase = await createClient()
@@ -42,7 +42,7 @@ export default async function EmployerDashboardPage() {
         </div>
         <div className="flex gap-2">
           <Button variant="outline" asChild>
-            <Link href="/employer/profile"><Building2 className="h-4 w-4 mr-2" />Company profile</Link>
+            <Link href="/employer/profile"><Building2 className="h-4 w-4 mr-2" />Collection profile</Link>
           </Button>
           <Button asChild>
             <Link href="/employer/jobs/new"><Plus className="h-4 w-4 mr-2" />Post a job</Link>

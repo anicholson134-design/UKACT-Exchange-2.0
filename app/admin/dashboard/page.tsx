@@ -27,7 +27,7 @@ export default async function AdminDashboardPage() {
 
   const stats = [
     { label: 'Candidates', value: candidates.count ?? 0, icon: Users, href: '/admin/candidates' },
-    { label: 'Approved Employers', value: employers.count ?? 0, icon: Building2, href: '/admin/employers' },
+    { label: 'Approved Collections', value: employers.count ?? 0, icon: Building2, href: '/admin/employers' },
     { label: 'Active Jobs', value: activeJobs.count ?? 0, icon: Briefcase, href: '/admin/jobs' },
     { label: 'Total Applications', value: applications.count ?? 0, icon: Send, href: '/admin/reports' },
   ]
@@ -55,7 +55,7 @@ export default async function AdminDashboardPage() {
           <CardHeader>
             <CardTitle className="flex items-center gap-2 text-orange-700">
               <Clock className="h-5 w-5" />
-              Pending Employers
+              Pending Collections
               <span className="ml-auto text-2xl font-bold">{pendingEmployers.count ?? 0}</span>
             </CardTitle>
           </CardHeader>

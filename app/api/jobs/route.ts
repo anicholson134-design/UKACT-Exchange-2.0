@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server'
 import { createClient } from '@/lib/supabase/server'
 import { jobSchema } from '@/lib/validations/job'
+import { sendEmail, newJobAdminEmail, ADMIN_EMAIL, SITE_URL } from '@/lib/email'
 
 const PAGE_SIZE = 20
 
@@ -43,7 +44,7 @@ export async function POST(request: Request) {
   if (profile?.role !== 'employer') return NextResponse.json({ error: 'Forbidden' }, { status: 403 })
 
   const { data: emp } = await supabase
-    .from('employer_profiles').select('status').eq('id', user.id).single()
+    .from('employer_profiles').select('status, company_name').eq('id', user.id).single()
   if (emp?.status !== 'approved') return NextResponse.json({ error: 'Account not approved' }, { status: 403 })
 
   const body = await request.json()
@@ -68,6 +69,14 @@ export async function POST(request: Request) {
     .single()
 
   if (error) return NextResponse.json({ error: error.message }, { status: 500 })
+
+  const { subject, html } = newJobAdminEmail({
+    title: data.title,
+    companyName: emp?.company_name ?? 'A collection',
+    description: data.description,
+    reviewUrl: `${SITE_URL}/admin/jobs/${data.id}`,
+  })
+  await sendEmail({ to: ADMIN_EMAIL, subject, html })
 
   return NextResponse.json(data, { status: 201 })
 }

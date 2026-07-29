@@ -44,7 +44,7 @@ export function BenefitsSection({ keeperBenefits, collectionBenefits }: Props) {
                 <Building2 className="h-6 w-6 text-moss" strokeWidth={1.5} />
               </div>
               <div>
-                <h3 className="font-display font-semibold text-xl text-forest">For Institutions</h3>
+                <h3 className="font-display font-semibold text-xl text-forest">For Collections</h3>
                 <p className="text-sm text-ink/50">Share and receive expertise</p>
               </div>
             </div>
@@ -56,7 +56,7 @@ export function BenefitsSection({ keeperBenefits, collectionBenefits }: Props) {
               ))}
             </ul>
             <Link href="/register/employer" className="block w-full py-3 text-center bg-gold text-cream font-medium rounded-xl hover:bg-gold-light transition-colors">
-              Register Your Institution
+              Register Your Collection
             </Link>
           </div>
         </div>

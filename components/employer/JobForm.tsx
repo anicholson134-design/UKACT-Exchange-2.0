@@ -15,9 +15,10 @@ import type { Job } from '@/types'
 interface JobFormProps {
   job?: Job
   employerLocation?: string | null
+  redirectTo?: string
 }
 
-export function JobForm({ job, employerLocation }: JobFormProps) {
+export function JobForm({ job, employerLocation, redirectTo = '/employer/jobs' }: JobFormProps) {
   const router = useRouter()
   const [loading, setLoading] = useState(false)
   const [skillInput, setSkillInput] = useState('')
@@ -79,7 +80,7 @@ export function JobForm({ job, employerLocation }: JobFormProps) {
       toast.error(result.error ?? 'Failed to save listing')
     } else {
       toast.success(job ? 'Listing updated' : 'Listing submitted for review')
-      router.push('/employer/jobs')
+      router.push(redirectTo)
       router.refresh()
     }
 

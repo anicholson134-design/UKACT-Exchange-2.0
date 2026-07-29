@@ -34,7 +34,7 @@ export function CompanyProfileForm({ initial }: { initial: CompanyProfileData })
     if (!res.ok) {
       toast.error(result.error ?? 'Failed to save profile')
     } else {
-      toast.success('Company profile updated')
+      toast.success('Collection profile updated')
       router.refresh()
     }
     setLoading(false)

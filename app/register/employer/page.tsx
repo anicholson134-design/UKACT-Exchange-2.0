@@ -3,7 +3,7 @@ import Link from 'next/link'
 import { RegisterForm } from '@/components/auth/RegisterForm'
 import { getSiteSettings } from '@/lib/getSiteSettings'
 
-export const metadata: Metadata = { title: 'Register Your Institution' }
+export const metadata: Metadata = { title: 'Register Your Collection' }
 export const dynamic = 'force-dynamic'
 
 export default async function EmployerRegisterPage() {

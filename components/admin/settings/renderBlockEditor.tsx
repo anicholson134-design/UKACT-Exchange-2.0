@@ -157,8 +157,8 @@ export function renderBlockEditor(type: string, d: BlockData, set: SetFn): React
               <StringArrayField label="Member benefits" values={d.keeper_benefits} onChange={v => set({ keeper_benefits: v })} placeholder="Access to placements at 80+ collections" />
             </div>
             <div>
-              <p className="text-xs font-medium text-ink/60 mb-2">For Institutions</p>
-              <StringArrayField label="Institution benefits" values={d.collection_benefits} onChange={v => set({ collection_benefits: v })} placeholder="Host motivated staff" />
+              <p className="text-xs font-medium text-ink/60 mb-2">For Collections</p>
+              <StringArrayField label="Collection benefits" values={d.collection_benefits} onChange={v => set({ collection_benefits: v })} placeholder="Host motivated staff" />
             </div>
           </div>
         </section>

@@ -1,9 +1,9 @@
 import { createClient } from '@/lib/supabase/server'
 import { getSiteSettings } from '@/lib/getSiteSettings'
-import { notFound } from 'next/navigation'
 import { Navbar } from '@/components/shared/Navbar'
 import { Footer } from '@/components/shared/Footer'
 import { ApplySection } from '@/components/candidate/ApplySection'
+import { PlacementUnavailable } from '@/components/candidate/PlacementUnavailable'
 import { isPastDeadline } from '@/lib/utils'
 import { MapPin, Calendar, Clock, Building2, Globe, ArrowLeft } from 'lucide-react'
 import Link from 'next/link'
@@ -50,7 +50,17 @@ export default async function JobDetailPage({ params }: Props) {
     .eq('slug', slug)
     .single()
 
-  if (!job || job.status !== 'active') notFound()
+  if (!job || job.status !== 'active') {
+    return (
+      <div className="flex flex-col min-h-screen">
+        <Navbar profile={profile as any} logoUrl={settings['branding.logo_url']} />
+        <main className="flex-1 pt-24 md:pt-28">
+          <PlacementUnavailable />
+        </main>
+        <Footer />
+      </div>
+    )
+  }
 
   // Check if already applied
   let alreadyApplied = false

@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server'
 import { createClient } from '@/lib/supabase/server'
+import { createAdminClient } from '@/lib/supabase/admin'
 import { jobSchema } from '@/lib/validations/job'
 
 type Params = { params: Promise<{ id: string }> }
@@ -25,9 +26,14 @@ export async function PATCH(request: Request, { params }: Params) {
   const { data: { user } } = await supabase.auth.getUser()
   if (!user) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
 
+  const { data: profile } = await supabase.from('profiles').select('role').eq('id', user.id).single()
+  const isAdmin = profile?.role === 'admin'
+
   const { data: job } = await supabase
     .from('jobs').select('employer_id').eq('id', id).single()
-  if (!job || job.employer_id !== user.id) return NextResponse.json({ error: 'Forbidden' }, { status: 403 })
+  if (!job || (!isAdmin && job.employer_id !== user.id)) {
+    return NextResponse.json({ error: 'Forbidden' }, { status: 403 })
+  }
 
   const body = await request.json()
   const parsed = jobSchema.partial().safeParse(body)
@@ -35,7 +41,11 @@ export async function PATCH(request: Request, { params }: Params) {
 
   const { start_date, expires_at, application_deadline, ...rest } = parsed.data
 
-  const { data, error } = await supabase
+  // Admins editing another collection's job need the service-role client —
+  // the "employer own jobs" RLS policy only permits the owning employer.
+  const client = isAdmin ? createAdminClient() : supabase
+
+  const { data, error } = await client
     .from('jobs')
     .update({
       ...rest,
@@ -58,11 +68,17 @@ export async function DELETE(_req: Request, { params }: Params) {
   const { data: { user } } = await supabase.auth.getUser()
   if (!user) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
 
+  const { data: profile } = await supabase.from('profiles').select('role').eq('id', user.id).single()
+  const isAdmin = profile?.role === 'admin'
+
   const { data: job } = await supabase
     .from('jobs').select('employer_id').eq('id', id).single()
-  if (!job || job.employer_id !== user.id) return NextResponse.json({ error: 'Forbidden' }, { status: 403 })
+  if (!job || (!isAdmin && job.employer_id !== user.id)) {
+    return NextResponse.json({ error: 'Forbidden' }, { status: 403 })
+  }
 
-  await supabase.from('jobs').update({ status: 'closed' }).eq('id', id)
+  const client = isAdmin ? createAdminClient() : supabase
+  await client.from('jobs').update({ status: 'closed' }).eq('id', id)
 
   return NextResponse.json({ success: true })
 }

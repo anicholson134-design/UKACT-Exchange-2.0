@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useEffect } from 'react'
+import Link from 'next/link'
 import { toast } from 'sonner'
 import { StatusBadge } from '@/components/shared/StatusBadge'
 import { formatDate } from '@/lib/utils'
@@ -60,7 +61,14 @@ export default function AdminJobsPage() {
           <tbody>
             {jobs.map(job => (
               <tr key={job.id} className="border-b last:border-0 hover:bg-muted/30">
-                <td className="px-4 py-3 font-medium">{job.title}</td>
+                <td className="px-4 py-3 font-medium">
+                  <Link href={`/admin/jobs/${job.id}`} className="hover:underline hover:text-primary">
+                    {job.title}
+                  </Link>
+                  {(job as any).employer_profiles?.company_name && (
+                    <p className="text-xs text-muted-foreground font-normal">{(job as any).employer_profiles.company_name}</p>
+                  )}
+                </td>
                 <td className="px-4 py-3"><StatusBadge status={job.status} /></td>
                 <td className="px-4 py-3 text-muted-foreground">{formatDate(job.created_at)}</td>
                 <td className="px-4 py-3">
