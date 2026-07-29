@@ -123,11 +123,15 @@ export function renderBlockEditor(type: string, d: BlockData, set: SetFn): React
           <div className={card}>
             <div><label className="block text-sm font-medium text-ink mb-1.5">Eyebrow</label><input className={inp} value={d.partners_eyebrow} onChange={e => set({ partners_eyebrow: e.target.value })} /></div>
             <div><label className="block text-sm font-medium text-ink mb-1.5">Heading</label><input className={inp} value={d.partners_heading} onChange={e => set({ partners_heading: e.target.value })} /></div>
-            <StringArrayField
-              label="Partner names"
-              values={d.partners.map(p => p.name)}
-              onChange={names => set({ partners: names.map(name => ({ name })) })}
-              placeholder="Chester Zoo"
+            <ObjectArrayField
+              label="Partners"
+              items={d.partners}
+              onChange={v => set({ partners: v })}
+              fields={[
+                { key: 'name', label: 'Name', placeholder: 'Chester Zoo' },
+                { key: 'logo', label: 'Logo', type: 'image' },
+              ]}
+              itemLabel={item => item.name || 'Partner'}
             />
           </div>
         </section>

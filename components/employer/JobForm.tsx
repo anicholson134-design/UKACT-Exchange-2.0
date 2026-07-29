@@ -9,6 +9,7 @@ import { jobSchema, type JobInput } from '@/lib/validations/job'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
+import { ImageField } from '@/components/admin/settings/ImageField'
 import type { Job } from '@/types'
 
 interface JobFormProps {
@@ -21,6 +22,7 @@ export function JobForm({ job, employerLocation }: JobFormProps) {
   const [loading, setLoading] = useState(false)
   const [skillInput, setSkillInput] = useState('')
   const [skills, setSkills] = useState<string[]>(job?.skills_required ?? [])
+  const [imageUrl, setImageUrl] = useState(job?.image_url ?? '')
 
   const { register, handleSubmit, formState: { errors } } = useForm<JobInput>({
     resolver: zodResolver(jobSchema) as any,
@@ -63,6 +65,7 @@ export function JobForm({ job, employerLocation }: JobFormProps) {
       body: JSON.stringify({
         ...data,
         skills_required: skills,
+        image_url: imageUrl || null,
         // Always set contract_type to 'contract' for exchanges
         contract_type: 'contract',
         remote: false,
@@ -142,6 +145,14 @@ export function JobForm({ job, employerLocation }: JobFormProps) {
         />
         <p className="text-xs text-muted-foreground">
           Pre-filled from your collection profile. Update if the keeper should report to a different address.
+        </p>
+      </div>
+
+      {/* Placement photo */}
+      <div className="space-y-2">
+        <ImageField label="Placement photo" value={imageUrl} onChange={setImageUrl} />
+        <p className="text-xs text-muted-foreground">
+          Shown on the placement card and detail page. Falls back to your collection&apos;s logo if left blank.
         </p>
       </div>
 

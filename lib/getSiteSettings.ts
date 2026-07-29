@@ -30,7 +30,7 @@ export const DEFAULT_TESTIMONIALS = [
 export const DEFAULT_HOME_PARTNERS = [
   'BIAZA', 'ABMA', 'IRKA', 'Small Zoo Network', 'Safe4',
   'Kiezebrink', 'Waterhouse Speciality Feeds', 'Hose2Habitat', 'Zoo Fab', 'Birdworld',
-].map(name => ({ name }))
+].map(name => ({ name, logo: '' }))
 
 export const DEFAULT_KEEPER_BENEFITS = [
   'Access to CPD conferences, workshops and training opportunities',

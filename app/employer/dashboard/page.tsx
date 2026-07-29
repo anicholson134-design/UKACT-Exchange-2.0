@@ -5,7 +5,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { StatusBadge } from '@/components/shared/StatusBadge'
 import { formatDate } from '@/lib/utils'
-import { Briefcase, Users, Plus } from 'lucide-react'
+import { Briefcase, Users, Plus, Building2 } from 'lucide-react'
 import type { Metadata } from 'next'
 import type { Job } from '@/types'
 
@@ -40,9 +40,14 @@ export default async function EmployerDashboardPage() {
           <h1 className="text-3xl font-bold">Dashboard</h1>
           <p className="text-muted-foreground mt-1">Manage your job listings and applicants</p>
         </div>
-        <Button asChild>
-          <Link href="/employer/jobs/new"><Plus className="h-4 w-4 mr-2" />Post a job</Link>
-        </Button>
+        <div className="flex gap-2">
+          <Button variant="outline" asChild>
+            <Link href="/employer/profile"><Building2 className="h-4 w-4 mr-2" />Company profile</Link>
+          </Button>
+          <Button asChild>
+            <Link href="/employer/jobs/new"><Plus className="h-4 w-4 mr-2" />Post a job</Link>
+          </Button>
+        </div>
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">

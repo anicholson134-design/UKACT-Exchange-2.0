@@ -7,6 +7,7 @@ export const jobSchema = z.object({
   start_date: z.string().optional().nullable(),
   expires_at: z.string().optional().nullable(),
   skills_required: z.array(z.string()).default([]),
+  image_url: z.string().optional().nullable(),
 })
 
 export type JobInput = z.infer<typeof jobSchema>

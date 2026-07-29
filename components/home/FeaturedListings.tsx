@@ -22,7 +22,7 @@ const placeholderJobs = [
     location: 'Chester Zoo, UK',
     contract_type: 'contract' as const,
     skills_required: ['Primates', 'Enrichment', 'Behavioural research'],
-    image: 'https://images.unsplash.com/photo-1548767797-d8c844163c4a?w=600&q=80',
+    image_url: 'https://images.unsplash.com/photo-1548767797-d8c844163c4a?w=600&q=80',
   },
   {
     id: '2',
@@ -30,7 +30,7 @@ const placeholderJobs = [
     location: 'SeaLife Brighton, UK',
     contract_type: 'full_time' as const,
     skills_required: ['Cetaceans', 'Pinniped', 'Training'],
-    image: 'https://images.unsplash.com/photo-1546026423-cc4642628d2b?w=600&q=80',
+    image_url: 'https://images.unsplash.com/photo-1546026423-cc4642628d2b?w=600&q=80',
   },
   {
     id: '3',
@@ -38,7 +38,7 @@ const placeholderJobs = [
     location: 'Longleat Safari, UK',
     contract_type: 'contract' as const,
     skills_required: ['Big cats', 'Safety protocols', 'Diet prep'],
-    image: 'https://images.unsplash.com/photo-1517315003714-a071486bd9ea?w=600&q=80',
+    image_url: 'https://images.unsplash.com/photo-1517315003714-a071486bd9ea?w=600&q=80',
   },
 ]
 
@@ -97,11 +97,13 @@ export function FeaturedListings({ jobs }: FeaturedListingsProps) {
                 className="group flex flex-col h-full bg-white rounded-2xl overflow-hidden border border-stone/20 hover:shadow-xl hover:-translate-y-1 transition-all duration-300"
               >
                 {/* Image */}
-                <div className="aspect-[16/9] overflow-hidden shrink-0">
+                <div className="aspect-[16/9] overflow-hidden shrink-0 bg-mist">
                   <img
-                    src={job.image ?? sectorImages.default}
+                    src={job.image_url ?? job.employer_profiles?.logo_url ?? sectorImages.default}
                     alt={job.title}
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                    className={`w-full h-full group-hover:scale-105 transition-transform duration-700 ${
+                      job.image_url ? 'object-cover' : 'object-contain p-8'
+                    }`}
                   />
                 </div>
 

@@ -58,6 +58,7 @@ export interface Job {
   salary_max: number | null
   skills_required: string[]
   status: JobStatus
+  image_url: string | null
   expires_at: string | null
   created_at: string
   updated_at: string

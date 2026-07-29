@@ -94,6 +94,11 @@ export default async function JobDetailPage({ params }: Props) {
         </div>
 
         <div className="container-keep pb-16">
+          {job.image_url && (
+            <div className="rounded-2xl overflow-hidden mb-10 aspect-[21/9] bg-mist">
+              <img src={job.image_url} alt={job.title} className="w-full h-full object-cover" />
+            </div>
+          )}
           <div className="grid lg:grid-cols-3 gap-10 lg:gap-16 items-start">
 
             {/* Main content */}
@@ -201,9 +206,13 @@ export default async function JobDetailPage({ params }: Props) {
               {/* Collection card */}
               <div className="rounded-2xl border border-stone/20 bg-white p-6 space-y-4">
                 <div className="flex items-center gap-3">
-                  <div className="w-12 h-12 rounded-xl bg-mist flex items-center justify-center shrink-0">
-                    <Building2 className="h-5 w-5 text-moss" strokeWidth={1.5} />
-                  </div>
+                  {emp?.logo_url ? (
+                    <img src={emp.logo_url} alt={emp.company_name} className="w-12 h-12 rounded-xl object-contain border border-stone/20 bg-white shrink-0 p-1" />
+                  ) : (
+                    <div className="w-12 h-12 rounded-xl bg-mist flex items-center justify-center shrink-0">
+                      <Building2 className="h-5 w-5 text-moss" strokeWidth={1.5} />
+                    </div>
+                  )}
                   <div>
                     <p className="font-semibold text-forest">{emp?.company_name ?? 'Collection'}</p>
                     {emp?.location && <p className="text-sm text-ink/50">{emp.location}</p>}

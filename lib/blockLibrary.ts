@@ -42,7 +42,7 @@ export function migrateLegacyBlockType(type: string, page: 'home' | 'joining' | 
 export interface StatItem { value: string; suffix: string; label: string; desc: string; [key: string]: string }
 export interface StepItem { title: string; desc: string; [key: string]: string }
 export interface TestimonialItem { quote: string; name: string; role: string; collection: string; avatar: string; [key: string]: string }
-export interface PartnerItem { name: string; [key: string]: string }
+export interface PartnerItem { name: string; logo: string; [key: string]: string }
 export interface FaqItem { q: string; a: string; [key: string]: string }
 
 export interface BlockData {

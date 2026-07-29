@@ -13,19 +13,29 @@ interface JobCardProps {
 }
 
 export function JobCard({ job, href, saved }: JobCardProps) {
+  const image = job.image_url ?? job.employer_profiles?.logo_url
+
   return (
     <Card className="hover:shadow-md transition-shadow">
+      {job.image_url && (
+        <img src={job.image_url} alt={job.title} className="aspect-[16/9] w-full object-cover" />
+      )}
       <CardHeader className="pb-2">
         <div className="flex items-start justify-between gap-2">
-          <div className="flex-1 min-w-0">
-            <Link href={href} className="font-semibold text-lg hover:text-primary line-clamp-1">
-              {job.title}
-            </Link>
-            {job.employer_profiles && (
-              <p className="text-sm text-muted-foreground mt-0.5">
-                {job.employer_profiles.company_name}
-              </p>
+          <div className="flex items-start gap-3 flex-1 min-w-0">
+            {!job.image_url && image && (
+              <img src={image} alt="" className="h-9 w-9 rounded-md object-contain border shrink-0 bg-white" />
             )}
+            <div className="flex-1 min-w-0">
+              <Link href={href} className="font-semibold text-lg hover:text-primary line-clamp-1">
+                {job.title}
+              </Link>
+              {job.employer_profiles && (
+                <p className="text-sm text-muted-foreground mt-0.5">
+                  {job.employer_profiles.company_name}
+                </p>
+              )}
+            </div>
           </div>
           <StatusBadge status={job.status} />
         </div>
