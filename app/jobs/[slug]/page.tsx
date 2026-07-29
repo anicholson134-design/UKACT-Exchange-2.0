@@ -4,7 +4,7 @@ import { Navbar } from '@/components/shared/Navbar'
 import { Footer } from '@/components/shared/Footer'
 import { ApplySection } from '@/components/candidate/ApplySection'
 import { PlacementUnavailable } from '@/components/candidate/PlacementUnavailable'
-import { isPastDeadline } from '@/lib/utils'
+import { isPastDeadline, formatDuration } from '@/lib/utils'
 import { MapPin, Calendar, Clock, Building2, Globe, ArrowLeft } from 'lucide-react'
 import Link from 'next/link'
 import type { Metadata } from 'next'
@@ -75,22 +75,14 @@ export default async function JobDetailPage({ params }: Props) {
   }
 
   const emp = job.employer_profiles as any
-  const startDate = (job as any).start_date
+  const startDate = job.start_date
   const endDate = job.expires_at
 
   function formatDateShort(d: string) {
     return new Date(d).toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' })
   }
 
-  function getDuration(start: string, end: string) {
-    const ms = new Date(end).getTime() - new Date(start).getTime()
-    const days = Math.round(ms / (1000 * 60 * 60 * 24))
-    if (days < 28) return `${days} day${days !== 1 ? 's' : ''}`
-    const months = Math.round(days / 30.44)
-    return `${months} month${months !== 1 ? 's' : ''}`
-  }
-
-  const deadline = (job as any).application_deadline
+  const deadline = job.application_deadline
   const deadlinePassed = isPastDeadline(deadline)
 
   return (
@@ -131,7 +123,7 @@ export default async function JobDetailPage({ params }: Props) {
                   {startDate && endDate && (
                     <span className="flex items-center gap-1.5">
                       <Clock className="h-4 w-4 text-stone" />
-                      {getDuration(startDate, endDate)}
+                      {formatDuration(startDate, endDate)}
                     </span>
                   )}
                   {startDate && (
@@ -227,10 +219,10 @@ export default async function JobDetailPage({ params }: Props) {
               <div className="rounded-2xl border border-stone/20 bg-white p-6 space-y-4">
                 <div className="flex items-center gap-3">
                   {emp?.logo_url ? (
-                    <img src={emp.logo_url} alt={emp.company_name} className="w-12 h-12 rounded-xl object-contain border border-stone/20 bg-white shrink-0 p-1" />
+                    <img src={emp.logo_url} alt={emp.company_name} className="w-20 h-20 rounded-xl object-contain border border-stone/20 bg-white shrink-0 p-1.5" />
                   ) : (
-                    <div className="w-12 h-12 rounded-xl bg-mist flex items-center justify-center shrink-0">
-                      <Building2 className="h-5 w-5 text-moss" strokeWidth={1.5} />
+                    <div className="w-20 h-20 rounded-xl bg-mist flex items-center justify-center shrink-0">
+                      <Building2 className="h-7 w-7 text-moss" strokeWidth={1.5} />
                     </div>
                   )}
                   <div>

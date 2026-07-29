@@ -114,7 +114,7 @@ export default async function AdminJobDetailPage({ params }: { params: Promise<{
           <h2 className="font-semibold text-lg">About the collection</h2>
           <div className="flex items-center gap-3">
             {emp.logo_url && (
-              <img src={emp.logo_url} alt={emp.company_name} className="w-10 h-10 rounded-lg object-contain border bg-white p-1" />
+              <img src={emp.logo_url} alt={emp.company_name} className="w-16 h-16 rounded-lg object-contain border bg-white p-1.5" />
             )}
             <div>
               <p className="font-medium">{emp.company_name}</p>

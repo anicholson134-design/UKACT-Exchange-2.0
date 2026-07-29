@@ -32,7 +32,7 @@ export function JobForm({ job, employerLocation, redirectTo = '/employer/jobs' }
           title: job.title,
           description: job.description,
           location: job.location ?? employerLocation ?? '',
-          start_date: (job as any).start_date ?? '',
+          start_date: job.start_date ?? '',
           expires_at: job.expires_at ? job.expires_at.split('T')[0] : '',
           application_deadline: job.application_deadline ? job.application_deadline.split('T')[0] : '',
           skills_required: job.skills_required,

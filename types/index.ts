@@ -59,6 +59,7 @@ export interface Job {
   skills_required: string[]
   status: JobStatus
   image_url: string | null
+  start_date: string | null
   expires_at: string | null
   application_deadline: string | null
   slug: string

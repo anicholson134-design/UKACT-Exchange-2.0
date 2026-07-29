@@ -34,6 +34,15 @@ export function isPastDeadline(date: string | null | undefined): boolean {
   return new Date(date).getTime() < Date.now()
 }
 
+/** Placement length, e.g. "14 days" for short exchanges or "3 months" for longer ones. */
+export function formatDuration(start: string, end: string): string {
+  const ms = new Date(end).getTime() - new Date(start).getTime()
+  const days = Math.round(ms / (1000 * 60 * 60 * 24))
+  if (days < 28) return `${days} day${days !== 1 ? 's' : ''}`
+  const months = Math.round(days / 30.44)
+  return `${months} month${months !== 1 ? 's' : ''}`
+}
+
 export function applicationStatusColor(status: ApplicationStatus): string {
   const map: Record<ApplicationStatus, string> = {
     submitted: 'bg-blue-100 text-blue-800',

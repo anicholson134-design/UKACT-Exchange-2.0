@@ -3,13 +3,9 @@
 import { useRef } from 'react'
 import Link from 'next/link'
 import { motion, useInView } from 'framer-motion'
-import { MapPin, Clock, ArrowRight } from 'lucide-react'
-import { formatContractType } from '@/lib/utils'
+import { ArrowRight } from 'lucide-react'
+import { JobCard } from '@/components/candidate/JobCard'
 import type { Job } from '@/types'
-
-const sectorImages: Record<string, string> = {
-  default: 'https://images.unsplash.com/photo-1564349683136-77e08dba1ef7?w=600&q=80',
-}
 
 interface FeaturedListingsProps {
   jobs: Job[]
@@ -92,54 +88,7 @@ export function FeaturedListings({ jobs }: FeaturedListingsProps) {
               animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.6, delay: 0.1 + i * 0.1, ease: [0.22, 1, 0.36, 1] }}
             >
-              <Link
-                href={`/jobs/${job.slug ?? job.id}`}
-                className="group flex flex-col h-full bg-white rounded-2xl overflow-hidden border border-stone/20 hover:shadow-xl hover:-translate-y-1 transition-all duration-300"
-              >
-                {/* Image */}
-                <div className="aspect-[16/9] overflow-hidden shrink-0 bg-mist">
-                  <img
-                    src={job.image_url ?? job.employer_profiles?.logo_url ?? sectorImages.default}
-                    alt={job.title}
-                    className={`w-full h-full group-hover:scale-105 transition-transform duration-700 ${
-                      job.image_url ? 'object-cover' : 'object-contain p-8'
-                    }`}
-                  />
-                </div>
-
-                {/* Content */}
-                <div className="p-6 flex flex-col flex-1">
-                  {/* Tags */}
-                  <div className="flex flex-wrap gap-1.5 mb-4">
-                    {(job.skills_required ?? []).slice(0, 2).map((s: string) => (
-                      <span key={s} className="text-xs font-medium px-2.5 py-1 rounded-full bg-mist text-moss border border-sage/20">
-                        {s}
-                      </span>
-                    ))}
-                  </div>
-
-                  <h3 className="font-display font-semibold text-xl text-forest mb-3 group-hover:text-canopy transition-colors line-clamp-2">
-                    {job.title}
-                  </h3>
-
-                  <div className="flex items-center gap-4 text-sm text-ink/50">
-                    {(job.location || job.employer_profiles?.location) && (
-                      <span className="flex items-center gap-1.5">
-                        <MapPin className="h-3.5 w-3.5" />
-                        {job.location ?? job.employer_profiles?.location}
-                      </span>
-                    )}
-                    <span className="flex items-center gap-1.5">
-                      <Clock className="h-3.5 w-3.5" />
-                      {formatContractType(job.contract_type)}
-                    </span>
-                  </div>
-
-                  <div className="mt-auto pt-5 flex items-center gap-2 text-sm font-medium text-gold group-hover:gap-3 transition-all">
-                    View placement <ArrowRight className="h-4 w-4" />
-                  </div>
-                </div>
-              </Link>
+              <JobCard job={job} href={`/jobs/${job.slug ?? job.id}`} />
             </motion.div>
           ))}
         </div>
