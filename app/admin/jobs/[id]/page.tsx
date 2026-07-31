@@ -74,14 +74,20 @@ export default async function AdminJobDetailPage({ params }: { params: Promise<{
           </div>
           {job.start_date && (
             <div>
-              <p className="text-muted-foreground">Start date</p>
+              <p className="text-muted-foreground">{job.flexible_dates ? 'Window opens' : 'Start date'}</p>
               <p className="font-medium mt-0.5">{formatDate(job.start_date)}</p>
             </div>
           )}
           {job.expires_at && (
             <div>
-              <p className="text-muted-foreground">End date</p>
+              <p className="text-muted-foreground">{job.flexible_dates ? 'Window closes' : 'End date'}</p>
               <p className="font-medium mt-0.5">{formatDate(job.expires_at)}</p>
+            </div>
+          )}
+          {job.flexible_dates && job.flexible_duration_days && (
+            <div>
+              <p className="text-muted-foreground">Flexible length</p>
+              <p className="font-medium mt-0.5">{job.flexible_duration_days} day{job.flexible_duration_days !== 1 ? 's' : ''} within window</p>
             </div>
           )}
           {job.application_deadline && (

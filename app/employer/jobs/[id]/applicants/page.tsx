@@ -79,12 +79,27 @@ export default async function ApplicantsPage({ params }: { params: Promise<{ id:
     }
   }
 
+  // Unread message counts — messages from the candidate that this employer hasn't read yet
+  const appIds = applications.map((a: any) => a.id)
+  const { data: unreadMessages } = await admin
+    .from('messages')
+    .select('application_id')
+    .in('application_id', appIds)
+    .is('read_at', null)
+    .neq('sender_id', user.id)
+
+  const unreadCounts: Record<string, number> = {}
+  for (const m of unreadMessages ?? []) {
+    unreadCounts[m.application_id] = (unreadCounts[m.application_id] ?? 0) + 1
+  }
+
   // Enrich applications with profile + email + signed CV URL
   const enriched = (applications as any[]).map(app => ({
     ...app,
     profile: profileMap[app.candidate_id] ?? null,
     email: emailMap[app.candidate_id] ?? null,
     cvSignedUrl: cvSignedUrls[app.id] ?? null,
+    unreadCount: unreadCounts[app.id] ?? 0,
   }))
 
   return (
@@ -93,7 +108,7 @@ export default async function ApplicantsPage({ params }: { params: Promise<{ id:
         <h1 className="text-3xl font-bold">Applicants</h1>
         <p className="text-muted-foreground mt-1">{job.title} · {enriched.length} application{enriched.length !== 1 ? 's' : ''}</p>
       </div>
-      <ApplicantTable applications={enriched as any} />
+      <ApplicantTable applications={enriched as any} currentUserId={user.id} />
     </div>
   )
 }

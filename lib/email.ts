@@ -170,3 +170,19 @@ export function applicationStatusEmail(opts: { jobTitle: string; companyName: st
   )
   return { subject, html }
 }
+
+// ── 7. New message on an application (to the other participant) ───────────
+export function newMessageEmail(opts: { senderName: string; jobTitle: string; preview: string; threadUrl: string }) {
+  const snippet = opts.preview.length > 200 ? opts.preview.slice(0, 200) + '…' : opts.preview
+  const subject = `New message from ${opts.senderName}: ${opts.jobTitle}`
+  const html = layout(
+    'New message',
+    `
+      <p style="margin:0 0 12px;"><strong>${opts.senderName}</strong> sent you a message about <strong>${opts.jobTitle}</strong>:</p>
+      <p style="margin:0;padding:12px 16px;background:#F7FBFD;border-radius:10px;color:#556;font-style:italic;">"${snippet}"</p>
+    `,
+    'Reply',
+    opts.threadUrl,
+  )
+  return { subject, html }
+}

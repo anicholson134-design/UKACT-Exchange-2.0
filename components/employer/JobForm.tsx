@@ -10,6 +10,7 @@ import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { ImageField } from '@/components/admin/settings/ImageField'
+import { DateRangeCalendar } from '@/components/employer/DateRangeCalendar'
 import type { Job } from '@/types'
 
 interface JobFormProps {
@@ -24,6 +25,10 @@ export function JobForm({ job, employerLocation, redirectTo = '/employer/jobs' }
   const [skillInput, setSkillInput] = useState('')
   const [skills, setSkills] = useState<string[]>(job?.skills_required ?? [])
   const [imageUrl, setImageUrl] = useState(job?.image_url ?? '')
+  const [flexible, setFlexible] = useState(job?.flexible_dates ?? false)
+  const [flexDuration, setFlexDuration] = useState(job?.flexible_duration_days ? String(job.flexible_duration_days) : '')
+  const [startDate, setStartDate] = useState(job?.start_date ?? '')
+  const [endDate, setEndDate] = useState(job?.expires_at ? job.expires_at.split('T')[0] : '')
 
   const { register, handleSubmit, formState: { errors } } = useForm<JobInput>({
     resolver: zodResolver(jobSchema) as any,
@@ -32,8 +37,6 @@ export function JobForm({ job, employerLocation, redirectTo = '/employer/jobs' }
           title: job.title,
           description: job.description,
           location: job.location ?? employerLocation ?? '',
-          start_date: job.start_date ?? '',
-          expires_at: job.expires_at ? job.expires_at.split('T')[0] : '',
           application_deadline: job.application_deadline ? job.application_deadline.split('T')[0] : '',
           skills_required: job.skills_required,
         }
@@ -68,6 +71,10 @@ export function JobForm({ job, employerLocation, redirectTo = '/employer/jobs' }
         ...data,
         skills_required: skills,
         image_url: imageUrl || null,
+        start_date: startDate || null,
+        expires_at: endDate || null,
+        flexible_dates: flexible,
+        flexible_duration_days: flexible && flexDuration ? Number(flexDuration) : null,
         // Always set contract_type to 'contract' for exchanges
         contract_type: 'contract',
         remote: false,
@@ -114,27 +121,46 @@ export function JobForm({ job, employerLocation, redirectTo = '/employer/jobs' }
         {errors.description && <p className="text-sm text-destructive">{errors.description.message}</p>}
       </div>
 
-      {/* Exchange length — start and end dates */}
-      <div className="space-y-2">
-        <Label>Exchange length *</Label>
-        <div className="grid grid-cols-2 gap-4">
-          <div className="space-y-1.5">
-            <span className="text-xs text-muted-foreground">Start date</span>
-            <Input
-              id="start_date"
-              type="date"
-              {...register('start_date')}
-            />
-          </div>
-          <div className="space-y-1.5">
-            <span className="text-xs text-muted-foreground">End date</span>
-            <Input
-              id="expires_at"
-              type="date"
-              {...register('expires_at')}
-            />
-          </div>
+      {/* Exchange dates */}
+      <div className="space-y-3">
+        <Label>Exchange dates *</Label>
+        <div className="inline-flex rounded-lg border border-input p-1 bg-muted/40">
+          <button
+            type="button"
+            onClick={() => setFlexible(false)}
+            className={`px-3 py-1.5 text-sm rounded-md transition-colors ${!flexible ? 'bg-background shadow-sm font-medium' : 'text-muted-foreground'}`}
+          >
+            Fixed dates
+          </button>
+          <button
+            type="button"
+            onClick={() => setFlexible(true)}
+            className={`px-3 py-1.5 text-sm rounded-md transition-colors ${flexible ? 'bg-background shadow-sm font-medium' : 'text-muted-foreground'}`}
+          >
+            Flexible
+          </button>
         </div>
+
+        {flexible && (
+          <div className="space-y-1.5 max-w-[160px]">
+            <span className="text-xs text-muted-foreground">Exchange length (days)</span>
+            <Input
+              type="number"
+              min={1}
+              value={flexDuration}
+              onChange={e => setFlexDuration(e.target.value)}
+              placeholder="e.g. 2"
+            />
+          </div>
+        )}
+
+        <DateRangeCalendar startDate={startDate} endDate={endDate} onChange={(s, e) => { setStartDate(s); setEndDate(e) }} />
+
+        <p className="text-xs text-muted-foreground">
+          {flexible
+            ? 'Select the window candidates can choose their dates within — click a start day, then an end day.'
+            : 'Click your start date, then your end date.'}
+        </p>
       </div>
 
       {/* Application deadline */}

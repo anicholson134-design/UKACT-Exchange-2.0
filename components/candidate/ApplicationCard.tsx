@@ -1,14 +1,24 @@
+'use client'
+
+import { useState } from 'react'
 import { Card, CardContent, CardHeader } from '@/components/ui/card'
 import { StatusBadge } from '@/components/shared/StatusBadge'
+import { Button } from '@/components/ui/button'
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog'
+import { MessageThread } from '@/components/shared/MessageThread'
 import { formatDate, formatContractType } from '@/lib/utils'
-import { MapPin, Clock } from 'lucide-react'
+import { MapPin, Clock, MessageSquare } from 'lucide-react'
 import type { Application } from '@/types'
 
 interface ApplicationCardProps {
   application: Application
+  currentUserId: string
+  unreadCount?: number
 }
 
-export function ApplicationCard({ application }: ApplicationCardProps) {
+export function ApplicationCard({ application, currentUserId, unreadCount = 0 }: ApplicationCardProps) {
+  const [open, setOpen] = useState(false)
+  const [unread, setUnread] = useState(unreadCount)
   const job = application.jobs
   const employer = job?.employer_profiles
 
@@ -38,10 +48,41 @@ export function ApplicationCard({ application }: ApplicationCardProps) {
             </span>
           )}
         </div>
-        <p className="text-xs text-muted-foreground mt-2">
-          Applied {formatDate(application.created_at)}
-        </p>
+        <div className="flex items-center justify-between mt-3">
+          <p className="text-xs text-muted-foreground">
+            Applied {formatDate(application.created_at)}
+          </p>
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={() => { setOpen(true); setUnread(0) }}
+            className="relative gap-1.5"
+          >
+            <MessageSquare className="h-3.5 w-3.5" />
+            Messages
+            {!!unread && (
+              <span className="absolute -top-1.5 -right-1.5 h-4 min-w-4 px-1 rounded-full bg-gold text-cream text-[10px] font-semibold flex items-center justify-center">
+                {unread}
+              </span>
+            )}
+          </Button>
+        </div>
       </CardContent>
+
+      <Dialog open={open} onOpenChange={setOpen}>
+        <DialogContent className="sm:max-w-lg">
+          <DialogHeader>
+            <DialogTitle className="font-display text-xl text-forest">
+              {employer?.company_name ?? 'Collection'}
+            </DialogTitle>
+          </DialogHeader>
+          <MessageThread
+            applicationId={application.id}
+            currentUserId={currentUserId}
+            otherPartyName={employer?.company_name ?? 'the collection'}
+          />
+        </DialogContent>
+      </Dialog>
     </Card>
   )
 }

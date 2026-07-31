@@ -19,7 +19,8 @@ import {
 } from '@/components/ui/dialog'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import { Button } from '@/components/ui/button'
-import { FileText, Mail, ChevronDown, Eye } from 'lucide-react'
+import { MessageThread } from '@/components/shared/MessageThread'
+import { FileText, Mail, ChevronDown, Eye, MessageSquare } from 'lucide-react'
 import type { ApplicationStatus } from '@/types'
 
 interface EnrichedApplication {
@@ -33,9 +34,16 @@ interface EnrichedApplication {
   candidate_id: string
   profile: { id: string; full_name: string; avatar_url: string | null } | null
   email: string | null
+  unreadCount?: number
 }
 
-export function ApplicantTable({ applications: initial }: { applications: EnrichedApplication[] }) {
+interface Props {
+  applications: EnrichedApplication[]
+  currentUserId?: string
+  enableMessaging?: boolean
+}
+
+export function ApplicantTable({ applications: initial, currentUserId, enableMessaging = true }: Props) {
   const [applications, setApplications] = useState(initial)
   const [selected, setSelected] = useState<EnrichedApplication | null>(null)
 
@@ -165,11 +173,21 @@ export function ApplicantTable({ applications: initial }: { applications: Enrich
                     <Button
                       variant="ghost"
                       size="sm"
-                      onClick={() => setSelected(app)}
-                      className="gap-1.5 text-xs"
+                      onClick={() => {
+                        setSelected(app)
+                        if (app.unreadCount) {
+                          setApplications(prev => prev.map(a => a.id === app.id ? { ...a, unreadCount: 0 } : a))
+                        }
+                      }}
+                      className="relative gap-1.5 text-xs"
                     >
                       <Eye className="h-3.5 w-3.5" />
                       View
+                      {!!app.unreadCount && (
+                        <span className="absolute -top-1.5 -right-1.5 h-4 min-w-4 px-1 rounded-full bg-gold text-cream text-[10px] font-semibold flex items-center justify-center">
+                          {app.unreadCount}
+                        </span>
+                      )}
                     </Button>
                   </td>
                 </tr>
@@ -269,6 +287,20 @@ export function ApplicantTable({ applications: initial }: { applications: Enrich
                     </SelectContent>
                   </Select>
                 </div>
+
+                {/* Messages */}
+                {enableMessaging && currentUserId && (
+                  <div className="space-y-2 pt-1">
+                    <p className="text-sm font-semibold text-forest flex items-center gap-1.5">
+                      <MessageSquare className="h-4 w-4" /> Messages
+                    </p>
+                    <MessageThread
+                      applicationId={selected.id}
+                      currentUserId={currentUserId}
+                      otherPartyName={selected.profile?.full_name ?? 'the applicant'}
+                    />
+                  </div>
+                )}
 
                 {/* Quick email button */}
                 {selected.email && (

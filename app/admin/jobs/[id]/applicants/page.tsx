@@ -88,7 +88,7 @@ export default async function AdminApplicantsPage({ params }: { params: Promise<
         <h1 className="text-3xl font-bold">Applicants</h1>
         <p className="text-muted-foreground mt-1">{job.title} · {companyName} · {enriched.length} application{enriched.length !== 1 ? 's' : ''}</p>
       </div>
-      <ApplicantTable applications={enriched as any} />
+      <ApplicantTable applications={enriched as any} currentUserId={user.id} enableMessaging={false} />
     </div>
   )
 }

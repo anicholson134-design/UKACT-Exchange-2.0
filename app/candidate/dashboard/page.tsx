@@ -4,7 +4,7 @@ import Link from 'next/link'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { ApplicationCard } from '@/components/candidate/ApplicationCard'
-import { Briefcase, FileText, Send } from 'lucide-react'
+import { Briefcase, FileText, Send, MessageSquare } from 'lucide-react'
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = { title: 'My Dashboard' }
@@ -14,7 +14,7 @@ export default async function CandidateDashboardPage() {
   const { data: { user } } = await supabase.auth.getUser()
   if (!user) redirect('/login')
 
-  const [{ data: candidateProfile }, { data: applications, count: appCount }, { count: jobCount }] =
+  const [{ data: candidateProfile }, { data: applications, count: appCount }, { count: jobCount }, { data: allAppIds }] =
     await Promise.all([
       supabase.from('candidate_profiles').select('cv_url, cv_filename').eq('id', user.id).single(),
       supabase
@@ -24,7 +24,23 @@ export default async function CandidateDashboardPage() {
         .order('created_at', { ascending: false })
         .limit(5),
       supabase.from('jobs').select('id', { count: 'exact', head: true }).eq('status', 'active'),
+      supabase.from('applications').select('id').eq('candidate_id', user.id),
     ])
+
+  const unreadCounts: Record<string, number> = {}
+  let totalUnread = 0
+  if (allAppIds?.length) {
+    const { data: unreadMessages } = await supabase
+      .from('messages')
+      .select('application_id')
+      .in('application_id', allAppIds.map(a => a.id))
+      .is('read_at', null)
+      .neq('sender_id', user.id)
+    for (const m of unreadMessages ?? []) {
+      unreadCounts[m.application_id] = (unreadCounts[m.application_id] ?? 0) + 1
+      totalUnread++
+    }
+  }
 
   return (
     <div className="space-y-8">
@@ -33,7 +49,7 @@ export default async function CandidateDashboardPage() {
         <p className="text-muted-foreground mt-1">Track your job search progress</p>
       </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
         <Card>
           <CardHeader className="pb-2 flex-row items-center justify-between space-y-0">
             <CardTitle className="text-sm font-medium">Applications</CardTitle>
@@ -41,6 +57,15 @@ export default async function CandidateDashboardPage() {
           </CardHeader>
           <CardContent>
             <p className="text-3xl font-bold">{appCount ?? 0}</p>
+          </CardContent>
+        </Card>
+        <Card>
+          <CardHeader className="pb-2 flex-row items-center justify-between space-y-0">
+            <CardTitle className="text-sm font-medium">Unread Messages</CardTitle>
+            <MessageSquare className="h-4 w-4 text-muted-foreground" />
+          </CardHeader>
+          <CardContent>
+            <p className="text-3xl font-bold">{totalUnread}</p>
           </CardContent>
         </Card>
         <Card>
@@ -78,7 +103,7 @@ export default async function CandidateDashboardPage() {
         {applications && applications.length > 0 ? (
           <div className="grid gap-3">
             {applications.map(app => (
-              <ApplicationCard key={app.id} application={app as any} />
+              <ApplicationCard key={app.id} application={app as any} currentUserId={user.id} unreadCount={unreadCounts[app.id] ?? 0} />
             ))}
           </div>
         ) : (

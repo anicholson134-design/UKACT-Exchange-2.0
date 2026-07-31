@@ -7,6 +7,8 @@ export const jobSchema = z.object({
   start_date: z.string().optional().nullable(),
   expires_at: z.string().optional().nullable(),
   application_deadline: z.string().optional().nullable(),
+  flexible_dates: z.boolean().optional(),
+  flexible_duration_days: z.number().int().positive().optional().nullable(),
   skills_required: z.array(z.string()).default([]),
   image_url: z.string().optional().nullable(),
 })

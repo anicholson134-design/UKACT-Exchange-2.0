@@ -29,6 +29,10 @@ export function formatDate(date: string): string {
   return new Intl.DateTimeFormat('en-GB', { day: 'numeric', month: 'short', year: 'numeric' }).format(new Date(date))
 }
 
+export function formatDateTime(date: string): string {
+  return new Intl.DateTimeFormat('en-GB', { day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit' }).format(new Date(date))
+}
+
 export function isPastDeadline(date: string | null | undefined): boolean {
   if (!date) return false
   return new Date(date).getTime() < Date.now()
@@ -41,6 +45,29 @@ export function formatDuration(start: string, end: string): string {
   if (days < 28) return `${days} day${days !== 1 ? 's' : ''}`
   const months = Math.round(days / 30.44)
   return `${months} month${months !== 1 ? 's' : ''}`
+}
+
+interface PlacementDates {
+  start_date: string | null
+  expires_at: string | null
+  flexible_dates?: boolean
+  flexible_duration_days?: number | null
+}
+
+/**
+ * Fixed placements show their computed duration ("14 days"); flexible ones
+ * show the offered length plus the window candidates can pick within
+ * ("2 days, flexible within 1 Sep – 30 Sep 2026").
+ */
+export function formatPlacementLength(job: PlacementDates): string | null {
+  if (!job.start_date || !job.expires_at) return null
+  if (job.flexible_dates && job.flexible_duration_days) {
+    const start = new Date(job.start_date).toLocaleDateString('en-GB', { day: 'numeric', month: 'short' })
+    const end = new Date(job.expires_at).toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' })
+    const n = job.flexible_duration_days
+    return `${n} day${n !== 1 ? 's' : ''}, flexible within ${start} – ${end}`
+  }
+  return formatDuration(job.start_date, job.expires_at)
 }
 
 export function applicationStatusColor(status: ApplicationStatus): string {

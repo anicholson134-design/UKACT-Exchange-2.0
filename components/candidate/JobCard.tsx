@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import { MapPin, Clock, CalendarClock, ArrowRight } from 'lucide-react'
-import { formatDuration, formatDate, isPastDeadline } from '@/lib/utils'
+import { formatPlacementLength, formatDate, isPastDeadline } from '@/lib/utils'
 import type { Job } from '@/types'
 
 const DEFAULT_IMAGE = 'https://images.unsplash.com/photo-1564349683136-77e08dba1ef7?w=600&q=80'
@@ -58,10 +58,10 @@ export function JobCard({ job, href }: JobCardProps) {
               {job.location ?? job.employer_profiles?.location}
             </span>
           )}
-          {job.start_date && job.expires_at && (
+          {formatPlacementLength(job) && (
             <span className="flex items-center gap-1.5">
               <Clock className="h-3.5 w-3.5" />
-              {formatDuration(job.start_date, job.expires_at)}
+              {formatPlacementLength(job)}
             </span>
           )}
           {job.application_deadline && (

@@ -4,7 +4,7 @@ import { Navbar } from '@/components/shared/Navbar'
 import { Footer } from '@/components/shared/Footer'
 import { ApplySection } from '@/components/candidate/ApplySection'
 import { PlacementUnavailable } from '@/components/candidate/PlacementUnavailable'
-import { isPastDeadline, formatDuration } from '@/lib/utils'
+import { isPastDeadline, formatPlacementLength } from '@/lib/utils'
 import { MapPin, Calendar, Clock, Building2, Globe, ArrowLeft } from 'lucide-react'
 import Link from 'next/link'
 import type { Metadata } from 'next'
@@ -120,13 +120,13 @@ export default async function JobDetailPage({ params }: Props) {
                       {job.location}
                     </span>
                   )}
-                  {startDate && endDate && (
+                  {formatPlacementLength(job) && (
                     <span className="flex items-center gap-1.5">
                       <Clock className="h-4 w-4 text-stone" />
-                      {formatDuration(startDate, endDate)}
+                      {formatPlacementLength(job)}
                     </span>
                   )}
-                  {startDate && (
+                  {startDate && !job.flexible_dates && (
                     <span className="flex items-center gap-1.5">
                       <Calendar className="h-4 w-4 text-stone" />
                       Starts {formatDateShort(startDate)}
@@ -173,17 +173,24 @@ export default async function JobDetailPage({ params }: Props) {
               {/* Exchange dates */}
               {(startDate || endDate) && (
                 <div>
-                  <h2 className="font-display font-semibold text-xl text-forest mb-4">Exchange dates</h2>
+                  <h2 className="font-display font-semibold text-xl text-forest mb-4">
+                    {job.flexible_dates ? 'Available window' : 'Exchange dates'}
+                  </h2>
+                  {job.flexible_dates && job.flexible_duration_days && (
+                    <p className="text-sm text-ink/60 mb-4">
+                      This collection is flexible — pick any {job.flexible_duration_days} day{job.flexible_duration_days !== 1 ? 's' : ''} within the window below.
+                    </p>
+                  )}
                   <div className="grid sm:grid-cols-2 gap-4">
                     {startDate && (
                       <div className="bg-mist rounded-xl p-5 border border-stone/20">
-                        <p className="text-xs font-semibold uppercase tracking-wider text-ink/40 mb-1">Start date</p>
+                        <p className="text-xs font-semibold uppercase tracking-wider text-ink/40 mb-1">{job.flexible_dates ? 'Window opens' : 'Start date'}</p>
                         <p className="font-display font-semibold text-xl text-forest">{formatDateShort(startDate)}</p>
                       </div>
                     )}
                     {endDate && (
                       <div className="bg-mist rounded-xl p-5 border border-stone/20">
-                        <p className="text-xs font-semibold uppercase tracking-wider text-ink/40 mb-1">End date</p>
+                        <p className="text-xs font-semibold uppercase tracking-wider text-ink/40 mb-1">{job.flexible_dates ? 'Window closes' : 'End date'}</p>
                         <p className="font-display font-semibold text-xl text-forest">{formatDateShort(endDate)}</p>
                       </div>
                     )}

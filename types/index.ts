@@ -62,6 +62,8 @@ export interface Job {
   start_date: string | null
   expires_at: string | null
   application_deadline: string | null
+  flexible_dates: boolean
+  flexible_duration_days: number | null
   slug: string
   created_at: string
   updated_at: string

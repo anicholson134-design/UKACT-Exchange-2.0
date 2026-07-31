@@ -16,6 +16,19 @@ export default async function ApplicationsPage() {
     .eq('candidate_id', user.id)
     .order('created_at', { ascending: false })
 
+  const unreadCounts: Record<string, number> = {}
+  if (applications?.length) {
+    const { data: unreadMessages } = await supabase
+      .from('messages')
+      .select('application_id')
+      .in('application_id', applications.map(a => a.id))
+      .is('read_at', null)
+      .neq('sender_id', user.id)
+    for (const m of unreadMessages ?? []) {
+      unreadCounts[m.application_id] = (unreadCounts[m.application_id] ?? 0) + 1
+    }
+  }
+
   return (
     <div className="space-y-6">
       <div>
@@ -25,7 +38,7 @@ export default async function ApplicationsPage() {
       {applications && applications.length > 0 ? (
         <div className="grid gap-4">
           {applications.map(app => (
-            <ApplicationCard key={app.id} application={app as any} />
+            <ApplicationCard key={app.id} application={app as any} currentUserId={user.id} unreadCount={unreadCounts[app.id] ?? 0} />
           ))}
         </div>
       ) : (
