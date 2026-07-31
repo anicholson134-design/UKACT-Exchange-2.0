@@ -2,6 +2,7 @@ import { createClient } from '@/lib/supabase/server'
 import { createAdminClient } from '@/lib/supabase/admin'
 import { redirect, notFound } from 'next/navigation'
 import { PageForm } from '@/components/cms/PageForm'
+import { BackLink } from '@/components/shared/BackLink'
 import type { Metadata } from 'next'
 
 type Props = { params: Promise<{ id: string }> }
@@ -27,6 +28,7 @@ export default async function EditCmsPage({ params }: Props) {
 
   return (
     <div className="space-y-6">
+      <BackLink href="/admin/cms" label="Back to pages" />
       <div>
         <h1 className="text-3xl font-bold">Edit page</h1>
         <p className="text-muted-foreground mt-1">/p/{page.slug}</p>

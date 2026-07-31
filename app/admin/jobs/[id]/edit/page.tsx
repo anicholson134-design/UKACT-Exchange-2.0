@@ -2,6 +2,7 @@ import { createClient } from '@/lib/supabase/server'
 import { createAdminClient } from '@/lib/supabase/admin'
 import { redirect, notFound } from 'next/navigation'
 import { JobForm } from '@/components/employer/JobForm'
+import { BackLink } from '@/components/shared/BackLink'
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = { title: 'Edit Placement' }
@@ -27,6 +28,7 @@ export default async function AdminEditJobPage({ params }: { params: Promise<{ i
 
   return (
     <div className="space-y-6">
+      <BackLink href={`/admin/jobs/${job.id}`} label="Back to placement" />
       <div>
         <h1 className="text-3xl font-bold">Edit Placement</h1>
         <p className="text-muted-foreground mt-1">{job.title} · {emp?.company_name}</p>

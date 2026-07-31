@@ -1,6 +1,7 @@
 import { createClient } from '@/lib/supabase/server'
 import { redirect, notFound } from 'next/navigation'
 import { JobForm } from '@/components/employer/JobForm'
+import { BackLink } from '@/components/shared/BackLink'
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = { title: 'Edit Placement' }
@@ -29,6 +30,7 @@ export default async function EditJobPage({ params }: { params: Promise<{ id: st
 
   return (
     <div className="space-y-6">
+      <BackLink href="/employer/jobs" label="Back to my jobs" />
       <div>
         <h1 className="text-3xl font-bold">Edit Placement</h1>
         <p className="text-muted-foreground mt-1">{job.title}</p>

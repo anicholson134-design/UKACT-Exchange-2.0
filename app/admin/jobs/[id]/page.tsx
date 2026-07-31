@@ -4,6 +4,7 @@ import { redirect, notFound } from 'next/navigation'
 import Link from 'next/link'
 import { StatusBadge } from '@/components/shared/StatusBadge'
 import { AdminJobModerationActions } from '@/components/admin/AdminJobModerationActions'
+import { BackLink } from '@/components/shared/BackLink'
 import { formatDate, formatContractType } from '@/lib/utils'
 import type { Metadata } from 'next'
 
@@ -31,6 +32,7 @@ export default async function AdminJobDetailPage({ params }: { params: Promise<{
 
   return (
     <div className="space-y-6 max-w-3xl">
+      <BackLink href="/admin/jobs" label="Back to jobs moderation" />
       <div className="flex items-center justify-between gap-4">
         <div>
           <h1 className="text-3xl font-bold">{job.title}</h1>

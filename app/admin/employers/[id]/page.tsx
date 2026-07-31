@@ -4,6 +4,7 @@ import { redirect, notFound } from 'next/navigation'
 import { StatusBadge } from '@/components/shared/StatusBadge'
 import { formatDate } from '@/lib/utils'
 import { EmployerApprovalForm } from '@/components/admin/EmployerApprovalForm'
+import { BackLink } from '@/components/shared/BackLink'
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = { title: 'Review Collection' }
@@ -49,6 +50,7 @@ export default async function AdminEmployerDetailPage({
 
   return (
     <div className="space-y-6 max-w-2xl">
+      <BackLink href="/admin/employers" label="Back to collections" />
       <div className="flex items-center justify-between gap-4">
         <div>
           <h1 className="text-3xl font-bold">{emp.company_name}</h1>

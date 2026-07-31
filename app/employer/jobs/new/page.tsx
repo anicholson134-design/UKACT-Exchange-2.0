@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import { createClient } from '@/lib/supabase/server'
 import { redirect } from 'next/navigation'
 import { JobForm } from '@/components/employer/JobForm'
+import { BackLink } from '@/components/shared/BackLink'
 
 export const metadata: Metadata = { title: 'Post a Placement' }
 
@@ -18,6 +19,7 @@ export default async function NewJobPage() {
 
   return (
     <div className="space-y-6">
+      <BackLink href="/employer/jobs" label="Back to my jobs" />
       <div>
         <h1 className="text-3xl font-bold">Post a Placement</h1>
         <p className="text-muted-foreground mt-1">Your listing will be reviewed by UKACT before going live.</p>

@@ -1,6 +1,7 @@
 import { createClient } from '@/lib/supabase/server'
 import { redirect } from 'next/navigation'
 import { CompanyProfileForm } from '@/components/employer/CompanyProfileForm'
+import { BackLink } from '@/components/shared/BackLink'
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = { title: 'Collection Profile' }
@@ -18,6 +19,7 @@ export default async function EmployerProfilePage() {
 
   return (
     <div className="space-y-8">
+      <BackLink href="/employer/dashboard" label="Back to dashboard" />
       <div>
         <h1 className="text-3xl font-bold">Collection Profile</h1>
         <p className="text-muted-foreground mt-1">

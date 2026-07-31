@@ -2,6 +2,7 @@ import { createClient } from '@/lib/supabase/server'
 import { createAdminClient } from '@/lib/supabase/admin'
 import { redirect, notFound } from 'next/navigation'
 import { ApplicantTable } from '@/components/employer/ApplicantTable'
+import { BackLink } from '@/components/shared/BackLink'
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = { title: 'Applicants' }
@@ -36,6 +37,7 @@ export default async function AdminApplicantsPage({ params }: { params: Promise<
   if (!applications?.length) {
     return (
       <div className="space-y-6">
+        <BackLink href={`/admin/jobs/${job.id}`} label="Back to placement" />
         <div>
           <h1 className="text-3xl font-bold">Applicants</h1>
           <p className="text-muted-foreground mt-1">{job.title} · {companyName} · 0 applications</p>
@@ -84,6 +86,7 @@ export default async function AdminApplicantsPage({ params }: { params: Promise<
 
   return (
     <div className="space-y-6">
+      <BackLink href={`/admin/jobs/${job.id}`} label="Back to placement" />
       <div>
         <h1 className="text-3xl font-bold">Applicants</h1>
         <p className="text-muted-foreground mt-1">{job.title} · {companyName} · {enriched.length} application{enriched.length !== 1 ? 's' : ''}</p>

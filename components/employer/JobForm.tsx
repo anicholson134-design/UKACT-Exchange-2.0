@@ -169,6 +169,9 @@ export function JobForm({ job, employerLocation, redirectTo = '/employer/jobs' }
         <Input
           id="application_deadline"
           type="date"
+          autoComplete="off"
+          data-lpignore="true"
+          data-1p-ignore
           {...register('application_deadline')}
         />
         <p className="text-xs text-muted-foreground">

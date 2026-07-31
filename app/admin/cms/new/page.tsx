@@ -1,6 +1,7 @@
 import { createClient } from '@/lib/supabase/server'
 import { redirect } from 'next/navigation'
 import { PageForm } from '@/components/cms/PageForm'
+import { BackLink } from '@/components/shared/BackLink'
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = { title: 'New Page' }
@@ -14,6 +15,7 @@ export default async function NewCmsPage() {
 
   return (
     <div className="space-y-6">
+      <BackLink href="/admin/cms" label="Back to pages" />
       <div>
         <h1 className="text-3xl font-bold">New page</h1>
         <p className="text-muted-foreground mt-1">Build a new page with the block editor</p>
