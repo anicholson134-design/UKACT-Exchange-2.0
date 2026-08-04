@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from 'react'
+import { useRouter } from 'next/navigation'
 import { toast } from 'sonner'
 import { StatusBadge } from '@/components/shared/StatusBadge'
 import { formatDate } from '@/lib/utils'
@@ -44,6 +45,7 @@ interface Props {
 }
 
 export function ApplicantTable({ applications: initial, currentUserId, enableMessaging = true }: Props) {
+  const router = useRouter()
   const [applications, setApplications] = useState(initial)
   const [selected, setSelected] = useState<EnrichedApplication | null>(null)
 
@@ -54,6 +56,17 @@ export function ApplicantTable({ applications: initial, currentUserId, enableMes
       body: JSON.stringify({ status }),
     })
     if (!res.ok) { toast.error('Failed to update status'); return }
+
+    if (status === 'hired') {
+      // Accepting this candidate auto-rejects every other still-open applicant server-side —
+      // refresh so the rest of the table picks up their new status too.
+      setApplications(prev => prev.map(a => a.id === id ? { ...a, status } : (a.status === 'rejected' || a.status === 'hired') ? a : { ...a, status: 'rejected' }))
+      if (selected?.id === id) setSelected(prev => prev ? { ...prev, status } : prev)
+      toast.success('Candidate accepted — other applicants notified they were unsuccessful')
+      router.refresh()
+      return
+    }
+
     setApplications(prev => prev.map(a => a.id === id ? { ...a, status } : a))
     if (selected?.id === id) setSelected(prev => prev ? { ...prev, status } : prev)
     toast.success('Status updated')
