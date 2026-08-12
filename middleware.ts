@@ -4,6 +4,22 @@ import { SUPABASE_URL, SUPABASE_ANON_KEY } from '@/lib/supabase/env'
 
 const PREVIEW_EXEMPT = ['/preview-access', '/api/preview-access', '/auth/callback']
 
+// Middleware runs in front of every page, including public ones — if
+// Supabase is ever slow or unreachable (wrong/placeholder URL, network
+// blip), a bare `await` here would hang the entire site until Vercel's
+// platform-level timeout kills the request with a 504. Race it instead so
+// a slow auth check degrades to "treat as logged out" rather than taking
+// the whole site down.
+const AUTH_CHECK_TIMEOUT_MS = 4000
+
+function withTimeout<T>(promise: Promise<T>, ms: number): Promise<T | null> {
+  return new Promise(resolve => {
+    const timer = setTimeout(() => resolve(null), ms)
+    promise.then(result => { clearTimeout(timer); resolve(result) })
+      .catch(() => { clearTimeout(timer); resolve(null) })
+  })
+}
+
 export async function middleware(request: NextRequest) {
   const pathname = request.nextUrl.pathname
 
@@ -37,7 +53,14 @@ export async function middleware(request: NextRequest) {
     }
   )
 
-  const { data: { user } } = await supabase.auth.getUser()
+  const authResult = await withTimeout(supabase.auth.getUser(), AUTH_CHECK_TIMEOUT_MS)
+  if (authResult === null) {
+    // Supabase didn't respond in time — don't hang the whole site waiting;
+    // fall through as a guest so public pages still render. Protected
+    // routes below will correctly redirect to /login since `user` is null.
+    console.warn('[middleware] Supabase auth check timed out — continuing as guest')
+  }
+  const { data: { user } } = authResult ?? { data: { user: null } }
 
   // Auth routes — redirect logged-in users to their dashboard
   const isAuthRoute = ['/login', '/register'].some(p => pathname.startsWith(p))
